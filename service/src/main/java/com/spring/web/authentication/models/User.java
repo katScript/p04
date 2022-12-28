@@ -1,6 +1,5 @@
 package com.spring.web.authentication.models;
 
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -10,6 +9,7 @@ import java.util.Set;
 @Table(name="users")
 public class User {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -32,7 +32,7 @@ public class User {
     private Date updatedAt;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable( name = "user_role",
+    @JoinTable( name = "users_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
