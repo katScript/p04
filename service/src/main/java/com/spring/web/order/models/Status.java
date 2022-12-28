@@ -1,25 +1,24 @@
-package com.spring.web.authentication.models;
-
+package com.spring.web.order.models;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name="orders_status")
+public class Status {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "code")
     private String code;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "label")
+    private String label;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "enable")
+    private Boolean enable;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private Date createdAt;
@@ -27,19 +26,25 @@ public class Role {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private Date updatedAt;
 
-    public Role() {}
+    public Status() {}
 
-    public Role(String code, String name, String description) {
+    public Status(
+            Long id,
+            String code,
+            String label,
+            Boolean enable
+    ) {
+        this.id = id;
         this.code = code;
-        this.name = name;
-        this.description = description;
+        this.label = label;
+        this.enable = enable;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,20 +56,20 @@ public class Role {
         this.code = code;
     }
 
-    public String getName() {
-        return name;
+    public String getLabel() {
+        return label;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
-    public String getDescription() {
-        return description;
+    public Boolean getEnable() {
+        return enable;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 
     public Date getCreatedAt() {
