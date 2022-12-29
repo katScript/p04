@@ -1,31 +1,30 @@
 package com.spring.web.authentication.payload.request;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ResetPasswordRequest {
-    private String userName;
-    private String currentPassword;
-    private String newPassword;
+    @NotNull
+    @NotBlank(message = "Token reset can not empty!")
+    private String token;
 
-    public String getUserName() {
-        return userName;
+    @NotNull
+    @NotBlank(message = "New password can not empty!")
+    private String password;
+
+    public String getToken() {
+        return token;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public String getCurrentPassword() {
-        return currentPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCurrentPassword(String currentPassword) {
-        this.currentPassword = currentPassword;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
