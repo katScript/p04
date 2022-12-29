@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name="customers")
 public class Customer {
+    public static final String ROLE = "customer";
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,111 +100,125 @@ public class Customer {
         return id;
     }
 
-    public void setId(Long id) {
+    public Customer setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
+    public Customer setFullName(String fullName) {
         this.fullName = fullName;
+        return this;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public Customer setPhone(String phone) {
         this.phone = phone;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Customer setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public Boolean getSubscription() {
         return subscription;
     }
 
-    public void setSubscription(Boolean subscription) {
+    public Customer setSubscription(Boolean subscription) {
         this.subscription = subscription;
+        return this;
     }
 
     public Double getCurrentMoney() {
         return currentMoney;
     }
 
-    public void setCurrentMoney(Double currentMoney) {
+    public Customer setCurrentMoney(Double currentMoney) {
         this.currentMoney = currentMoney;
+        return this;
     }
 
     public Double getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(Double totalMoney) {
+    public Customer setTotalMoney(Double totalMoney) {
         this.totalMoney = totalMoney;
+        return this;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public Customer setUser(User user) {
         this.user = user;
+        return this;
     }
 
     public Set<BalanceHistory> getBalanceHistories() {
         return balanceHistories;
     }
 
-    public void setBalanceHistories(Set<BalanceHistory> balanceHistories) {
+    public Customer setBalanceHistories(Set<BalanceHistory> balanceHistories) {
         this.balanceHistories = balanceHistories;
+        return this;
     }
 
     public Set<BillingAddress> getBillingAddresses() {
         return billingAddresses;
     }
 
-    public void setBillingAddresses(Set<BillingAddress> billingAddresses) {
+    public Customer setBillingAddresses(Set<BillingAddress> billingAddresses) {
         this.billingAddresses = billingAddresses;
+        return this;
     }
 
     public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public Customer setOrders(Set<Order> orders) {
         this.orders = orders;
+        return this;
     }
 
     public Set<Log> getLogs() {
         return logs;
     }
 
-    public void setLogs(Set<Log> logs) {
+    public Customer setLogs(Set<Log> logs) {
         this.logs = logs;
+        return this;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public Customer setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+        return this;
     }
 
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public Customer setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
     }
 }

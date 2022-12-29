@@ -2,9 +2,9 @@ package com.spring.web.authentication.controller;
 
 import javax.validation.Valid;
 
+import com.spring.web.authentication.payload.request.ChangePasswordRequest;
 import com.spring.web.authentication.payload.request.ForgetPasswordRequest;
 import com.spring.web.authentication.payload.request.LoginRequest;
-import com.spring.web.authentication.payload.request.ResetPasswordRequest;
 import com.spring.web.authentication.payload.response.ForgetPasswordResponse;
 import com.spring.web.authentication.payload.response.JwtResponse;
 import com.spring.web.authentication.services.UserService;
@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RestController("UserAuthController")
+@RestController
 @RequestMapping("/v1/auth")
 public class AuthController {
     @Autowired
@@ -35,10 +35,10 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/password/reset")
-    public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordRequest resetPassword) {
+    @PostMapping("/password/change")
+    public ResponseEntity<?> resetPassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
         try {
-            userService.resetPassword(resetPassword);
+            userService.changePassword(changePasswordRequest);
             return ResponseEntity.ok(new MessageResponse("Update password success"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
@@ -52,8 +52,8 @@ public class AuthController {
     @PostMapping("/password/forget")
     public ResponseEntity<?> forgetPassword(@Valid @RequestBody ForgetPasswordRequest forgetPasswordRequest) {
         try {
-            ForgetPasswordResponse fpr = userService.forgetPassword(forgetPasswordRequest);
-            return ResponseEntity.ok(fpr);
+            userService.forgetPassword(forgetPasswordRequest);
+            return ResponseEntity.ok("Email change password request had send!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,
