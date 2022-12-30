@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface CustomerLogRepository extends JpaRepository<Log, Long> {
     List<Log> findByCustomer(Customer customer);
+    List<Log> findByCustomerId(Long id);
 }

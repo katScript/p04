@@ -1,6 +1,6 @@
 package com.spring.web.customer.payload;
 
-import com.spring.web.order.service.OrderDTO;
+import com.spring.web.order.payload.OrderDTO;
 
 import java.util.List;
 

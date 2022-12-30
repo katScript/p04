@@ -60,71 +60,80 @@ public class BillingAddress {
         return id;
     }
 
-    public void setId(Long id) {
+    public BillingAddress setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public BillingAddress setType(String type) {
         this.type = type;
+        return this;
     }
 
     public String getBillingName() {
         return billingName;
     }
 
-    public void setBillingName(String billingName) {
+    public BillingAddress setBillingName(String billingName) {
         this.billingName = billingName;
+        return this;
     }
 
     public String getHolder() {
         return holder;
     }
 
-    public void setHolder(String holder) {
+    public BillingAddress setHolder(String holder) {
         this.holder = holder;
+        return this;
     }
 
     public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
+    public BillingAddress setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public BillingAddress setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public BillingAddress setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+        return this;
     }
 
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public BillingAddress setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
     }
 
     public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public BillingAddress setCustomer(Customer customer) {
         this.customer = customer;
+        return this;
     }
 }

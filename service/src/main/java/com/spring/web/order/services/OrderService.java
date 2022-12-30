@@ -4,8 +4,8 @@ import com.spring.web.customer.models.Customer;
 import com.spring.web.helpers.date.DateTimeConverter;
 import com.spring.web.order.models.Order;
 import com.spring.web.order.models.repository.OrderRepository;
-import com.spring.web.order.service.OrderDTO;
-import com.spring.web.order.service.PackageDTO;
+import com.spring.web.order.payload.OrderDTO;
+import com.spring.web.order.payload.PackageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
