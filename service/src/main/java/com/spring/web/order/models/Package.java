@@ -13,7 +13,7 @@ public class Package {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="service_id", referencedColumnName = "id", nullable = false)
-    private Service service;
+    private ServiceBusiness service;
 
     @Column(name = "package_name")
     private String packageName;
@@ -37,7 +37,7 @@ public class Package {
 
     public Package(
             Long id,
-            Service service,
+            ServiceBusiness service,
             String packageName,
             Double price,
             String status,
@@ -55,63 +55,71 @@ public class Package {
         return id;
     }
 
-    public void setId(Long id) {
+    public Package setId(Long id) {
         this.id = id;
+        return this;
     }
 
-    public Service getService() {
+    public ServiceBusiness getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public Package setService(ServiceBusiness service) {
         this.service = service;
+        return this;
     }
 
     public String getPackageName() {
         return packageName;
     }
 
-    public void setPackageName(String packageName) {
+    public Package setPackageName(String packageName) {
         this.packageName = packageName;
+        return this;
     }
 
     public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public Package setPrice(Double price) {
         this.price = price;
+        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public Package setStatus(String status) {
         this.status = status;
+        return this;
     }
 
     public String getNote() {
         return note;
     }
 
-    public void setNote(String note) {
+    public Package setNote(String note) {
         this.note = note;
+        return this;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public Package setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+        return this;
     }
 
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public Package setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
     }
 }

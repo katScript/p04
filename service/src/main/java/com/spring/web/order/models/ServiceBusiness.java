@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="services")
-public class Service {
+public class ServiceBusiness {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +29,11 @@ public class Service {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private Date updatedAt;
 
-    public Service() {
+    public ServiceBusiness() {
         packages = new HashSet<>();
     }
 
-    public Service(
+    public ServiceBusiness(
             Long id,
             String category,
             String serviceName,
@@ -49,47 +49,53 @@ public class Service {
         return id;
     }
 
-    public void setId(Long id) {
+    public ServiceBusiness setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public ServiceBusiness setCategory(String category) {
         this.category = category;
+        return this;
     }
 
     public String getServiceName() {
         return serviceName;
     }
 
-    public void setServiceName(String serviceName) {
+    public ServiceBusiness setServiceName(String serviceName) {
         this.serviceName = serviceName;
+        return this;
     }
 
     public Set<Package> getPackages() {
         return packages;
     }
 
-    public void setPackages(Set<Package> packages) {
+    public ServiceBusiness setPackages(Set<Package> packages) {
         this.packages = packages;
+        return this;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public ServiceBusiness setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+        return this;
     }
 
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public ServiceBusiness setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
     }
 }
