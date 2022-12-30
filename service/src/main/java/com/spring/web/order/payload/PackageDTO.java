@@ -3,6 +3,8 @@ package com.spring.web.order.payload;
 public class PackageDTO {
     private Long id;
 
+    private Long serviceId;
+
     private String packageName;
 
     private Double price;
@@ -19,6 +21,7 @@ public class PackageDTO {
 
     public PackageDTO(
             Long id,
+            Long serviceId,
             String packageName,
             Double price,
             String status,
@@ -27,6 +30,7 @@ public class PackageDTO {
             String updatedAt
     ) {
         this.id = id;
+        this.serviceId = serviceId;
         this.packageName = packageName;
         this.price = price;
         this.status = status;
@@ -89,5 +93,13 @@ public class PackageDTO {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Long getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(Long serviceId) {
+        this.serviceId = serviceId;
     }
 }

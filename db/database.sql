@@ -97,7 +97,7 @@ CREATE TABLE `customers_balance_history` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_balance_customer_id_customers` (`customer_id`),
-  CONSTRAINT `fk_balance_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
+  CONSTRAINT `fk_balance_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -129,7 +129,7 @@ CREATE TABLE `customers_billing_address` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_billing_address_customer_id_customers` (`customer_id`),
-  CONSTRAINT `fk_billing_address_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
+  CONSTRAINT `fk_billing_address_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -162,7 +162,7 @@ CREATE TABLE `customers_log` (
   PRIMARY KEY (`id`),
   KEY `fk_log_customer_id_customers` (`customer_id`),
   KEY `fk_log_order_id_order` (`order_id`),
-  CONSTRAINT `fk_log_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  CONSTRAINT `fk_log_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_log_order_id_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -201,7 +201,7 @@ CREATE TABLE `orders` (
   KEY `fk_order_package_id_packages` (`package_id`),
   KEY `fk_order_customer_id_customers` (`customer_id`),
   KEY `fk_order_status_id_status` (`status_id`),
-  CONSTRAINT `fk_order_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  CONSTRAINT `fk_order_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_order_package_id_packages` FOREIGN KEY (`package_id`) REFERENCES `services_package` (`id`),
   CONSTRAINT `fk_order_status_id_status` FOREIGN KEY (`status_id`) REFERENCES `orders_status` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -308,7 +308,7 @@ DROP TABLE IF EXISTS `services_package`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `services_package` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `service_id` int unsigned NOT NULL,
+  `service_id` int unsigned DEFAULT NULL,
   `package_name` varchar(225) NOT NULL,
   `price` float DEFAULT '0',
   `status` varchar(40) DEFAULT NULL,
@@ -396,4 +396,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-28 18:17:45
+-- Dump completed on 2022-12-30 14:13:58

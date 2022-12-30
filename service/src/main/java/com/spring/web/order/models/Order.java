@@ -84,103 +84,116 @@ public class Order {
         return id;
     }
 
-    public void setId(Long id) {
+    public Order setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public Order setCustomer(Customer customer) {
         this.customer = customer;
+        return this;
     }
 
     public Package getItem() {
         return item;
     }
 
-    public void setItem(Package item) {
+    public Order setItem(Package item) {
         this.item = item;
+        return this;
     }
 
     public String getTarget() {
         return target;
     }
 
-    public void setTarget(String target) {
+    public Order setTarget(String target) {
         this.target = target;
+        return this;
     }
 
     public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public Order setStatus(Status status) {
         this.status = status;
+        return this;
     }
 
     public String getStatusDetail() {
         return statusDetail;
     }
 
-    public void setStatusDetail(String statusDetail) {
+    public Order setStatusDetail(String statusDetail) {
         this.statusDetail = statusDetail;
+        return this;
     }
 
     public Integer getQty() {
         return qty;
     }
 
-    public void setQty(Integer qty) {
+    public Order setQty(Integer qty) {
         this.qty = qty;
+        return this;
     }
 
     public Double getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(Double subtotal) {
+    public Order setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
+        return this;
     }
 
     public String getCouponCode() {
         return couponCode;
     }
 
-    public void setCouponCode(String couponCode) {
+    public Order setCouponCode(String couponCode) {
         this.couponCode = couponCode;
+        return this;
     }
 
     public Double getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(Double discountPrice) {
+    public Order setDiscountPrice(Double discountPrice) {
         this.discountPrice = discountPrice;
+        return this;
     }
 
     public String getNote() {
         return note;
     }
 
-    public void setNote(String note) {
+    public Order setNote(String note) {
         this.note = note;
+        return this;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public Order setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+        return this;
     }
 
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public Order setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
     }
 }
