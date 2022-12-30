@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface BillingAddressRepository extends JpaRepository<BillingAddress, Long> {
     List<BillingAddress> findByCustomer(Customer customer);
+
+    List<BillingAddress> findByCustomerId(Long id);
 }

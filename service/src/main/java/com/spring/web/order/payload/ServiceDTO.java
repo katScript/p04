@@ -1,4 +1,4 @@
-package com.spring.web.order.service;
+package com.spring.web.order.payload;
 
 import java.util.List;
 
