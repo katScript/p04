@@ -1,57 +1,38 @@
-package com.spring.web.admin.models;
+package com.spring.web.admin.payload;
 
-import com.spring.web.authentication.models.User;
-
-import javax.persistence.*;
-import java.util.Date;
-
-@Entity
-@Table(name="admin")
-public class Admin {
-    public static final String ROLE = "admin";
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AdminDTO {
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
-
-    @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "phone")
     private String phone;
 
-    @Column(name = "address")
     private String address;
 
-    @Column(name = "current_address")
     private String currentAddress;
 
-    @Column(name = "created_at", insertable = false, updatable = false)
-    private Date createdAt;
+    private String createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
-    private Date updatedAt;
+    private String updatedAt;
 
-    public Admin() {}
+    public AdminDTO() {}
 
-    public Admin(
+    public AdminDTO(
             Long id,
-            User user,
             String fullName,
             String phone,
             String address,
-            String currentAddress
+            String currentAddress,
+            String createdAt,
+            String updatedAt
     ) {
         this.id = id;
-        this.user = user;
         this.fullName = fullName;
         this.phone = phone;
         this.address = address;
         this.currentAddress = currentAddress;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Long getId() {
@@ -60,14 +41,6 @@ public class Admin {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getFullName() {
@@ -102,19 +75,19 @@ public class Admin {
         this.currentAddress = currentAddress;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
