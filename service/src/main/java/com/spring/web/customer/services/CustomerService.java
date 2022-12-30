@@ -1,12 +1,8 @@
 package com.spring.web.customer.services;
 
-import com.spring.web.customer.models.BalanceHistory;
-import com.spring.web.customer.models.BillingAddress;
 import com.spring.web.customer.models.Customer;
 import com.spring.web.customer.models.repository.CustomerRepository;
-import com.spring.web.customer.payload.BillingAddressDTO;
 import com.spring.web.customer.payload.CustomerDTO;
-import com.spring.web.customer.payload.request.ChangeBalanceRequest;
 import com.spring.web.helpers.date.DateTimeConverter;
 import com.spring.web.order.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
