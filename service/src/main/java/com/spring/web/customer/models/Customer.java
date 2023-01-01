@@ -35,7 +35,7 @@ public class Customer {
     @Column(name = "total_money")
     private Double totalMoney;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

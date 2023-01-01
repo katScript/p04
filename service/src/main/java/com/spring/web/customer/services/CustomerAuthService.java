@@ -54,7 +54,13 @@ public class CustomerAuthService {
         ));
     }
 
+    public User findByUserId(Long id) {
+        return userService.userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found!"));
+    }
+
     public void deleteCustomerAccount(Customer customer) {
-        userService.deleteUser(customer.getUser());
+        User user = customer.getUser();
+        userService.deleteUser(user);
     }
 }

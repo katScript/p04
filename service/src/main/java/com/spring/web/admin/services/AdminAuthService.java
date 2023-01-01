@@ -27,7 +27,7 @@ public class AdminAuthService {
         userService.resetUserPassword(user, rpr.getPassword());
     }
 
-    public void registerCustomer(RegisterRequest registerRequest) {
+    public void registerAdmin(RegisterRequest registerRequest) {
         User user = userService.registerUser(
                 registerRequest.getUsername(),
                 registerRequest.getEmail(),

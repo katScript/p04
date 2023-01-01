@@ -1,17 +1,35 @@
 import './App.css';
-import usePublicStyle from 'src/hooks/usePublicStyle';
-// import {useState} from 'react';
+import RouteConfig from "routes/RouteConfig";
+import React, {Component} from "react";
+import {Navigate} from "react-router-dom";
 
-export default function App(props) {
+class App extends Component {
     // const name = 'Company Name';
     // const [terms, setTerms] = useState([]);
-    usePublicStyle("/plugins/pg-calendar/css/pignose.calendar.min.css");
-    usePublicStyle("/plugins/chartist/css/chartist.min.css");
-    usePublicStyle("/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css");
+    constructor(props) {
+        super(props);
+        this.admin = JSON.parse(localStorage.getItem("admin"));
+        this.customer = JSON.parse(localStorage.getItem("customer"));
 
-    return (
-        <div className="App">
-            Ok! Let's go.
-        </div>
-    );
+        this.routeConfig = new RouteConfig();
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <div id="preloader">
+                    <div className="loader">
+                        <svg className="circular" viewBox="25 25 50 50">
+                            <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="3" strokeMiterlimit="10"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="main-wrapper">
+                    <RouteConfig/>
+                </div>
+            </div>
+        );
+    }
 }
+
+export default App;

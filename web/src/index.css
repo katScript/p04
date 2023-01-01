@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.is-invalid input {
+  border-color: #ff5e5e!important;
+}
+

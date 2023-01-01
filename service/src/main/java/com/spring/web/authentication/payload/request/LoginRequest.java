@@ -6,18 +6,18 @@ import javax.validation.constraints.NotNull;
 public class LoginRequest {
     @NotNull
     @NotBlank(message = "Username can not empty!")
-    private String userName;
+    private String username;
 
     @NotNull
     @NotBlank(message = "Password can not empty!")
     private String password;
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getPassword() {

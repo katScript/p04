@@ -36,7 +36,7 @@ public class AdminAuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerCustomer(@Valid @RequestBody RegisterRequest registerRequest) {
         try {
-            adminAuthService.registerCustomer(registerRequest);
+            adminAuthService.registerAdmin(registerRequest);
             return ResponseEntity.ok(new MessageResponse("Register success"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(

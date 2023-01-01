@@ -1,5 +1,7 @@
 package com.spring.web.customer.services;
 
+import com.spring.web.authentication.models.User;
+import com.spring.web.authentication.models.repository.UserRepository;
 import com.spring.web.customer.models.Customer;
 import com.spring.web.customer.models.repository.CustomerRepository;
 import com.spring.web.customer.payload.CustomerDTO;
@@ -42,6 +44,14 @@ public class CustomerService {
         customerData.setBillingAddress(billingAddressService.getByCustomer(customer));
 
         return customerData;
+    }
+
+    public CustomerDTO getCustomerByUserId(Long id) {
+        User user = customerAuthService.findByUserId(id);
+        Customer customer = customerRepository.findByUser(user)
+                .orElseThrow(() -> new RuntimeException(String.format("Customer with id %d not found!", id)));
+
+        return bindCustomerData(customer);
     }
 
     public List<CustomerDTO> getAllCustomer() {
