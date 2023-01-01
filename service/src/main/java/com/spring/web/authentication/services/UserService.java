@@ -11,7 +11,6 @@ import com.spring.web.authentication.payload.request.ChangePasswordRequest;
 import com.spring.web.authentication.payload.response.JwtResponse;
 import com.spring.web.authentication.security.jwt.JwtUtils;
 import com.spring.web.authentication.security.services.UserDetailsImpl;
-import com.spring.web.customer.models.Customer;
 import com.spring.web.email.models.Mail;
 import com.spring.web.email.services.MailServiceImp;
 import com.spring.web.helpers.date.DateTimeConverter;
@@ -33,7 +32,7 @@ public class UserService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository userRepository;
+    public UserRepository userRepository;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -49,7 +48,7 @@ public class UserService {
 
     public JwtResponse login(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
@@ -120,7 +119,7 @@ public class UserService {
                 username,
                 "",
                 email,
-                password,
+                encoder.encode(password),
                 new HashSet<>()
         );
 
@@ -130,7 +129,7 @@ public class UserService {
     }
 
     public void deleteUser(User user) {
-        userRepository.delete(user);
+        userRepository.deleteById(user.getId());
     }
 
     public UserDTO bindUserData(User user) {

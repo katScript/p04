@@ -43,6 +43,19 @@ public class CustomerController {
         }
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getCustomerByUserId(@Valid @PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(customerService.getCustomerByUserId(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
     @PostMapping("/save")
     public ResponseEntity<?> save(@Valid @RequestBody CustomerDTO customerDTO) {
         try {
@@ -61,7 +74,7 @@ public class CustomerController {
     public ResponseEntity<?> delete(@Valid @PathVariable Long id) {
         try {
             customerService.deleteCustomerById(id);
-            return ResponseEntity.ok("Delete customer success!");
+            return ResponseEntity.ok(new MessageResponse("Delete customer success!"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,

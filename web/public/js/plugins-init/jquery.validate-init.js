@@ -1,89 +1,89 @@
 jQuery(".form-valide").validate({
     rules: {
-        "val-username": {
+        "username": {
             required: !0,
             minlength: 3
         },
-        "val-email": {
+        "email": {
             required: !0,
             email: !0
         },
-        "val-password": {
+        "password": {
             required: !0,
             minlength: 5
         },
-        "val-confirm-password": {
+        "confirm-password": {
             required: !0,
-            equalTo: "#val-password"
+            equalTo: "#password"
         },
-        "val-select2": {
+        "select2": {
             required: !0
         },
-        "val-select2-multiple": {
+        "select2-multiple": {
             required: !0,
             minlength: 2
         },
-        "val-suggestions": {
+        "suggestions": {
             required: !0,
             minlength: 5
         },
-        "val-skill": {
+        "skill": {
             required: !0
         },
-        "val-currency": {
+        "currency": {
             required: !0,
             currency: ["$", !0]
         },
-        "val-website": {
+        "website": {
             required: !0,
             url: !0
         },
-        "val-phoneus": {
+        "phone": {
             required: !0,
-            phoneUS: !0
+            phone: !0
         },
-        "val-digits": {
+        "digits": {
             required: !0,
             digits: !0
         },
-        "val-number": {
+        "number": {
             required: !0,
             number: !0
         },
-        "val-range": {
+        "range": {
             required: !0,
             range: [1, 5]
         },
-        "val-terms": {
+        "terms": {
             required: !0
         }
     },
     messages: {
-        "val-username": {
+        "username": {
             required: "Please enter a username",
             minlength: "Your username must consist of at least 3 characters"
         },
-        "val-email": "Please enter a valid email address",
-        "val-password": {
+        "email": "Please enter a valid email address",
+        "password": {
             required: "Please provide a password",
             minlength: "Your password must be at least 5 characters long"
         },
-        "val-confirm-password": {
+        "confirm-password": {
             required: "Please provide a password",
             minlength: "Your password must be at least 5 characters long",
             equalTo: "Please enter the same password as above"
         },
-        "val-select2": "Please select a value!",
-        "val-select2-multiple": "Please select at least 2 values!",
-        "val-suggestions": "What can we do to become better?",
-        "val-skill": "Please select a skill!",
-        "val-currency": "Please enter a price!",
-        "val-website": "Please enter your website!",
-        "val-phoneus": "Please enter a US phone!",
-        "val-digits": "Please enter only digits!",
-        "val-number": "Please enter a number!",
-        "val-range": "Please enter a number between 1 and 5!",
-        "val-terms": "You must agree to the service terms!"
+        "select2": "Please select a value!",
+        "select2-multiple": "Please select at least 2 values!",
+        "suggestions": "What can we do to become better?",
+        "skill": "Please select a skill!",
+        "currency": "Please enter a price!",
+        "website": "Please enter your website!",
+        "phone": "Please enter a phone number!",
+        "digits": "Please enter only digits!",
+        "number": "Please enter a number!",
+        "range": "Please enter a number between 1 and 5!",
+        "terms": "You must agree to the service terms!"
     },
 
     ignore: [],
@@ -103,21 +103,21 @@ jQuery(".form-valide").validate({
 
 jQuery(".form-valide-with-icon").validate({
     rules: {
-        "val-username": {
+        "username": {
             required: !0,
             minlength: 3
         },
-        "val-password": {
+        "password": {
             required: !0,
             minlength: 5
         }
     },
     messages: {
-        "val-username": {
+        "username": {
             required: "Please enter a username",
             minlength: "Your username must consist of at least 3 characters"
         },
-        "val-password": {
+        "password": {
             required: "Please provide a password",
             minlength: "Your password must be at least 5 characters long"
         }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import common from "./common";
 
-const accessToken = common.TOKEN() || null;
+const accessToken = common.cookiesManager.get(common.userHashId.token) || "";
 
 const API = common.DOMAIN;
 
@@ -21,37 +21,29 @@ const handleError = (error) => {
 };
 
 
-const get = (endPoint, options = {}) =>
+export const get = (endPoint, options = {}) =>
     axios.get(
         API + endPoint,
         { headers: getHeader(), ...options }
     ).catch(handleError);
 
 
-const post = (endPoint, data = {}) =>
+export const post = (endPoint, data = {}) =>
     axios.post(
         API + endPoint,
         data instanceof FormData ? data : JSON.stringify(data),
         { headers: getHeader(data instanceof FormData) }
     ).catch(handleError);
 
-const put = (endPoint, data = {}) =>
+export const put = (endPoint, data = {}) =>
     axios.put(
         API + endPoint,
         JSON.stringify(data),
         { headers: getHeader() }
     ).catch(handleError);
 
-const del = (endPoint) =>
+export const del = (endPoint) =>
     axios.delete(
         API + endPoint,
         { headers: getHeader() }
     ).catch(handleError);
-
-export default {
-    get,
-    post,
-    del,
-    put,
-    getHeader,
-};
