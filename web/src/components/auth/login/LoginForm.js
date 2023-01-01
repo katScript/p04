@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import staticContent from "hooks/staticContent";
-import {Link, Navigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import { login } from "api/user/account";
 import UserData from "models/user/user-data";
 import LoginData from "models/user/login-data";
@@ -47,7 +47,6 @@ class LoginForm extends Component {
                 title: 'Good job!',
                 text: 'You clicked the button.',
                 icon: 'success'
-            }).then(r => {
             });
         } catch (e) {
             Swal.fire({
@@ -97,7 +96,7 @@ class LoginForm extends Component {
 function LoginFormHooks() {
     staticContent.useStaticStyle("/plugins/sweetalert/css/sweetalert.css");
     staticContent.useBodyStaticScript("/plugins/validation/jquery.validate.min.js");
-    staticContent.useBodyStaticScript("/plugins/validation/jquery.validate-init.js");
+    staticContent.useBodyStaticScript("/js/custom/validate.js");
 }
 
 export default LoginForm;

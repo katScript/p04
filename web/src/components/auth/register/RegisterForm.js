@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import Swal from "sweetalert2";
-import {register} from "api/user/account";
+import {registerCustomer} from "api/customer/customer";
 import RegisterData from "models/customer/register-data";
+import staticContent from "hooks/staticContent";
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class RegisterForm extends Component {
 
     registerResponse = async () => {
         this.registerData.bindObjectData(this.state);
-        await register(this.registerData.getObjectData());
+        await registerCustomer(this.registerData.getObjectData());
     }
 
     handleFormSubmit = (e) => {
@@ -56,7 +57,7 @@ class RegisterForm extends Component {
         return (
             <div className="RegisterForm">
                 <div className="form-validation">
-                    <form className="form-valide" action="#" method="post">
+                    <form className="form-valide" onSubmit={this.handleFormSubmit}>
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <input type="text" className="form-control" id="fullname"
@@ -110,9 +111,17 @@ class RegisterForm extends Component {
                     </form>
                     <span><Link to="/auth/login">Login</Link></span>
                 </div>
+                <RegisterFormHooks/>
             </div>
         );
     }
+}
+
+
+function RegisterFormHooks() {
+    staticContent.useStaticStyle("/plugins/sweetalert/css/sweetalert.css");
+    staticContent.useBodyStaticScript("/plugins/validation/jquery.validate.min.js");
+    staticContent.useBodyStaticScript("/js/custom/validate.js");
 }
 
 export default RegisterForm;
