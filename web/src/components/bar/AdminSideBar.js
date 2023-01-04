@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
-class SideBar extends Component {
+class AdminSideBar extends Component {
 
     render() {
         return (
@@ -20,13 +20,15 @@ class SideBar extends Component {
                                 </ul>
                             </li>
                             <li className="mega-menu mega-menu-sm">
-                                <Link to="/admin/service/list" className="has-arrow" aria-expanded="false">
+                                <Link to="/admin/service" className="has-arrow" aria-expanded="false">
                                     <i className="icon-drawar menu-icon"></i><span
                                     className="nav-text">Services</span>
                                 </Link>
                                 <ul aria-expanded="false">
-                                    <li><Link to="/admin/service">List services</Link></li>
-                                    <li><Link to="/admin/service/detail">Service detail</Link></li>
+                                    <li><Link to="/admin/service">List Services</Link></li>
+                                    <li><Link to="/admin/service/detail">Service Detail</Link></li>
+                                    <li><Link to="/admin/package">List Package</Link></li>
+                                    <li><Link to="/admin/package/detail">Package Detail</Link></li>
                                 </ul>
                             </li>
                         </ul>
@@ -37,4 +39,4 @@ class SideBar extends Component {
     }
 }
 
-export default SideBar;
+export default AdminSideBar;

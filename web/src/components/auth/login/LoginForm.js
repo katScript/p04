@@ -57,12 +57,15 @@ class LoginForm extends Component {
         }
     }
 
-    render() {
-        const { username, password } = this.state;
+    staticContentImport = () => {
         const staticContent = this.props.staticContent;
 
         staticContent.useBodyStaticScript("/plugins/validation/jquery.validate.min.js");
         staticContent.useBodyStaticScript("/js/custom/validate.js");
+    }
+
+    render() {
+        const { username, password } = this.state;
 
         return (
             <div className="LoginForm">
@@ -88,9 +91,15 @@ class LoginForm extends Component {
                                 <button type="submit" className="btn btn-primary">Login</button>
                             </div>
                         </div>
+
+                        <div className="form-group row justify-content-center">
+                            <div className="col-lg-8 float-right">
+                                <span><Link to="/auth/register">Register</Link> now!</span>
+                            </div>
+                        </div>
                     </form>
-                    <span><Link to="/auth/register">Register</Link> now!</span>
                 </div>
+                <this.staticContentImport/>
             </div>
         );
     }

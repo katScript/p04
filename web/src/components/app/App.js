@@ -1,7 +1,6 @@
 import RouteConfig from "routes/RouteConfig";
 import React, {Component} from "react";
-import StaticContent from "hooks/StaticContent";
-import {Link} from "react-router-dom";
+import './App.css';
 
 class App extends Component {
     // const name = 'Company Name';

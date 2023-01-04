@@ -1,28 +1,30 @@
-import React from "react";
+import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
-function Breadcrumb({item}) {
-    const listItems = item.map((element) => {
-        let classItem = "breadcrumb-item";
-        if (element.active)
-            classItem += " active";
+class Breadcrumb extends Component {
+    render() {
+        const listItems = this.props.item.map((element, i) => {
+            let classItem = "breadcrumb-item";
+            if (element.active)
+                classItem += " active";
+
+            return (
+                <li className={classItem} key={i}>
+                    <Link to={element.url}>{element.label}</Link>
+                </li>
+            );
+        });
 
         return (
-            <li className={classItem}>
-                <Link to={element.url}>element.label</Link>
-            </li>
-        );
-    });
-
-    return (
-        <div className="row page-titles mx-0">
-            <div className="col p-md-0">
-                <ol className="breadcrumb">
-                    {listItems}
-                </ol>
+            <div className="row page-titles mx-0">
+                <div className="col p-md-0">
+                    <ol className="breadcrumb">
+                        {listItems}
+                    </ol>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Breadcrumb;

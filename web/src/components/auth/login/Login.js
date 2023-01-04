@@ -5,15 +5,17 @@ import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import LoginForm from "components/auth/login/LoginForm";
 
 class Login extends Component {
+    staticContentImport = () => {
+        let sc = this.props.staticContent;
+
+        sc.useStaticStyle("/plugins/fullcalendar/css/fullcalendar.min.css");
+        sc.useBodyStaticScript("/plugins/jqueryui/js/jquery-ui.min.js");
+        sc.useBodyStaticScript("/plugins/moment/moment.min.js");
+        sc.useBodyStaticScript("/plugins/fullcalendar/js/fullcalendar.min.js");
+        sc.useBodyStaticScript("/js/custom/fullcalendar.js");
+    }
+
     render() {
-        const {staticContent} = this.props.staticContent;
-
-        staticContent.useStaticStyle("/plugins/fullcalendar/css/fullcalendar.min.css");
-        staticContent.useBodyStaticScript("/plugins/jqueryui/js/jquery-ui.min.js");
-        staticContent.useBodyStaticScript("/plugins/moment/moment.min.js");
-        staticContent.useBodyStaticScript("/plugins/fullcalendar/js/fullcalendar.min.js");
-        staticContent.useBodyStaticScript("/js/custom/fullcalendar.js");
-
         return (
             <div className="Login">
                 <Header/>
@@ -34,6 +36,7 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
+                <this.staticContentImport/>
             </div>
         );
     }

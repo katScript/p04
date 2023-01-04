@@ -20,7 +20,7 @@ public class ServiceBusiness {
     private String serviceName;
 
     @OneToMany(mappedBy = "service",
-            fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Package> packages;
 
     @Column(name = "created_at", insertable = false, updatable = false)
