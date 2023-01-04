@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import Swal from "sweetalert2";
-import {register} from "api/user/account";
+import {registerCustomer} from "api/customer/customer";
 import RegisterData from "models/customer/register-data";
+import wrapper from "components/app/wrapper";
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class RegisterForm extends Component {
 
     registerResponse = async () => {
         this.registerData.bindObjectData(this.state);
-        await register(this.registerData.getObjectData());
+        await registerCustomer(this.registerData.getObjectData());
     }
 
     handleFormSubmit = (e) => {
@@ -52,11 +53,16 @@ class RegisterForm extends Component {
 
     render() {
         const {username, password, fullname, email, confirmPassword, phone} = this.state;
+        const staticContent = this.props.staticContent;
+
+        staticContent.useBodyStaticScript("/plugins/validation/jquery.validate.min.js");
+        staticContent.useBodyStaticScript("/js/custom/validate.js");
+
 
         return (
             <div className="RegisterForm">
                 <div className="form-validation">
-                    <form className="form-valide" action="#" method="post">
+                    <form className="form-valide" onSubmit={this.handleFormSubmit}>
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <input type="text" className="form-control" id="fullname"
@@ -115,4 +121,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default RegisterForm;
+export default wrapper(RegisterForm);

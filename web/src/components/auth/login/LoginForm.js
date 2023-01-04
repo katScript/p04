@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import staticContent from "hooks/staticContent";
-import {Link, Navigate} from "react-router-dom";
+import wrapper from "components/app/wrapper";
+import {Link} from "react-router-dom";
 import { login } from "api/user/account";
 import UserData from "models/user/user-data";
 import LoginData from "models/user/login-data";
@@ -47,7 +47,6 @@ class LoginForm extends Component {
                 title: 'Good job!',
                 text: 'You clicked the button.',
                 icon: 'success'
-            }).then(r => {
             });
         } catch (e) {
             Swal.fire({
@@ -60,6 +59,10 @@ class LoginForm extends Component {
 
     render() {
         const { username, password } = this.state;
+        const staticContent = this.props.staticContent;
+
+        staticContent.useBodyStaticScript("/plugins/validation/jquery.validate.min.js");
+        staticContent.useBodyStaticScript("/js/custom/validate.js");
 
         return (
             <div className="LoginForm">
@@ -88,16 +91,9 @@ class LoginForm extends Component {
                     </form>
                     <span><Link to="/auth/register">Register</Link> now!</span>
                 </div>
-                <LoginFormHooks/>
             </div>
         );
     }
 }
 
-function LoginFormHooks() {
-    staticContent.useStaticStyle("/plugins/sweetalert/css/sweetalert.css");
-    staticContent.useBodyStaticScript("/plugins/validation/jquery.validate.min.js");
-    staticContent.useBodyStaticScript("/plugins/validation/jquery.validate-init.js");
-}
-
-export default LoginForm;
+export default wrapper(LoginForm);

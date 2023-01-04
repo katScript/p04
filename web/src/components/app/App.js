@@ -1,7 +1,7 @@
-import './App.css';
 import RouteConfig from "routes/RouteConfig";
 import React, {Component} from "react";
-import {Navigate} from "react-router-dom";
+import StaticContent from "hooks/StaticContent";
+import {Link} from "react-router-dom";
 
 class App extends Component {
     // const name = 'Company Name';
@@ -11,7 +11,6 @@ class App extends Component {
         this.admin = JSON.parse(localStorage.getItem("admin"));
         this.customer = JSON.parse(localStorage.getItem("customer"));
 
-        this.routeConfig = new RouteConfig();
     }
 
     render() {
@@ -27,9 +26,13 @@ class App extends Component {
                 <div id="main-wrapper">
                     <RouteConfig/>
                 </div>
+                <AppHooks/>
             </div>
         );
     }
+}
+
+function AppHooks() {
 }
 
 export default App;

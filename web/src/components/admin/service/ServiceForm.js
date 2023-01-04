@@ -1,22 +1,16 @@
 import React, {Component} from "react";
-import wrapper from "components/app/wrapper";
 import Header from "components/bar/Header";
+import SideBar from "components/bar/SideBar";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
-import LoginForm from "components/auth/login/LoginForm";
+import wrapper from "components/app/wrapper";
 
-class Login extends Component {
+class ServiceForm extends Component {
+
     render() {
-        const {staticContent} = this.props.staticContent;
-
-        staticContent.useStaticStyle("/plugins/fullcalendar/css/fullcalendar.min.css");
-        staticContent.useBodyStaticScript("/plugins/jqueryui/js/jquery-ui.min.js");
-        staticContent.useBodyStaticScript("/plugins/moment/moment.min.js");
-        staticContent.useBodyStaticScript("/plugins/fullcalendar/js/fullcalendar.min.js");
-        staticContent.useBodyStaticScript("/js/custom/fullcalendar.js");
-
         return (
-            <div className="Login">
+            <div className="ServiceForm">
                 <Header/>
+                <SideBar/>
                 <div className="content-body">
                     <Breadcrumb item={[]}/>
                     <div className="container-fluid">
@@ -27,7 +21,7 @@ class Login extends Component {
                                         <span className="display-5"><i className="icon-user gradient-4-text"></i></span>
                                     </div>
                                     <div className="card-body">
-                                        <LoginForm/>
+                                        ID: {this.props.params.id}
                                     </div>
                                 </div>
                             </div>
@@ -39,4 +33,4 @@ class Login extends Component {
     }
 }
 
-export default wrapper(Login);
+export default wrapper(ServiceForm);

@@ -46,7 +46,7 @@ public class AdminAuthService {
         ));
     }
 
-    public void deleteCustomerAccount(Admin admin) {
+    public void deleteAdminAccount(Admin admin) {
         userService.deleteUser(admin.getUser());
     }
 }

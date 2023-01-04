@@ -14,7 +14,7 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
@@ -58,63 +58,71 @@ public class Admin {
         return id;
     }
 
-    public void setId(Long id) {
+    public Admin setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public Admin setUser(User user) {
         this.user = user;
+        return this;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
+    public Admin setFullName(String fullName) {
         this.fullName = fullName;
+        return this;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public Admin setPhone(String phone) {
         this.phone = phone;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public Admin setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public String getCurrentAddress() {
         return currentAddress;
     }
 
-    public void setCurrentAddress(String currentAddress) {
+    public Admin setCurrentAddress(String currentAddress) {
         this.currentAddress = currentAddress;
+        return this;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public Admin setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+        return this;
     }
 
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public Admin setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
     }
 }
