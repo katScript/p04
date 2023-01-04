@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import Swal from "sweetalert2";
 import {registerCustomer} from "api/customer/customer";
 import RegisterData from "models/customer/register-data";
-import staticContent from "hooks/staticContent";
+import wrapper from "components/app/wrapper";
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -53,6 +53,11 @@ class RegisterForm extends Component {
 
     render() {
         const {username, password, fullname, email, confirmPassword, phone} = this.state;
+        const staticContent = this.props.staticContent;
+
+        staticContent.useBodyStaticScript("/plugins/validation/jquery.validate.min.js");
+        staticContent.useBodyStaticScript("/js/custom/validate.js");
+
 
         return (
             <div className="RegisterForm">
@@ -111,17 +116,9 @@ class RegisterForm extends Component {
                     </form>
                     <span><Link to="/auth/login">Login</Link></span>
                 </div>
-                <RegisterFormHooks/>
             </div>
         );
     }
 }
 
-
-function RegisterFormHooks() {
-    staticContent.useStaticStyle("/plugins/sweetalert/css/sweetalert.css");
-    staticContent.useBodyStaticScript("/plugins/validation/jquery.validate.min.js");
-    staticContent.useBodyStaticScript("/js/custom/validate.js");
-}
-
-export default RegisterForm;
+export default wrapper(RegisterForm);

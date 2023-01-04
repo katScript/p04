@@ -1,19 +1,19 @@
 import {useEffect} from 'react';
 
-class staticContent {
-    static getPublicUrl = (url) => {
+class StaticContent {
+    getPublicUrl = (url) => {
         return process.env.PUBLIC_URL + url;
     }
 
-    static useStaticStyle = (url) => {
+    useStaticStyle = (url) => {
         let publicUrl = this.getPublicUrl(url);
         useEffect(() => {
             let head = document.head;
             let link = document.createElement("link");
 
             link.setAttribute("type", "text/css");
-            link.setAttribute("type", "stylesheet");
-            link.setAttribute("type", publicUrl);
+            link.setAttribute("rel", "stylesheet");
+            link.setAttribute("href", publicUrl);
 
             head.appendChild(link);
 
@@ -24,7 +24,7 @@ class staticContent {
         }, [publicUrl]);
     }
 
-    static useHeadStaticScript = (url) => {
+    useHeadStaticScript = (url) => {
         let publicUrl = this.getPublicUrl(url);
         useEffect(() => {
             let head = document.head;
@@ -41,7 +41,7 @@ class staticContent {
         }, [publicUrl]);
     }
 
-    static useBodyStaticScript = (url) => {
+     useBodyStaticScript = (url) => {
         let publicUrl = this.getPublicUrl(url);
         useEffect(() => {
             let staticScript = document.getElementById("static-script");
@@ -58,4 +58,4 @@ class staticContent {
     }
 }
 
-export default staticContent;
+export default StaticContent;
