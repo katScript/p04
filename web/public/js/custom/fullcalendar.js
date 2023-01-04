@@ -1,6 +1,4 @@
-const jQ = $;
-
-jQ(window).on('load', function() {
+$(window).on('load', function() {
     ! function(e) {
         "use strict";
         var t = function() {

@@ -32,7 +32,6 @@ class LoginForm extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
         try {
-
             this.getLoginResponse().then(() => {
                 let role = this.loginData.roles,
                     id = this.loginData.id,
@@ -40,7 +39,7 @@ class LoginForm extends Component {
 
 
                 this.userData.setUserCookies(token);
-                this.userData.getUserData()[role](id);
+                this.userData.getUserData(id)[role]();
             });
 
             return Swal.fire({
@@ -88,13 +87,17 @@ class LoginForm extends Component {
 
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
-                                <button type="submit" className="btn btn-primary">Login</button>
+                                <div className="d-flex justify-content-center">
+                                    <button type="submit" className="btn btn-primary">Login</button>
+                                </div>
                             </div>
                         </div>
 
                         <div className="form-group row justify-content-center">
-                            <div className="col-lg-8 float-right">
-                                <span><Link to="/auth/register">Register</Link> now!</span>
+                            <div className="col-lg-8">
+                                <span className="d-flex justify-content-center">
+                                    <Link to="/auth/register">Register</Link> now!
+                                </span>
                             </div>
                         </div>
                     </form>

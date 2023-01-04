@@ -9,13 +9,15 @@ class Dashboard extends Component {
         this.staticContent = this.props.staticContent;
     }
 
-    render() {
+    staticContentImport = () => {
         this.staticContent.useStaticStyle("/plugins/fullcalendar/css/fullcalendar.min.css");
         this.staticContent.useBodyStaticScript("/plugins/jqueryui/js/jquery-ui.min.js");
         this.staticContent.useBodyStaticScript("/plugins/moment/moment.min.js");
         this.staticContent.useBodyStaticScript("/plugins/fullcalendar/js/fullcalendar.min.js");
         this.staticContent.useBodyStaticScript("/js/plugins-init/fullcalendar-init.js");
+    }
 
+    render() {
         return (
             <div className="Dashboard">
                 <Header/>
@@ -23,6 +25,7 @@ class Dashboard extends Component {
                 <div className="content-body">
 
                 </div>
+                <this.staticContentImport/>
             </div>
         );
     }

@@ -5,9 +5,8 @@ import javax.validation.Valid;
 import com.spring.web.authentication.payload.request.ChangePasswordRequest;
 import com.spring.web.authentication.payload.request.ForgetPasswordRequest;
 import com.spring.web.authentication.payload.request.LoginRequest;
-import com.spring.web.authentication.payload.response.ForgetPasswordResponse;
 import com.spring.web.authentication.payload.response.JwtResponse;
-import com.spring.web.authentication.services.UserService;
+import com.spring.web.authentication.services.AuthService;
 import com.spring.web.helpers.erorrs.ErrorResponse;
 import com.spring.web.helpers.message.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/auth")
 public class AuthController {
     @Autowired
-    public UserService userService;
+    public AuthService userService;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

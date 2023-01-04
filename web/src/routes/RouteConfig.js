@@ -7,6 +7,7 @@ import Service from "components/admin/service/Service";
 import ServiceForm from "components/admin/service/ServiceForm";
 import Package from "components/admin/package/Package";
 import PackageForm from "components/admin/package/PackageForm";
+import Main from "components/client/main/Main";
 
 class RouteConfig extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class RouteConfig extends Component {
                 <Route path="/admin/package" element={<Package/>} />
                 <Route path="/admin/service/detail/:id?" element={<ServiceForm />} />
                 <Route path="/admin/package/detail/:id?" element={<PackageForm/>} />
-                <Route path="/" element={<Register/>} />
+                <Route path="/" element={<Main/>} />
             </Routes>
         );
     }

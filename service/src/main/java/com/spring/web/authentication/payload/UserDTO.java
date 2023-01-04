@@ -9,6 +9,8 @@ public class UserDTO {
 
     private String email;
 
+    private String role;
+
     private String createdAt;
 
     private String updatedAt;
@@ -20,6 +22,7 @@ public class UserDTO {
             String userName,
             String avatar,
             String email,
+            String role,
             String createdAt,
             String updatedAt
     ) {
@@ -27,6 +30,7 @@ public class UserDTO {
         this.userName = userName;
         this.avatar = avatar;
         this.email = email;
+        this.role = role;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -77,5 +81,13 @@ public class UserDTO {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import common from "./common";
+import {common} from "utils/common";
 
 const API = common.DOMAIN;
 

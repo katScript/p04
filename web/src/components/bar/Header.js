@@ -4,7 +4,15 @@ import NavSignIn from "components/bar/NavSignIn";
 import NavUser from "components/bar/NavUser";
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: JSON.parse(localStorage.getItem("user"))
+        }
+    }
+
     render() {
+        const user = this.state.user;
         return (
             <div className="Header">
                 <NavHeader/>
@@ -12,7 +20,7 @@ class Header extends Component {
                     <div className="header-content clearfix">
                         <div className="header-right">
                             <ul className="clearfix">
-                                { this.props.user ? <NavUser/> : <NavSignIn/> }
+                                { user ? <NavUser user={user} /> : <NavSignIn/> }
                             </ul>
                         </div>
                     </div>

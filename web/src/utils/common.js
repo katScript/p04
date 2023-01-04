@@ -10,7 +10,7 @@ const userCookies = {
     roles: "4DFkgFzNb6eHkWw7SLzGCGvTwNN49pk3"
 }
 
-export default {
+export const common = {
     DOMAIN: "http://localhost:8091",
     userHashId: userCookies,
     cookiesManager: cookies
