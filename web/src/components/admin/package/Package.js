@@ -4,21 +4,21 @@ import Header from "components/bar/Header";
 import AdminSideBar from "components/bar/AdminSideBar";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import TableData from "components/table/TableData";
-import ServiceData from "models/order/service";
-import {getAllService} from "api/order/service";
+import {getAllPackage} from "api/order/package";
+import PackageData from "models/order/package";
 
-class Service extends Component {
+class Package extends Component {
     constructor(props) {
         super(props);
 
-        this.serviceData = new ServiceData();
+        this.packageData = new PackageData();
         this.state = {
-            keyData: this.serviceData.getTableKeyList(),
-            label: this.serviceData.getLabelList(),
+            keyData: this.packageData.getTableKeyList(),
+            label: this.packageData.getLabelList(),
             data: []
         };
 
-        this.getAllServiceData().then((r) => {
+        this.getAllPackageData().then((r) => {
             this.setState({data: r});
         });
     }
@@ -33,18 +33,18 @@ class Service extends Component {
             {
                 active : true,
                 label : "Service",
-                url: "/admin/service"
+                url: "/admin/package"
             }
         ];
     }
 
-    getAllServiceData = async () => {
-        const {data} = await getAllService();
+    getAllPackageData = async () => {
+        const {data} = await getAllPackage();
         let list = [];
 
         for (const item of Object.values(data)) {
-            this.serviceData.setObjectData(item);
-            list.push(this.serviceData.getObjectData());
+            this.packageData.setObjectData(item);
+            list.push(this.packageData.getObjectData());
         }
 
         return list;
@@ -52,7 +52,7 @@ class Service extends Component {
 
     render() {
         return (
-            <div className="Service">
+            <div className="Package">
                 <Header/>
                 <AdminSideBar/>
                 <div className="content-body">
@@ -80,4 +80,4 @@ class Service extends Component {
 }
 
 
-export default wrapper(Service);
+export default wrapper(Package);

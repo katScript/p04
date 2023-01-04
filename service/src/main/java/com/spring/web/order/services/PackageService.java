@@ -50,8 +50,13 @@ public class PackageService {
     }
 
     public void savePackage(PackageDTO packageDTO) {
-        ServiceBusiness business = serviceRepository.findById(packageDTO.getServiceId())
-                .orElseThrow(() -> new RuntimeException(String.format("Service with id %d not found!", packageDTO.getServiceId())));
+        ServiceBusiness business;
+        if (packageDTO.getServiceId() != null) {
+            business = serviceRepository.findById(packageDTO.getServiceId())
+                    .orElseThrow(() -> new RuntimeException(String.format("Service with id %d not found!", packageDTO.getServiceId())));
+        } else {
+            business = null;
+        }
 
         packageRepository.save(bindPackageObject(packageDTO, business));
     }
@@ -60,15 +65,13 @@ public class PackageService {
         packageRepository.deleteById(id);
     }
 
-    public Package bindPackageObject(PackageDTO data, ServiceBusiness serviceBusiness) {
-        Package packageData;
-        if (data.getId() != null) {
-            packageData = packageRepository.findById(data.getId())
-                    .orElseThrow(() -> new RuntimeException(String.format("Package with id %d not found!", data.getId())));
-        } else {
-            packageData = new Package();
-        }
+    public void unTrackPackage(Package pk) {
+        pk.setService(null);
+        packageRepository.save(pk);
+    }
 
+    public Package bindPackageObject(PackageDTO data, ServiceBusiness serviceBusiness) {
+        Package packageData = getPackageObject(data);
         packageData.setService(serviceBusiness)
                 .setPackageName(data.getPackageName())
                 .setPrice(data.getPrice())
@@ -78,10 +81,24 @@ public class PackageService {
         return packageData;
     }
 
+    public Package getPackageObject(PackageDTO data) {
+        Package packageData;
+        if (data.getId() != null) {
+            packageData = packageRepository.findById(data.getId())
+                    .orElseThrow(() -> new RuntimeException(String.format("Package with id %d not found!", data.getId())));
+        } else {
+            packageData = new Package();
+        }
+
+        return packageData;
+    }
+
     public PackageDTO bindPackageData(Package data) {
+        ServiceBusiness serviceBusiness = data.getService() != null ? data.getService() : new ServiceBusiness();
+
         return new PackageDTO(
                 data.getId(),
-                data.getService().getId(),
+                serviceBusiness.getId(),
                 data.getPackageName(),
                 data.getPrice(),
                 data.getStatus(),

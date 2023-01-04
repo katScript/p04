@@ -2,8 +2,8 @@ package com.spring.web.order.controller;
 
 import com.spring.web.helpers.erorrs.ErrorResponse;
 import com.spring.web.helpers.message.MessageResponse;
-import com.spring.web.order.payload.ServiceDTO;
-import com.spring.web.order.services.BusinessService;
+import com.spring.web.order.payload.PackageDTO;
+import com.spring.web.order.services.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,15 +12,15 @@ import javax.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/v1/service")
-public class ServiceController {
+@RequestMapping("/v1/package")
+public class PackageController {
     @Autowired
-    public BusinessService businessService;
+    public PackageService packageService;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@Valid @PathVariable Long id) {
         try {
-            return ResponseEntity.ok(businessService.getServiceById(id));
+            return ResponseEntity.ok(packageService.getPackageById(id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,
@@ -33,7 +33,7 @@ public class ServiceController {
     @GetMapping("/all")
     public ResponseEntity<?> getAllService() {
         try {
-            return ResponseEntity.ok(businessService.getAllService());
+            return ResponseEntity.ok(packageService.getAllPackage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,
@@ -44,10 +44,10 @@ public class ServiceController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveService(@Valid @RequestBody ServiceDTO data) {
+    public ResponseEntity<?> saveService(@Valid @RequestBody PackageDTO data) {
         try {
-            businessService.saveService(data);
-            return ResponseEntity.ok(new MessageResponse("Save service success!"));
+            packageService.savePackage(data);
+            return ResponseEntity.ok(new MessageResponse("Save package success!"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,
@@ -60,8 +60,8 @@ public class ServiceController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteService(@Valid @PathVariable Long id) {
         try {
-            businessService.deleteServiceById(id);
-            return ResponseEntity.ok(new MessageResponse("Delete service success!"));
+            packageService.deletePackageById(id);
+            return ResponseEntity.ok(new MessageResponse("Delete package success!"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,

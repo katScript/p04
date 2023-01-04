@@ -12,7 +12,7 @@ public class Package {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="service_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name="service_id", referencedColumnName = "id")
     private ServiceBusiness service;
 
     @Column(name = "package_name")

@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BusinessService {
@@ -24,7 +26,12 @@ public class BusinessService {
         ServiceBusiness serviceBusiness = serviceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(String.format("Service with id %d not found!", id)));
 
-        return bindServiceData(serviceBusiness);
+        ServiceDTO serviceDTO = bindServiceData(serviceBusiness);
+        for (Package p : serviceBusiness.getPackages()) {
+            serviceDTO.getItems().add(packageService.bindPackageData(p));
+        }
+
+        return serviceDTO;
     }
 
     public List<ServiceDTO> getAllService() {
@@ -43,7 +50,15 @@ public class BusinessService {
     }
 
     public void deleteServiceById(Long id) {
-        serviceRepository.deleteById(id);
+        ServiceBusiness serviceBusiness = serviceRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException(String.format("Service with id %d not found!", id)));
+
+        for (Package pk : serviceBusiness.getPackages()) {
+            packageService.unTrackPackage(pk);
+        }
+
+        serviceBusiness.getPackages().clear();
+        serviceRepository.delete(serviceBusiness);
     }
 
     public ServiceBusiness bindServiceObject(ServiceDTO data) {
@@ -55,16 +70,19 @@ public class BusinessService {
             serviceBusiness = new ServiceBusiness();
         }
 
-        List<Package> items = new ArrayList<>();
+        for (Package pk : serviceBusiness.getPackages()) {
+            packageService.unTrackPackage(pk);
+        }
+
+        Set<Package> items = new HashSet<>();
         for (PackageDTO pd : data.getItems()) {
-            items.add(packageService.bindPackageObject(pd, serviceBusiness));
+            items.add(packageService.getPackageObject(pd).setService(serviceBusiness));
         }
 
         serviceBusiness.setCategory(data.getCategory())
                 .setServiceName(data.getServiceName());
-        serviceBusiness.getPackages().clear();
-        serviceBusiness.getPackages().addAll(items);
 
+        serviceBusiness.setPackages(items);
         return serviceBusiness;
     }
 
