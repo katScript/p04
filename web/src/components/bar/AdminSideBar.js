@@ -1,8 +1,9 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
 import {Link} from "react-router-dom";
+import $ from "jquery";
+import SideBarManager from "./SideBarManager";
 
 class AdminSideBar extends Component {
-
     render() {
         return (
             <div className="SideBar">
@@ -34,9 +35,11 @@ class AdminSideBar extends Component {
                         </ul>
                     </div>
                 </div>
+                <SideBarManager/>
             </div>
         );
     }
 }
+
 
 export default AdminSideBar;

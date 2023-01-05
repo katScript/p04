@@ -1,7 +1,7 @@
 package com.spring.web.customer.services;
 
 import com.spring.web.authentication.models.User;
-import com.spring.web.authentication.services.UserService;
+import com.spring.web.authentication.services.AuthService;
 import com.spring.web.customer.models.Customer;
 import com.spring.web.customer.models.repository.CustomerRepository;
 import com.spring.web.authentication.payload.request.ResetPasswordRequest;
@@ -18,7 +18,7 @@ public class CustomerAuthService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private UserService userService;
+    private AuthService userService;
 
     public void resetPassword(ResetPasswordRequest rpr) {
         User user = userService.getUserByToken(rpr.getToken());

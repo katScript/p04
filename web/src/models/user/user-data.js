@@ -1,6 +1,7 @@
 import { getCustomerByUserId } from "api/customer/customer";
 import Cookies from 'universal-cookie';
-import common from 'utils/common';
+import {common} from 'utils/common';
+import {getUserById} from "api/user/user";
 
 class UserData {
     constructor() {
@@ -20,21 +21,36 @@ class UserData {
         this.cookies.set(common.userHashId.token, token, { path: '/',  expires})
     }
 
-    fetchCustomerData = async (id) => {
+    fetchCustomerDataByUser = async (id) => {
         const {data} = await getCustomerByUserId(id);
         return data;
     }
 
-    getUserData = () => {
+    getUserData = (id) => {
+        this.fetchUserData(id).then((data) => {
+            localStorage.setItem("user", JSON.stringify(data));
+        });
+
         return {
-            customer: (id) => {
-                this.fetchCustomerData(id).then((data) => {
+            customer: () => {
+                this.fetchCustomerDataByUser(id).then((data) => {
                     localStorage.setItem("customer", JSON.stringify(data));
                 });
 
                 return "/";
             }
         }
+    }
+
+    fetchUserData = async (id) => {
+        const {data} = await getUserById(id);
+        return data;
+    }
+
+    removeUserData = (role) => {
+        localStorage.removeItem("user");
+        localStorage.removeItem(role);
+        this.cookies.remove(common.userHashId.token, { path: '/' });
     }
 
     getObjectData = () => {

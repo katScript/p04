@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Header from "components/bar/Header";
 import AdminSideBar from "components/bar/AdminSideBar";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import wrapper from "components/app/wrapper";
@@ -116,7 +115,6 @@ class ServiceForm extends Component {
 
         return (
             <div className="ServiceForm">
-                <Header/>
                 <AdminSideBar/>
                 <div className="content-body">
                     <Breadcrumb item={[]}/>

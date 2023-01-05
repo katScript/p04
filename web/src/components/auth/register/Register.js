@@ -5,7 +5,7 @@ import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import RegisterForm from "components/auth/register/RegisterForm";
 
 class Register extends Component {
-    render() {
+    staticContentImport = () => {
         const staticContent = this.props.staticContent;
 
         staticContent.useStaticStyle("/plugins/fullcalendar/css/fullcalendar.min.css");
@@ -13,9 +13,11 @@ class Register extends Component {
         staticContent.useBodyStaticScript("/plugins/moment/moment.min.js");
         staticContent.useBodyStaticScript("/plugins/fullcalendar/js/fullcalendar.min.js");
         staticContent.useBodyStaticScript("/js/custom/fullcalendar.js");
+    }
+
+    render() {
         return (
             <div className="Register">
-                <Header/>
                 <div className="content-body">
                     <Breadcrumb item={[]}/>
                     <div className="container-fluid">
@@ -33,6 +35,7 @@ class Register extends Component {
                         </div>
                     </div>
                 </div>
+                <this.staticContentImport/>
             </div>
         );
     }

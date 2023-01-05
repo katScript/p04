@@ -5,7 +5,7 @@ import com.spring.web.admin.models.repository.AdminRepository;
 import com.spring.web.admin.payload.AdminDTO;
 import com.spring.web.authentication.models.User;
 import com.spring.web.authentication.payload.request.ResetPasswordRequest;
-import com.spring.web.authentication.services.UserService;
+import com.spring.web.authentication.services.AuthService;
 import com.spring.web.admin.payload.request.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class AdminAuthService {
     private AdminRepository adminRepository;
 
     @Autowired
-    private UserService userService;
+    private AuthService userService;
 
     public void resetPassword(ResetPasswordRequest rpr) {
         User user = userService.getUserByToken(rpr.getToken());

@@ -51,13 +51,15 @@ class RegisterForm extends Component {
         }
     }
 
-    render() {
-        const {username, password, fullname, email, confirmPassword, phone} = this.state;
+    staticContentImport = () => {
         const staticContent = this.props.staticContent;
 
         staticContent.useBodyStaticScript("/plugins/validation/jquery.validate.min.js");
         staticContent.useBodyStaticScript("/js/custom/validate.js");
+    }
 
+    render() {
+        const {username, password, fullname, email, confirmPassword, phone} = this.state;
 
         return (
             <div className="RegisterForm">
@@ -110,12 +112,22 @@ class RegisterForm extends Component {
 
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
-                                <button type="submit" className="btn btn-primary">Register</button>
+                                <div className="d-flex justify-content-center">
+                                    <button type="submit" className="btn btn-primary">Register</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="form-group row justify-content-center">
+                            <div className="col-lg-8">
+                                <span className="d-flex justify-content-center">
+                                    Go to <Link to="/auth/login">Login</Link>
+                                </span>
                             </div>
                         </div>
                     </form>
-                    <span><Link to="/auth/login">Login</Link></span>
                 </div>
+                <this.staticContentImport/>
             </div>
         );
     }

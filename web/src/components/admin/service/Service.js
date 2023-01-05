@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
-import Header from "components/bar/Header";
 import AdminSideBar from "components/bar/AdminSideBar";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import TableData from "components/table/TableData";
@@ -53,7 +52,6 @@ class Service extends Component {
     render() {
         return (
             <div className="Service">
-                <Header/>
                 <AdminSideBar/>
                 <div className="content-body">
                     <Breadcrumb item={this.prepareBreadcrumb()}/>

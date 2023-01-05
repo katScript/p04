@@ -2,6 +2,7 @@ package com.spring.web.order.controller;
 
 import com.spring.web.helpers.erorrs.ErrorResponse;
 import com.spring.web.helpers.message.MessageResponse;
+import com.spring.web.order.data.Category;
 import com.spring.web.order.payload.ServiceDTO;
 import com.spring.web.order.services.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,19 @@ public class ServiceController {
         }
     }
 
+    @GetMapping("/category/{category}")
+    public ResponseEntity<?> getServiceByCategory(@Valid @PathVariable String category) {
+        try {
+            return ResponseEntity.ok(businessService.getAllServiceByCategory(category));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
     @PostMapping("/save")
     public ResponseEntity<?> saveService(@Valid @RequestBody ServiceDTO data) {
         try {
@@ -62,6 +76,19 @@ public class ServiceController {
         try {
             businessService.deleteServiceById(id);
             return ResponseEntity.ok(new MessageResponse("Delete service success!"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
+    @GetMapping("/category/option")
+    public ResponseEntity<?> getAllCategory() {
+        try {
+            return ResponseEntity.ok(Category.getAlLCategoryType());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,
