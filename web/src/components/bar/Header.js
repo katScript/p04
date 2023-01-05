@@ -18,6 +18,11 @@ class Header extends Component {
                 <NavHeader/>
                 <div className="header">
                     <div className="header-content clearfix">
+                        <div className="nav-control">
+                            <div className="hamburger">
+                                <span className="toggle-icon"><i className="icon-menu"></i></span>
+                            </div>
+                        </div>
                         <div className="header-right">
                             <ul className="clearfix">
                                 { user ? <NavUser user={user} /> : <NavSignIn/> }

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
-import Header from "components/bar/Header";
 import AdminSideBar from "components/bar/AdminSideBar";
 
 class Dashboard extends Component {
@@ -20,7 +19,6 @@ class Dashboard extends Component {
     render() {
         return (
             <div className="Dashboard">
-                <Header/>
                 <AdminSideBar/>
                 <div className="content-body">
 

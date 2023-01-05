@@ -18,7 +18,6 @@ class Register extends Component {
     render() {
         return (
             <div className="Register">
-                <Header/>
                 <div className="content-body">
                     <Breadcrumb item={[]}/>
                     <div className="container-fluid">

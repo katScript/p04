@@ -1,39 +1,164 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import {common} from "utils/common";
+import {getAllServiceByCategory} from "api/order/service";
+import SideBarManager from "components/bar/SideBarManager";
 
 class SideBar extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            facebook: [],
+            instagram: [],
+            tiktok: [],
+            shopee: [],
+            youtube: [],
+            telegram: []
+        }
+
+        common.categoryOption().forEach((e) => {
+            this.getServiceDataByCategory(e.value).then(async (r) => {
+                await this.setState({[e.value]: r});
+            });
+        });
+    }
+
+    getServiceDataByCategory = async (category) => {
+        const {data} = await getAllServiceByCategory(category);
+        return data;
+    }
 
     render() {
+        const { facebook, instagram, tiktok, shopee, youtube, telegram } = this.state;
+
         return (
             <div className="SideBar">
                 <div className="nk-sidebar">
                     <div className="nk-nav-scroll">
                         <ul className="metismenu" id="menu">
-                            <li className="nav-label">Dashboard</li>
                             <li>
-                                <Link to="/admin" className="has-arrow" aria-expanded="false">
-                                    <i className="icon-speedometer menu-icon"></i><span
-                                    className="nav-text">Dashboard</span>
+                                <Link to="/">
+                                    <i className="icon-screen-desktop menu-icon"></i><span
+                                    className="nav-text">Home</span>
                                 </Link>
+                            </li>
+                            <li className="nav-label">Customer</li>
+                            <li>
+                                <a href="#account" className="has-arrow" aria-expanded="false">
+                                    <i className="icon-user menu-icon"></i><span className="nav-text">Account</span>
+                                </a>
                                 <ul aria-expanded="false">
-                                    <li><Link to="/admin">Home</Link></li>
+                                    <li><Link to="/customer"><i className="icon-book-open menu-icon"></i>Information</Link></li>
+                                    <li><Link to="/b"><i className="icon-credit-card menu-icon"></i>Recharge</Link></li>
+                                    <li><Link to="/c"><i className="icon-notebook menu-icon"></i>History</Link></li>
                                 </ul>
                             </li>
-                            <li className="mega-menu mega-menu-sm">
-                                <Link to="/admin/service" className="has-arrow" aria-expanded="false">
-                                    <i className="icon-drawar menu-icon"></i><span
-                                    className="nav-text">Services</span>
-                                </Link>
+                            <li className="nav-label">Service</li>
+                            <li>
+                                <a href="#facebook" className="has-arrow" aria-expanded="false">
+                                    <i className="menu-icon font-tiny">
+                                        <i className="fab fa-facebook-f"></i>
+                                    </i><span className="nav-text">Facebook</span>
+                                </a>
                                 <ul aria-expanded="false">
-                                    <li><Link to="/admin/service">List Services</Link></li>
-                                    <li><Link to="/admin/service/detail">Service Detail</Link></li>
-                                    <li><Link to="/admin/package">List Package</Link></li>
-                                    <li><Link to="/admin/package/detail">Package Detail</Link></li>
+                                    {facebook.map((e) => {
+                                        return (
+                                            <li key={e.id}>
+                                                <Link to={"/place/order/service/" + e.id}>{e.serviceName}</Link>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#instagram" className="has-arrow" aria-expanded="false">
+                                    <i className="menu-icon font-tiny">
+                                        <i className="fab fa-instagram"></i>
+                                    </i><span className="nav-text">Instagram</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    {instagram.map((e) => {
+                                        return (
+                                            <li key={e.id}>
+                                                <Link to={"/place/order/service/" + e.id}>{e.serviceName}</Link>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#tiktock" className="has-arrow" aria-expanded="false">
+                                    <i className="menu-icon font-tiny">
+                                        <i className="fab fa-tiktok"></i>
+                                    </i>
+                                    <span className="nav-text">TikTok</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    {tiktok.map((e) => {
+                                        return (
+                                            <li key={e.id}>
+                                                <Link to={"/place/order/service/" + e.id}>{e.serviceName}</Link>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#shopee" className="has-arrow" aria-expanded="false">
+                                    <i className="menu-icon font-tiny">
+                                        <i className="fab fa-shopify"></i>
+                                    </i>
+                                    <span className="nav-text">Shopee</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    {shopee.map((e) => {
+                                        return (
+                                            <li key={e.id}>
+                                                <Link to={"/place/order/service/" + e.id}>{e.serviceName}</Link>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#youtube" className="has-arrow" aria-expanded="false">
+                                    <i className="menu-icon font-tiny">
+                                        <i className="fab fa-youtube"></i>
+                                    </i>
+                                    <span className="nav-text">Youtube</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    {youtube.map((e) => {
+                                        return (
+                                            <li key={e.id}>
+                                                <Link to={"/place/order/service/" + e.id}>{e.serviceName}</Link>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#telegram" className="has-arrow" aria-expanded="false">
+                                    <i className="menu-icon font-tiny">
+                                        <i className="fab fa-telegram-plane"></i>
+                                    </i>
+                                    <span className="nav-text">Telegram</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    {telegram.map((e) => {
+                                        return (
+                                            <li key={e.id}>
+                                                <Link to={"/place/order/service/" + e.id}>{e.serviceName}</Link>
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </li>
                         </ul>
                     </div>
                 </div>
+                <SideBarManager/>
             </div>
         );
     }

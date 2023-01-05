@@ -18,7 +18,6 @@ class Login extends Component {
     render() {
         return (
             <div className="Login">
-                <Header/>
                 <div className="content-body">
                     <Breadcrumb item={[]}/>
                     <div className="container-fluid">

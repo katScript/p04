@@ -1,6 +1,7 @@
 import RouteConfig from "routes/RouteConfig";
 import React, {Component} from "react";
 import './App.css';
+import Header from "components/bar/Header";
 
 class App extends Component {
     // const name = 'Company Name';
@@ -9,7 +10,6 @@ class App extends Component {
         super(props);
         this.admin = JSON.parse(localStorage.getItem("admin"));
         this.customer = JSON.parse(localStorage.getItem("customer"));
-
     }
 
     render() {
@@ -23,6 +23,7 @@ class App extends Component {
                     </div>
                 </div>
                 <div id="main-wrapper">
+                    <Header/>
                     <RouteConfig/>
                 </div>
                 <AppHooks/>

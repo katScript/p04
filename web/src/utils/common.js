@@ -1,4 +1,5 @@
 import Cookies from 'universal-cookie';
+import {getAllCategoryOption} from "api/order/service";
 
 const cookies = new Cookies();
 
@@ -13,5 +14,12 @@ const userCookies = {
 export const common = {
     DOMAIN: "http://localhost:8091",
     userHashId: userCookies,
-    cookiesManager: cookies
+    cookiesManager: cookies,
+    categoryOption: () => {
+        return JSON.parse(localStorage.getItem("category_option"));
+    },
+    storeCategoryOption: async () => {
+        const {data} = await getAllCategoryOption();
+        localStorage.setItem("category_option", JSON.stringify(data));
+    }
 }

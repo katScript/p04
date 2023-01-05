@@ -45,6 +45,17 @@ public class BusinessService {
         return results;
     }
 
+    public List<ServiceDTO> getAllServiceByCategory(String category) {
+        List<ServiceBusiness> serviceBusinesses = serviceRepository.findByCategory(category);
+        List<ServiceDTO> results = new ArrayList<>();
+
+        for (ServiceBusiness sb: serviceBusinesses) {
+            results.add(bindServiceData(sb));
+        }
+
+        return results;
+    }
+
     public void saveService(ServiceDTO data) {
         serviceRepository.save(bindServiceObject(data));
     }

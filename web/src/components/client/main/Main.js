@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
-import Header from "components/bar/Header";
 import SideBar from "components/bar/SideBar";
-
 
 class Main extends Component {
     constructor(props) {
@@ -21,7 +19,6 @@ class Main extends Component {
     render() {
         return (
             <div className="Main">
-                <Header/>
                 <SideBar/>
                 <div className="content-body">
 
