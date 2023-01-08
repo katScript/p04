@@ -5,6 +5,7 @@ import { login } from "api/user/account";
 import UserData from "models/user/user-data";
 import LoginData from "models/user/login-data";
 import Swal from 'sweetalert2';
+import {common} from "utils/common";
 
 class LoginForm extends Component {
     constructor(props) {
@@ -20,8 +21,12 @@ class LoginForm extends Component {
     }
 
     getLoginResponse =  async () => {
-        const {data} = await login(this.state);
-        this.loginData.setObjectData(data);
+        try {
+            const {data} = await login(this.state);
+            this.loginData.setObjectData(data);
+        } catch (e) {
+            throw e;
+        }
     }
 
     handleChangeInput = async (event) => {
@@ -31,29 +36,32 @@ class LoginForm extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        try {
-            this.getLoginResponse().then(() => {
-                let role = this.loginData.roles,
-                    id = this.loginData.id,
-                    token = this.loginData.token;
+        this.getLoginResponse().then(() => {
+            this.userData.removeUserData();
+            let role = this.loginData.roles,
+                id = this.loginData.id,
+                token = this.loginData.token;
 
-
-                this.userData.setUserCookies(token);
-                this.userData.getUserData(id)[role]();
-            });
+            this.userData.setUserCookies(token);
+            const url = this.userData.getUserData(id)[role]();
 
             return Swal.fire({
-                title: 'Good job!',
-                text: 'You clicked the button.',
-                icon: 'success'
+                title: 'Welcome!',
+                text: 'Đăng nhập thành công!',
+                icon: 'success',
+                confirmButtonText: 'Đóng',
+            }).then(r => {
+                common.redirect(url);
             });
-        } catch (e) {
+        }).catch((e) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!'
+                text: "Tên đăng nhập hoặc mật khẩu không đúng!",
+                confirmButtonText: 'Đóng',
+            }).then(r => {
             });
-        }
+        });
     }
 
     staticContentImport = () => {

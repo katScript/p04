@@ -9,7 +9,10 @@ const userCookies = {
     expireTime: 86400000,
     username: "jgT7Un46hLk4jBzyTGEq6j634H34jmU8",
     id: "4qYbrSdRZSb2uYS4f58iBKmjRHFFaWmy",
-    roles: "4DFkgFzNb6eHkWw7SLzGCGvTwNN49pk3"
+    roles: "4DFkgFzNb6eHkWw7SLzGCGvTwNN49pk3",
+    customer: "customer",
+    admin: "admin",
+    user: "user"
 }
 
 export const common = {
@@ -31,5 +34,14 @@ export const common = {
         mainElement.fadeOut();
         loaderElement.fadeOut(800);
         mainElement.fadeIn(500);
+    },
+    refreshPage: () => {
+        window.location.reload();
+    },
+    redirect: (path) => {
+        window.location.href = path;
+    },
+    thousandFormat: (value) => {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 }

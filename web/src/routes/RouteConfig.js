@@ -12,6 +12,10 @@ import OrderForm from "components/client/order/OrderForm";
 import CustomerInformation from "components/client/customer/CustomerInformation";
 import Order from "components/admin/order/Order";
 import User from "components/admin/user/User";
+import Customer from "components/admin/customer/Customer";
+import CustomerForm from "components/admin/customer/CustomerForm";
+import NotFound from "components/page/NotFound";
+import Recharge from "components/client/customer/Recharge";
 
 class RouteConfig extends Component {
     constructor(props) {
@@ -21,45 +25,55 @@ class RouteConfig extends Component {
         this.registerPath = "/auth/register";
     }
 
-    staticRoute = () => {
-        return [this.loginPath, this.registerPath];
+    getCustomerLoginRoute = () => {
+        if (this.props.isLogin)
+            return (
+                <Route path="customer" exact>
+                    <Route index element={<CustomerInformation/>} />
+                    <Route path="recharge" exact element={<Recharge/>} />
+                    <Route path="history" exact element={<CustomerInformation/>} />
+                </Route>
+            );
+
+        return (<Route path="customer" element={<Login/>}/>);
     }
 
     render() {
+        const isAdmin = this.props.isAdmin;
         return (
             <Routes>
                 <Route path={this.loginPath} element={<Login/>} />
                 <Route path={this.registerPath} element={<Register/>} />
-                <Route path="/admin" >
-                    <Route index element={<Dashboard/>} />
-                    <Route path="service">
-                        <Route index element={<Service/>} />
-                        <Route path="detail/:id?" element={<ServiceForm />} />
+                {isAdmin && (
+                    <Route path="/admin" exact>
+                        <Route index element={<Dashboard/>} />
+                        <Route path="service">
+                            <Route index exact element={<Service/>} />
+                            <Route path="detail/:id?" exact element={<ServiceForm />} />
+                        </Route>
+                        <Route path="package" exact>
+                            <Route index exact element={<Package/>} />
+                            <Route path="detail/:id?" exact element={<PackageForm/>} />
+                        </Route>
+                        <Route path="customer" exact>
+                            <Route index exact element={<Customer/>} />
+                            <Route path=":id" exact element={<CustomerForm/> }/>
+                            <Route path="payment" exact element={<PackageForm/>} />
+                        </Route>
+                        <Route path="order" exact>
+                            <Route index exact element={<Order/>} />
+                        </Route>
+                        <Route path="user" exact>
+                            <Route index exact element={<User/>} />
+                        </Route>
                     </Route>
-                    <Route path="package">
-                        <Route index element={<Package/>} />
-                        <Route path="detail/:id?" element={<PackageForm/>} />
-                    </Route>
-                    <Route path="customer">
-                        <Route index element={<Package/>} />
-                        <Route path="payment" element={<PackageForm/>} />
-                    </Route>
-                    <Route path="order">
-                        <Route index element={<Order/>} />
-                    </Route>
-                    <Route path="user">
-                        <Route index element={<User/>} />
-                    </Route>
-                </Route>
-                <Route path="/">
+                )}
+                <Route path="/" exact>
                     <Route index element={<Main/>}/>
-                    <Route path="customer">
-                        <Route index element={<CustomerInformation/>} />
-                        <Route path="recharge" element={<CustomerInformation/>} />
-                        <Route path="history" element={<CustomerInformation/>} />
-                    </Route>
-                    <Route path="place/order/service/:id" element={<OrderForm/>} />
+                    {this.getCustomerLoginRoute()}
+                    <Route path="place/order/service/:id" exact element={<OrderForm/>} />
                 </Route>
+                <Route path='*' element={<NotFound isAdmin={isAdmin} />}/>
             </Routes>
         );
     }

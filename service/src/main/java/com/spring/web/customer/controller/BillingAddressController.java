@@ -3,6 +3,7 @@ package com.spring.web.customer.controller;
 import com.spring.web.customer.payload.BillingAddressDTO;
 import com.spring.web.customer.services.BillingAddressService;
 import com.spring.web.helpers.erorrs.ErrorResponse;
+import com.spring.web.helpers.message.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +47,7 @@ public class BillingAddressController {
     public ResponseEntity<?> saveBillingAddressData(@Valid @PathVariable Long id, @RequestBody BillingAddressDTO data) {
         try {
             billingAddressService.saveCustomerBillingAddress(id, data);
-            return ResponseEntity.ok("Save billing address success!");
+            return ResponseEntity.ok(new MessageResponse("Save billing address success!"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,

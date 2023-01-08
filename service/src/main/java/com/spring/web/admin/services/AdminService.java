@@ -74,6 +74,7 @@ public class AdminService {
                 admin.getPhone(),
                 admin.getAddress(),
                 admin.getCurrentAddress(),
+                admin.getUser().getUserName(),
                 DateTimeConverter.dateToString(admin.getCreatedAt()),
                 DateTimeConverter.dateToString(admin.getUpdatedAt())
         );

@@ -1,14 +1,26 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
 import NavHeader from "components/bar/NavHeader";
 import NavSignIn from "components/bar/NavSignIn";
 import NavUser from "components/bar/NavUser";
+import {common} from "utils/common";
 
 class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: JSON.parse(localStorage.getItem("user"))
+            user: null
         }
+    }
+
+    HooksData = () => {
+        let userData = localStorage.getItem(common.userHashId.user);
+        useEffect(() => {
+            if (userData) {
+                this.setState({
+                    user: JSON.parse(userData)
+                })
+            }
+        }, [userData]);
     }
 
     render() {
@@ -30,6 +42,7 @@ class Header extends Component {
                         </div>
                     </div>
                 </div>
+                <this.HooksData/>
             </div>
         );
     }

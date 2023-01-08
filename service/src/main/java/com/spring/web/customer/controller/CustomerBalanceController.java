@@ -3,6 +3,7 @@ package com.spring.web.customer.controller;
 import com.spring.web.customer.payload.request.ChangeBalanceRequest;
 import com.spring.web.customer.services.BalanceHistoryService;
 import com.spring.web.helpers.erorrs.ErrorResponse;
+import com.spring.web.helpers.message.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class CustomerBalanceController {
     public ResponseEntity<?> changeCustomerBalance(@Valid @PathVariable Long id, @RequestBody ChangeBalanceRequest cbr) {
         try {
             balanceHistoryService.changeCustomerBalance(id, cbr);
-            return ResponseEntity.ok("Change customer balance success!");
+            return ResponseEntity.ok(new MessageResponse("Change customer balance success!"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,

@@ -2,21 +2,21 @@ import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import TableData from "components/table/TableData";
-import {getAllPackage} from "api/order/package";
-import PackageData from "models/order/package-data";
+import {getAllCustomer} from "api/customer/customer";
+import CustomerData from "models/customer/customer-data";
 
 class Customer extends Component {
     constructor(props) {
         super(props);
 
-        this.packageData = new PackageData();
+        this.customerData = new CustomerData();
         this.state = {
-            keyData: this.packageData.getTableKeyList(),
-            label: this.packageData.getLabelList(),
+            keyData: this.customerData.getTableKeyList(),
+            label: this.customerData.getLabelList(),
             data: []
         };
 
-        this.getAllPackageData().then((r) => {
+        this.getAllCustomer().then((r) => {
             this.setState({data: r});
         });
     }
@@ -36,13 +36,13 @@ class Customer extends Component {
         ];
     }
 
-    getAllPackageData = async () => {
-        const {data} = await getAllPackage();
+    getAllCustomer = async () => {
+        const {data} = await getAllCustomer();
         let list = [];
 
         for (const item of Object.values(data)) {
-            this.packageData.setObjectData(item);
-            list.push(this.packageData.getObjectData());
+            this.customerData.setObjectData(item);
+            list.push(this.customerData.getObjectData());
         }
 
         return list;
