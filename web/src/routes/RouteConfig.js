@@ -8,8 +8,10 @@ import ServiceForm from "components/admin/service/ServiceForm";
 import Package from "components/admin/package/Package";
 import PackageForm from "components/admin/package/PackageForm";
 import Main from "components/client/main/Main";
-import OrderForm from "../components/client/order/OrderForm";
-import CustomerInformation from "../components/client/customer/CustomerInformation";
+import OrderForm from "components/client/order/OrderForm";
+import CustomerInformation from "components/client/customer/CustomerInformation";
+import Order from "components/admin/order/Order";
+import User from "components/admin/user/User";
 
 class RouteConfig extends Component {
     constructor(props) {
@@ -38,10 +40,24 @@ class RouteConfig extends Component {
                         <Route index element={<Package/>} />
                         <Route path="detail/:id?" element={<PackageForm/>} />
                     </Route>
+                    <Route path="customer">
+                        <Route index element={<Package/>} />
+                        <Route path="payment" element={<PackageForm/>} />
+                    </Route>
+                    <Route path="order">
+                        <Route index element={<Order/>} />
+                    </Route>
+                    <Route path="user">
+                        <Route index element={<User/>} />
+                    </Route>
                 </Route>
                 <Route path="/">
                     <Route index element={<Main/>}/>
-                    <Route path="customer" element={<CustomerInformation/>} />
+                    <Route path="customer">
+                        <Route index element={<CustomerInformation/>} />
+                        <Route path="recharge" element={<CustomerInformation/>} />
+                        <Route path="history" element={<CustomerInformation/>} />
+                    </Route>
                     <Route path="place/order/service/:id" element={<OrderForm/>} />
                 </Route>
             </Routes>

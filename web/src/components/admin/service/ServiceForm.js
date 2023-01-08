@@ -1,13 +1,12 @@
 import React, {Component} from "react";
-import AdminSideBar from "components/bar/AdminSideBar";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import wrapper from "components/app/wrapper";
 import {getServiceById, saveService} from "api/order/service";
 import {getAllPackage} from "api/order/package";
 import Swal from "sweetalert2";
 import {Link} from "react-router-dom";
-import ServiceData from "models/order/service";
-import PackageData from "models/order/package";
+import ServiceData from "models/order/service-data";
+import PackageData from "models/order/package-data";
 import SelectTable from "components/table/SelectTable";
 
 class ServiceForm extends Component {
@@ -115,7 +114,6 @@ class ServiceForm extends Component {
 
         return (
             <div className="ServiceForm">
-                <AdminSideBar/>
                 <div className="content-body">
                     <Breadcrumb item={[]}/>
                     <div className="container-fluid">

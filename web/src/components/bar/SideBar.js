@@ -16,7 +16,9 @@ class SideBar extends Component {
             youtube: [],
             telegram: []
         }
+    }
 
+    componentWillMount() {
         common.categoryOption().forEach((e) => {
             this.getServiceDataByCategory(e.value).then(async (r) => {
                 await this.setState({[e.value]: r});
@@ -46,12 +48,13 @@ class SideBar extends Component {
                             <li className="nav-label">Customer</li>
                             <li>
                                 <a href="#account" className="has-arrow" aria-expanded="false">
-                                    <i className="icon-user menu-icon"></i><span className="nav-text">Account</span>
+                                    <i className="icon-user menu-icon"></i>
+                                    <span className="nav-text">Account</span>
                                 </a>
                                 <ul aria-expanded="false">
                                     <li><Link to="/customer"><i className="icon-book-open menu-icon"></i>Information</Link></li>
-                                    <li><Link to="/b"><i className="icon-credit-card menu-icon"></i>Recharge</Link></li>
-                                    <li><Link to="/c"><i className="icon-notebook menu-icon"></i>History</Link></li>
+                                    <li><Link to="/customer/recharge"><i className="icon-credit-card menu-icon"></i>Recharge</Link></li>
+                                    <li><Link to="/customer/history"><i className="icon-notebook menu-icon"></i>History</Link></li>
                                 </ul>
                             </li>
                             <li className="nav-label">Service</li>

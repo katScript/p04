@@ -19,7 +19,6 @@ class Dashboard extends Component {
     render() {
         return (
             <div className="Dashboard">
-                <AdminSideBar/>
                 <div className="content-body">
 
                 </div>

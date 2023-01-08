@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
 import SideBar from "components/bar/SideBar";
+import {Route, Routes} from "react-router-dom";
+import CustomerInformation from "../customer/CustomerInformation";
 
 class Main extends Component {
     constructor(props) {
@@ -19,7 +21,6 @@ class Main extends Component {
     render() {
         return (
             <div className="Main">
-                <SideBar/>
                 <div className="content-body">
 
                 </div>

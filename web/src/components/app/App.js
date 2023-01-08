@@ -2,6 +2,9 @@ import RouteConfig from "routes/RouteConfig";
 import React, {Component} from "react";
 import './App.css';
 import Header from "components/bar/Header";
+import Loader from "components/common/Loader";
+import SideBar from "components/bar/SideBar";
+import AdminSideBar from "../bar/AdminSideBar";
 
 class App extends Component {
     // const name = 'Company Name';
@@ -15,15 +18,10 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <div id="preloader">
-                    <div className="loader">
-                        <svg className="circular" viewBox="25 25 50 50">
-                            <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="3" strokeMiterlimit="10"/>
-                        </svg>
-                    </div>
-                </div>
+                <Loader id={"preloader"}/>
                 <div id="main-wrapper">
                     <Header/>
+                    <AdminSideBar/>
                     <RouteConfig/>
                 </div>
                 <AppHooks/>

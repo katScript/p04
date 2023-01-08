@@ -81,7 +81,6 @@ class PackageForm extends Component {
 
         return (
             <div className="PackageForm">
-                <AdminSideBar/>
                 <div className="content-body">
                     <Breadcrumb item={[]}/>
                     <div className="container-fluid">
