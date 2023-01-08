@@ -5,6 +5,7 @@ import com.spring.web.authentication.models.repository.UserRepository;
 import com.spring.web.customer.models.Customer;
 import com.spring.web.customer.models.repository.CustomerRepository;
 import com.spring.web.customer.payload.CustomerDTO;
+import com.spring.web.helpers.currency.Formatter;
 import com.spring.web.helpers.date.DateTimeConverter;
 import com.spring.web.order.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,12 +97,13 @@ public class CustomerService {
                 customer.getPhone(),
                 customer.getEmail(),
                 customer.getSubscription(),
-                customer.getCurrentMoney(),
+                Formatter.roundCurrency(customer.getCurrentMoney()),
                 customer.getTotalMoney(),
                 new ArrayList<>(),
                 new ArrayList<>(),
                 new ArrayList<>(),
                 new ArrayList<>(),
+                customer.getUser().getUserName(),
                 DateTimeConverter.dateToString(customer.getCreatedAt()),
                 DateTimeConverter.dateToString(customer.getUpdatedAt())
         );

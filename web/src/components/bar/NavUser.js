@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
 import {Link} from "react-router-dom";
 import UserData from "models/user/user-data";
+import {common} from "utils/common";
 
 class NavUser extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class NavUser extends Component {
     logout = () => {
         const user = this.props.user;
         this.userData.removeUserData(user.role);
+        common.redirect(window.location.pathname);
     }
 
     render() {
@@ -39,9 +41,9 @@ class NavUser extends Component {
 
                             <hr className="my-2"/>
                             <li>
-                                <Link to="/auth/login" onClick={this.logout}>
+                                <a href="#" onClick={this.logout}>
                                     <i className="icon-key"></i><span>Logout</span>
-                                </Link>
+                                </a>
                             </li>
                         </ul>
                     </div>

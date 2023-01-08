@@ -4,15 +4,30 @@ import './App.css';
 import Header from "components/bar/Header";
 import Loader from "components/common/Loader";
 import SideBar from "components/bar/SideBar";
-import AdminSideBar from "../bar/AdminSideBar";
+import AdminSideBar from "components/bar/AdminSideBar";
+import {common} from "utils/common";
 
 class App extends Component {
-    // const name = 'Company Name';
-    // const [terms, setTerms] = useState([]);
     constructor(props) {
         super(props);
-        this.admin = JSON.parse(localStorage.getItem("admin"));
-        this.customer = JSON.parse(localStorage.getItem("customer"));
+        this.admin = JSON.parse(localStorage.getItem(common.userHashId.admin));
+        this.customer = JSON.parse(localStorage.getItem(common.userHashId.customer));
+        this.user = JSON.parse(localStorage.getItem(common.userHashId.user));
+    }
+
+    getSideBar = () => {
+        if (this.isAdmin())
+            return (<AdminSideBar/>);
+
+        return (<SideBar isLogin={this.isLogin()}/>);
+    }
+
+    isAdmin = () => {
+        return this.admin !== null;
+    }
+
+    isLogin = () => {
+        return this.user !== null;
     }
 
     render() {
@@ -21,16 +36,17 @@ class App extends Component {
                 <Loader id={"preloader"}/>
                 <div id="main-wrapper">
                     <Header/>
-                    <AdminSideBar/>
-                    <RouteConfig/>
+                    {this.getSideBar()}
+                    <RouteConfig isAdmin={this.isAdmin()} isLogin={this.isLogin()}/>
+                    <div className="footer">
+                        <div className="copyright">
+                            <p>Copyright © Developed by <a href="#">Kat</a> 2022</p>
+                        </div>
+                    </div>
                 </div>
-                <AppHooks/>
             </div>
         );
     }
-}
-
-function AppHooks() {
 }
 
 export default App;

@@ -11,6 +11,8 @@ public class AdminDTO {
 
     private String currentAddress;
 
+    private String username;
+
     private String createdAt;
 
     private String updatedAt;
@@ -23,6 +25,7 @@ public class AdminDTO {
             String phone,
             String address,
             String currentAddress,
+            String username,
             String createdAt,
             String updatedAt
     ) {
@@ -31,6 +34,7 @@ public class AdminDTO {
         this.phone = phone;
         this.address = address;
         this.currentAddress = currentAddress;
+        this.username = username;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -89,5 +93,13 @@ public class AdminDTO {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

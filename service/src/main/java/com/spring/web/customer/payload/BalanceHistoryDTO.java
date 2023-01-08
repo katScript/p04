@@ -1,5 +1,7 @@
 package com.spring.web.customer.payload;
 
+import com.spring.web.helpers.currency.Formatter;
+
 public class BalanceHistoryDTO {
     private Long id;
 

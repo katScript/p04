@@ -24,7 +24,9 @@ export const get = (endPoint, options = {}) => {
     return axios.get(
         API + endPoint,
         { headers: getHeader(), ...options }
-    ).catch(handleError);
+    ).catch((errors) => {
+        handleError(errors);
+    });
 }
 
 
@@ -34,7 +36,9 @@ export const post = (endPoint, data = {}) => {
         API + endPoint,
         data instanceof FormData ? data : JSON.stringify(data),
         {headers: getHeader(data instanceof FormData)}
-    ).catch(handleError);
+    ).catch((errors) => {
+        handleError(errors);
+    });
 }
 
 export const put = (endPoint, data = {}) => {
@@ -42,12 +46,16 @@ export const put = (endPoint, data = {}) => {
         API + endPoint,
         JSON.stringify(data),
         {headers: getHeader()}
-    ).catch(handleError);
+    ).catch((errors) => {
+        handleError(errors);
+    });
 }
 
 export const del = (endPoint) => {
     return axios.delete(
         API + endPoint,
         {headers: getHeader()}
-    ).catch(handleError);
+    ).catch((errors) => {
+        handleError(errors);
+    });
 }

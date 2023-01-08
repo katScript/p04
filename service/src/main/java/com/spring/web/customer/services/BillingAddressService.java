@@ -5,6 +5,7 @@ import com.spring.web.customer.models.Customer;
 import com.spring.web.customer.models.repository.BillingAddressRepository;
 import com.spring.web.customer.models.repository.CustomerRepository;
 import com.spring.web.customer.payload.BillingAddressDTO;
+import com.spring.web.helpers.currency.Formatter;
 import com.spring.web.helpers.date.DateTimeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,12 +58,12 @@ public class BillingAddressService {
         if (data.getId() != null) {
             billingAddress = billingAddressRepository.findById(data.getId())
                     .orElseThrow(() -> new RuntimeException(String.format("Billing address with id %d not found!", data.getId())));
+
+            if (!billingAddress.getCustomer().getId().equals(customerId))
+                throw new RuntimeException("Customer not valid!");
         } else {
             billingAddress = new BillingAddress();
         }
-
-        if (!billingAddress.getCustomer().getId().equals(customerId))
-            throw new RuntimeException("Customer not valid!");
 
         Customer customer = customerRepository.findById(customerId)
                         .orElseThrow(() -> new RuntimeException(String.format("Customer with id %d not found!", customerId)));
@@ -91,16 +92,17 @@ public class BillingAddressService {
         BillingAddress billingAddress = billingAddressRepository.findById(billingAddressId)
                 .orElse(null);
 
+        String incomeString = Formatter.formatThousand(income);
         String description;
         if (billingAddress != null) {
-            description = String.format("%s recharge %f from %s with account %s",
+            description = String.format("%s recharge %s from %s with account %s",
                     billingAddress.getCustomer().getFullName(),
-                    income,
+                    incomeString,
                     billingAddress.getBillingName(),
                     billingAddress.getAccountNumber()
             );
         } else {
-            description = String.format("Recharge %f by billing address id %d", income, billingAddressId);
+            description = String.format("Recharge %s by billing address id %d", income, billingAddressId);
         }
 
         return description;

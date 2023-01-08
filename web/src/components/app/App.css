@@ -2,6 +2,10 @@
     max-width: 900px!important;
 }
 
+.content-body {
+    min-height: 950px!important;
+}
+
 .select-model table .active {
     background-color: rgba(0, 0, 0, 0.075);
     border-left: solid 2px #7571f9!important;

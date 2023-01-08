@@ -13,7 +13,6 @@ import com.spring.web.authentication.security.jwt.JwtUtils;
 import com.spring.web.authentication.security.services.UserDetailsImpl;
 import com.spring.web.email.models.Mail;
 import com.spring.web.email.services.MailServiceImp;
-import com.spring.web.helpers.date.DateTimeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -27,6 +27,8 @@ public class CustomerDTO {
 
     private List<CustomerLogDTO> customerLog;
 
+    private String username;
+
     private String createdAt;
 
     private String updatedAt;
@@ -45,6 +47,7 @@ public class CustomerDTO {
             List<BillingAddressDTO> billingAddress,
             List<BalanceHistoryDTO> balanceHistory,
             List<CustomerLogDTO> customerLog,
+            String username,
             String createdAt,
             String updatedAt
     ) {
@@ -59,6 +62,7 @@ public class CustomerDTO {
         this.billingAddress = billingAddress;
         this.balanceHistory = balanceHistory;
         this.customerLog = customerLog;
+        this.username = username;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -166,5 +170,13 @@ public class CustomerDTO {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

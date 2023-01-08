@@ -32,7 +32,7 @@ class SideBar extends Component {
     }
 
     render() {
-        const { facebook, instagram, tiktok, shopee, youtube, telegram } = this.state;
+        const {facebook, instagram, tiktok, shopee, youtube, telegram} = this.state;
 
         return (
             <div className="SideBar">
@@ -46,17 +46,19 @@ class SideBar extends Component {
                                 </Link>
                             </li>
                             <li className="nav-label">Customer</li>
-                            <li>
-                                <a href="#account" className="has-arrow" aria-expanded="false">
+                            {this.props.isLogin && (
+                                <li>
+                                    <a href="#account" className="has-arrow" aria-expanded="false">
                                     <i className="icon-user menu-icon"></i>
-                                    <span className="nav-text">Account</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    <li><Link to="/customer"><i className="icon-book-open menu-icon"></i>Information</Link></li>
-                                    <li><Link to="/customer/recharge"><i className="icon-credit-card menu-icon"></i>Recharge</Link></li>
-                                    <li><Link to="/customer/history"><i className="icon-notebook menu-icon"></i>History</Link></li>
-                                </ul>
-                            </li>
+                                        <span className="nav-text">Account</span>
+                                    </a>
+                                    <ul aria-expanded="false">
+                                        <li><Link to="/customer"><i className="icon-book-open menu-icon"></i>Information</Link></li>
+                                        <li><Link to="/customer/recharge"><i className="icon-credit-card menu-icon"></i>Recharge</Link></li>
+                                        <li><Link to="/customer/history"><i className="icon-notebook menu-icon"></i>History</Link></li>
+                                    </ul>
+                                </li>
+                                )}
                             <li className="nav-label">Service</li>
                             <li>
                                 <a href="#facebook" className="has-arrow" aria-expanded="false">
