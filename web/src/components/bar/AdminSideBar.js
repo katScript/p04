@@ -1,6 +1,5 @@
-import React, {Component, useEffect} from "react";
+import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import $ from "jquery";
 import SideBarManager from "./SideBarManager";
 
 class AdminSideBar extends Component {
@@ -12,7 +11,7 @@ class AdminSideBar extends Component {
                         <ul className="metismenu" id="menu">
                             <li className="nav-label">Dashboard</li>
                             <li>
-                                <Link to="/admin" className="has-arrow" aria-expanded="false">
+                                <Link to="#dashboard" className="has-arrow" aria-expanded="false">
                                     <i className="icon-speedometer menu-icon"></i><span
                                     className="nav-text">Dashboard</span>
                                 </Link>
@@ -21,15 +20,32 @@ class AdminSideBar extends Component {
                                 </ul>
                             </li>
                             <li className="mega-menu mega-menu-sm">
-                                <Link to="/admin/service" className="has-arrow" aria-expanded="false">
+                                <a href="#customer" className="has-arrow" aria-expanded="false">
+                                    <i className="icon-user menu-icon"></i><span
+                                    className="nav-text">Customer</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    <li><Link to="/admin/customer">Customer</Link></li>
+                                    <li><Link to="/admin/customer/payment">Payment</Link></li>
+                                </ul>
+                            </li>
+                            <li className="mega-menu mega-menu-sm">
+                                <a href="#order" className="has-arrow" aria-expanded="false">
                                     <i className="icon-drawar menu-icon"></i><span
-                                    className="nav-text">Services</span>
+                                    className="nav-text">Order</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    <li><Link to="/admin/order">Order</Link></li>
+                                    <li><Link to="/admin/service">Services</Link></li>
+                                    <li><Link to="/admin/package">Package</Link></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <Link to="#user" className="has-arrow" aria-expanded="false">
+                                    <i className="icon-briefcase menu-icon"></i><span className="nav-text">User</span>
                                 </Link>
                                 <ul aria-expanded="false">
-                                    <li><Link to="/admin/service">List Services</Link></li>
-                                    <li><Link to="/admin/service/detail">Service Detail</Link></li>
-                                    <li><Link to="/admin/package">List Package</Link></li>
-                                    <li><Link to="/admin/package/detail">Package Detail</Link></li>
+                                    <li><Link to="/admin/user">Admin User</Link></li>
                                 </ul>
                             </li>
                         </ul>

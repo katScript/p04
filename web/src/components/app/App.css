@@ -7,3 +7,20 @@
     border-left: solid 2px #7571f9!important;
     border-right: solid 2px #7571f9!important;
 }
+
+.header {
+    z-index: 999;
+}
+
+.pre-loader-com {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 99999999999!important;
+    background: #F3F3F9;
+}
+
+.active-package {
+    z-index: 1;
+    border: 1px solid #4d7cff!important;
+}

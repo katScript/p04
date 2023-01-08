@@ -1,5 +1,6 @@
 import Cookies from 'universal-cookie';
 import {getAllCategoryOption} from "api/order/service";
+import $ from 'jquery';
 
 const cookies = new Cookies();
 
@@ -21,5 +22,14 @@ export const common = {
     storeCategoryOption: async () => {
         const {data} = await getAllCategoryOption();
         localStorage.setItem("category_option", JSON.stringify(data));
+    },
+    loadScreen: (loader, main) => {
+        let loaderElement = $(loader),
+            mainElement = $(main);
+
+        loaderElement.fadeIn(200);
+        mainElement.fadeOut();
+        loaderElement.fadeOut(800);
+        mainElement.fadeIn(500);
     }
 }

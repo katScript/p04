@@ -5,12 +5,14 @@ function SideBarManager() {
     const url = window.location.href;
     useEffect(() => {
         const changeUrlAction = () => {
-            $("ul#menu a.active").filter(
-                function() {
-                    return true;
-                }).removeClass("active")
-                .parent().removeClass("active");
+            const li = $("ul#menu li.active");
+            if (li.length > 0) {
+                li.removeClass("active");
+                li.find(".active").removeClass("active");
+                li.find(".in").removeClass("in");
+            }
 
+            $("ul#menu ul.in").removeClass("in");
             let o = $("ul#menu a").filter(
                 function() {
                     return this.href === url;
@@ -25,12 +27,14 @@ function SideBarManager() {
             }
         }
 
-        $(window).on("load", function() {
-            changeUrlAction();
-        });
-
         if (document.readyState === "complete") {
-            changeUrlAction();
+            $(document).ready(() => {
+                changeUrlAction();
+            });
+        } else {
+            $(window).on("load", () => {
+                changeUrlAction();
+            });
         }
     }, [url]);
 }

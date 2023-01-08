@@ -2,21 +2,21 @@ import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import TableData from "components/table/TableData";
-import ServiceData from "models/order/service-data";
-import {getAllService} from "api/order/service";
+import {getAllPackage} from "api/order/package";
+import PackageData from "models/order/package-data";
 
-class Service extends Component {
+class Customer extends Component {
     constructor(props) {
         super(props);
 
-        this.serviceData = new ServiceData();
+        this.packageData = new PackageData();
         this.state = {
-            keyData: this.serviceData.getTableKeyList(),
-            label: this.serviceData.getLabelList(),
+            keyData: this.packageData.getTableKeyList(),
+            label: this.packageData.getLabelList(),
             data: []
         };
 
-        this.getAllServiceData().then((r) => {
+        this.getAllPackageData().then((r) => {
             this.setState({data: r});
         });
     }
@@ -30,19 +30,19 @@ class Service extends Component {
             },
             {
                 active : true,
-                label : "Service",
-                url: "/admin/service"
+                label : "Customer",
+                url: "/admin/customer"
             }
         ];
     }
 
-    getAllServiceData = async () => {
-        const {data} = await getAllService();
+    getAllPackageData = async () => {
+        const {data} = await getAllPackage();
         let list = [];
 
         for (const item of Object.values(data)) {
-            this.serviceData.setObjectData(item);
-            list.push(this.serviceData.getObjectData());
+            this.packageData.setObjectData(item);
+            list.push(this.packageData.getObjectData());
         }
 
         return list;
@@ -50,7 +50,7 @@ class Service extends Component {
 
     render() {
         return (
-            <div className="Service">
+            <div className="Customer">
                 <div className="content-body">
                     <Breadcrumb item={this.prepareBreadcrumb()}/>
                     <div className="container-fluid">
@@ -58,7 +58,7 @@ class Service extends Component {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-title font-medium">Service</h4>
+                                        <h4 className="card-title">Customer</h4>
                                         <TableData label={this.state.label}
                                                    data={this.state.data}
                                                    keyData={this.state.keyData}
@@ -76,4 +76,4 @@ class Service extends Component {
 }
 
 
-export default wrapper(Service);
+export default wrapper(Customer);

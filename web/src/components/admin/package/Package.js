@@ -1,10 +1,9 @@
 import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
-import AdminSideBar from "components/bar/AdminSideBar";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import TableData from "components/table/TableData";
 import {getAllPackage} from "api/order/package";
-import PackageData from "models/order/package";
+import PackageData from "models/order/package-data";
 
 class Package extends Component {
     constructor(props) {
@@ -52,7 +51,6 @@ class Package extends Component {
     render() {
         return (
             <div className="Package">
-                <AdminSideBar/>
                 <div className="content-body">
                     <Breadcrumb item={this.prepareBreadcrumb()}/>
                     <div className="container-fluid">
@@ -60,7 +58,7 @@ class Package extends Component {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-title">Package</h4>
+                                        <h4 className="card-title font-medium">Package</h4>
                                         <TableData label={this.state.label}
                                                    data={this.state.data}
                                                    keyData={this.state.keyData}
