@@ -2,8 +2,9 @@ import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import {common} from "utils/common";
-import {getCustomerById} from "api/customer/customer";
+import {getCustomerById, saveCustomerInfo} from "api/customer/customer";
 import CustomerData from "models/customer/customer-data";
+import Swal from "sweetalert2";
 
 class CustomerInformation extends Component {
     constructor(props) {
@@ -14,8 +15,8 @@ class CustomerInformation extends Component {
             fullName: "",
             phone: "",
             email: "",
-            currentMoney: "",
-            totalMoney: "",
+            currentMoneyLabel: "",
+            totalMoneyLabel: "",
             username: ""
         }
 
@@ -32,8 +33,9 @@ class CustomerInformation extends Component {
                 fullName: data.fullName,
                 phone: data.phone,
                 email: data.email,
-                currentMoney: data.currentMoney,
-                totalMoney: data.totalMoney,
+                currentMoneyLabel: data.currentMoney,
+                totalMoneyLabel: data.totalMoney,
+                subscription: false,
                 username: data.username
             });
         });
@@ -47,6 +49,32 @@ class CustomerInformation extends Component {
     fetchCustomerDataById = async (id) => {
         const {data} = await getCustomerById(id);
         return data;
+    }
+
+    saveCustomer = async () => {
+        await saveCustomerInfo(this.state);
+    }
+
+    handleFormSubmit = (e) => {
+        e.preventDefault();
+        this.saveCustomer().then(() => {
+            return Swal.fire({
+                title: 'Thành công!',
+                text: 'Lưu thông tin khách hàng thành công!',
+                icon: 'success',
+                confirmButtonText: 'Đóng',
+            }).then(r => {
+                common.redirect("/customer");
+            });
+        }).catch((e) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Có lỗi sảy ra vui lòng thử lại sau!",
+                confirmButtonText: 'Đóng',
+            }).then(r => {
+            });
+        });
     }
 
     render() {
@@ -115,7 +143,7 @@ class CustomerInformation extends Component {
                                         <div className="card-body">
                                             <div className="d-inline-block">
                                                 <h3 className="card-title text-white">Số tiền hiện tại</h3>
-                                                <h2 className="text-white">{this.state.currentMoney} VND</h2>
+                                                <h2 className="text-white">{this.state.currentMoneyLabel} VND</h2>
                                             </div>
                                             <span className="float-right display-4 opacity-5"><i
                                                 className="fas fa-wallet"></i></span>
@@ -125,7 +153,7 @@ class CustomerInformation extends Component {
                                         <div className="card-body">
                                             <div className="d-inline-block">
                                                 <h3 className="card-title text-white">Tổng tiền đã nạp</h3>
-                                                <h2 className="text-white">{this.state.totalMoney} VND</h2>
+                                                <h2 className="text-white">{this.state.totalMoneyLabel} VND</h2>
                                             </div>
                                             <span className="float-right display-4 opacity-5"><i
                                                 className="far fa-money-bill-alt"></i></span>

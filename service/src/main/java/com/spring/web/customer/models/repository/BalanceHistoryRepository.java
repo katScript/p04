@@ -10,7 +10,8 @@ import java.util.List;
 
 @Repository
 public interface BalanceHistoryRepository extends JpaRepository<BalanceHistory, Long> {
-    List<BalanceHistory> findByCustomer(Customer customer);
+    @Query("select b from BalanceHistory b where b.customer = ?1")
+    List<BalanceHistory> findByCustomerOrderByCreatedAtDesc(Customer customer);
 
-    List<BalanceHistory> findByCustomerId(Long id);
+    List<BalanceHistory> findByCustomerIdOrderByCreatedAtDesc(Long id);
 }

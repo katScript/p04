@@ -1,5 +1,6 @@
 import Cookies from 'universal-cookie';
 import {getAllCategoryOption} from "api/order/service";
+import {getAllBillingOption, getAllHostOption} from "api/customer/customer";
 import $ from 'jquery';
 
 const cookies = new Cookies();
@@ -15,16 +16,53 @@ const userCookies = {
     user: "user"
 }
 
+const storageKey = {
+    categoryOption: "category_option",
+    billingOption: "billing_option",
+    hostOption: "host_option"
+}
+
+const storeCategoryOption = async () => {
+    const {data} = await getAllCategoryOption();
+    return data;
+}
+
+const storeBillingOption = async () => {
+    const {data} = await getAllBillingOption();
+    return data;
+}
+
+const storeHostOption = async () => {
+    const {data} = await getAllHostOption();
+    return data;
+}
+
 export const common = {
     DOMAIN: "http://localhost:8091",
     userHashId: userCookies,
+    storageKey: storageKey,
     cookiesManager: cookies,
     categoryOption: () => {
-        return JSON.parse(localStorage.getItem("category_option"));
+        return JSON.parse(localStorage.getItem(storageKey.categoryOption));
     },
-    storeCategoryOption: async () => {
-        const {data} = await getAllCategoryOption();
-        localStorage.setItem("category_option", JSON.stringify(data));
+    billingOption: () => {
+        return JSON.parse(localStorage.getItem(storageKey.billingOption));
+    },
+    hostOption: () => {
+        return JSON.parse(localStorage.getItem(storageKey.hostOption));
+    },
+    storeStaticData: () => {
+        storeCategoryOption().then((r) => {
+            localStorage.setItem(storageKey.categoryOption, JSON.stringify(r));
+        });
+
+        storeBillingOption().then((r) => {
+            localStorage.setItem(storageKey.billingOption, JSON.stringify(r));
+        });
+
+        storeHostOption().then((r) => {
+            localStorage.setItem(storageKey.hostOption, JSON.stringify(r));
+        })
     },
     loadScreen: (loader, main) => {
         let loaderElement = $(loader),

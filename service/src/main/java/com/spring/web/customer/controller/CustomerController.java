@@ -1,5 +1,7 @@
 package com.spring.web.customer.controller;
 
+import com.spring.web.customer.data.BillingType;
+import com.spring.web.customer.data.Host;
 import com.spring.web.customer.payload.CustomerDTO;
 import com.spring.web.customer.services.CustomerService;
 import com.spring.web.helpers.erorrs.ErrorResponse;
@@ -76,6 +78,32 @@ public class CustomerController {
         try {
             customerService.deleteCustomerById(id);
             return ResponseEntity.ok(new MessageResponse("Delete customer success!"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
+    @GetMapping("/billing/type")
+    public ResponseEntity<?> getBillingType() {
+        try {
+            return ResponseEntity.ok(BillingType.getAlLBillingType());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
+    @GetMapping("/billing/card/host")
+    public ResponseEntity<?> getHostOption() {
+        try {
+            return ResponseEntity.ok(Host.getAlLHostOption());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,

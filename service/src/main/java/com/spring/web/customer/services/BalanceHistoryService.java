@@ -24,6 +24,9 @@ public class BalanceHistoryService {
     @Autowired
     public BillingAddressService billingAddressService;
 
+    @Autowired
+    public BillingCardService billingCardService;
+
     public BalanceHistoryDTO getHistoryById(Long customerId, Long id) {
         BalanceHistory balanceHistory = balanceHistoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(String.format("Balance history record with id %d not found!", id)));
@@ -35,7 +38,7 @@ public class BalanceHistoryService {
     }
 
     public List<BalanceHistoryDTO> getAllHistoryByCustomerId(Long customerId) {
-        List<BalanceHistory> balanceHistories = balanceHistoryRepository.findByCustomerId(customerId);
+        List<BalanceHistory> balanceHistories = balanceHistoryRepository.findByCustomerIdOrderByCreatedAtDesc(customerId);
         List<BalanceHistoryDTO> result = new ArrayList<>();
 
         for (BalanceHistory bh: balanceHistories) {
@@ -46,7 +49,7 @@ public class BalanceHistoryService {
     }
 
     public List<BalanceHistoryDTO> getByCustomer(Customer customer) {
-        List<BalanceHistory> balanceHistories = balanceHistoryRepository.findByCustomer(customer);
+        List<BalanceHistory> balanceHistories = balanceHistoryRepository.findByCustomerOrderByCreatedAtDesc(customer);
         List<BalanceHistoryDTO> result = new ArrayList<>();
 
         for (BalanceHistory bh : balanceHistories) {
@@ -56,7 +59,7 @@ public class BalanceHistoryService {
         return result;
     }
 
-    public void changeCustomerBalance(Long customerId, ChangeBalanceRequest cbr) {
+    public void changeCustomerBalance(Long customerId, ChangeBalanceRequest cbr, Boolean isCard) {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new RuntimeException(String.format("Customer with id %d not found!", customerId)));
 
@@ -66,15 +69,20 @@ public class BalanceHistoryService {
         customer.setTotalMoney(total + cbr.getIncome())
                 .setCurrentMoney(current + cbr.getIncome());
 
+        String description = isCard ? billingCardService.getCustomerBalanceChangeDescription(
+                cbr.getBillingAddressId(),
+                cbr.getIncome()
+        ) : billingAddressService.getCustomerBalanceChangeDescription(
+                cbr.getBillingAddressId(),
+                cbr.getIncome()
+        );
+
         customer.getBalanceHistories().add(new BalanceHistory(
                 null,
                 current,
                 cbr.getIncome(),
                 current + cbr.getIncome(),
-                billingAddressService.getCustomerBalanceChangeDescription(
-                        cbr.getBillingAddressId(),
-                        cbr.getIncome()
-                ),
+                description,
                 customer
         ));
 

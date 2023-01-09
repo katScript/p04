@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import {registerCustomer} from "api/customer/customer";
 import RegisterData from "models/customer/register-data";
 import wrapper from "components/app/wrapper";
+import {common} from "utils/common";
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -33,22 +34,21 @@ class RegisterForm extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        try {
-            this.registerResponse().then(() => {
-                return Swal.fire({
-                    title: 'Good job!',
-                    text: 'You clicked the button.',
-                    icon: 'success'
-                }).then(r => {
-                });
+        this.registerResponse().then(() => {
+            return Swal.fire({
+                title: 'Good job!',
+                text: 'You clicked the button.',
+                icon: 'success'
+            }).then(r => {
+                common.redirect("/auth/login")
             });
-        } catch (e) {
+        }).catch((e) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Something went wrong!'
-            });
-        }
+            }).then(() => {});
+        });
     }
 
     staticContentImport = () => {

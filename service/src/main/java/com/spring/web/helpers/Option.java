@@ -1,10 +1,10 @@
-package com.spring.web.order.data;
+package com.spring.web.helpers;
 
-public class CategoryOption {
+public class Option {
     private String value;
     private String label;
 
-    public CategoryOption(
+    public Option(
             String value,
             String label
     ) {

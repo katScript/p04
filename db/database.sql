@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
   PRIMARY KEY (`id`),
   KEY `fk_admin_user` (`user_id`),
   CONSTRAINT `fk_admin_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +43,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (1,9,'fullName','0123456789','address','currentAddress','2023-01-08 07:53:38','2023-01-08 14:53:38');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +68,7 @@ CREATE TABLE `customers` (
   PRIMARY KEY (`id`),
   KEY `fk_customer_user_id_users` (`user_id`),
   CONSTRAINT `fk_customer_user_id_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,6 +77,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (2,'fullName',2,'0123456789','customer@customer.com',0,50000,50000,'2022-12-31 03:58:23','2023-01-08 14:42:05'),(7,'qwe',7,'0123456789','qwe@qwe.qwe',0,0,0,'2023-01-01 12:54:09','2023-01-01 19:54:09'),(8,'',8,'','',0,0,0,'2023-01-01 13:06:31','2023-01-01 20:06:31');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +100,7 @@ CREATE TABLE `customers_balance_history` (
   PRIMARY KEY (`id`),
   KEY `fk_balance_customer_id_customers` (`customer_id`),
   CONSTRAINT `fk_balance_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,6 +109,7 @@ CREATE TABLE `customers_balance_history` (
 
 LOCK TABLES `customers_balance_history` WRITE;
 /*!40000 ALTER TABLE `customers_balance_history` DISABLE KEYS */;
+INSERT INTO `customers_balance_history` VALUES (1,2,0,20000,20000,'fullName recharge 20,000 from BANK ABCD with account 012391823','2023-01-08 07:24:17','2023-01-08 14:42:44'),(2,2,20000,30000,50000,'fullName recharge 30,000 from BANK ABCD with account 012391823','2023-01-08 07:42:05','2023-01-08 14:42:44');
 /*!40000 ALTER TABLE `customers_balance_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,7 +133,7 @@ CREATE TABLE `customers_billing_address` (
   PRIMARY KEY (`id`),
   KEY `fk_billing_address_customer_id_customers` (`customer_id`),
   CONSTRAINT `fk_billing_address_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +142,41 @@ CREATE TABLE `customers_billing_address` (
 
 LOCK TABLES `customers_billing_address` WRITE;
 /*!40000 ALTER TABLE `customers_billing_address` DISABLE KEYS */;
+INSERT INTO `customers_billing_address` VALUES (1,2,'mobile','BANK ABCD','CUSTOMER A','012391823','bank address','2023-01-08 05:46:52','2023-01-09 10:42:35'),(2,2,'momo','Tên ngân hàng','Tên chủ thẻ','1923819283','Địa chỉ','2023-01-09 03:35:59','2023-01-09 10:42:25'),(3,2,'paypal','PAYPAL NGUYEN VAN A','NGUYEN VAN A','1928391912','','2023-01-09 03:44:51','2023-01-09 10:44:51');
 /*!40000 ALTER TABLE `customers_billing_address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `customers_billing_card`
+--
+
+DROP TABLE IF EXISTS `customers_billing_card`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customers_billing_card` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `customer_id` int unsigned NOT NULL,
+  `code` varchar(225) NOT NULL,
+  `seri` varchar(225) NOT NULL,
+  `value` float NOT NULL,
+  `host` varchar(50) NOT NULL,
+  `active` tinyint(1) default '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_billing_card_customer_id_customers` (`customer_id`),
+  CONSTRAINT `fk_billing_card_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customers_billing_card`
+--
+
+LOCK TABLES `customers_billing_card` WRITE;
+/*!40000 ALTER TABLE `customers_billing_card` DISABLE KEYS */;
+INSERT INTO `customers_billing_card` VALUES (1,2,'code','seri',10,'viettel','0','2023-01-09 06:35:09','2023-01-09 13:35:09'),(2,2,'981283912831','0912831928391',100000,'vinaphone','0','2023-01-09 06:50:36','2023-01-09 13:50:36');
+/*!40000 ALTER TABLE `customers_billing_card` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -287,7 +324,7 @@ CREATE TABLE `services` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,6 +333,7 @@ CREATE TABLE `services` (
 
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
+INSERT INTO `services` VALUES (8,'facebook','Facebook Free','2023-01-05 09:46:58','2023-01-05 16:46:58'),(9,'instagram','Instagram Free','2023-01-05 09:54:01','2023-01-05 16:54:01'),(10,'tiktok','Tiktok Free','2023-01-05 09:55:17','2023-01-05 16:55:17'),(11,'shopee','Shopee Free','2023-01-05 09:55:38','2023-01-05 16:55:38'),(12,'youtube','Youtube Free','2023-01-05 09:56:10','2023-01-05 16:56:10'),(13,'telegram','Telegram Free','2023-01-05 09:56:19','2023-01-05 16:56:19'),(14,'facebook','Facebook View','2023-01-05 09:56:44','2023-01-05 16:56:44');
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,7 +356,7 @@ CREATE TABLE `services_package` (
   PRIMARY KEY (`id`),
   KEY `fk_service_id_services` (`service_id`),
   CONSTRAINT `fk_service_id_services` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,6 +365,7 @@ CREATE TABLE `services_package` (
 
 LOCK TABLES `services_package` WRITE;
 /*!40000 ALTER TABLE `services_package` DISABLE KEYS */;
+INSERT INTO `services_package` VALUES (6,8,'packageName',10.01,'custom','note','2023-01-04 13:03:30','2023-01-06 16:54:51'),(7,8,'Test package',20,'Status','','2023-01-06 09:33:30','2023-01-06 17:19:57'),(8,8,'Other package',20000,'','<p>oto ke</p>','2023-01-06 09:54:49','2023-01-06 17:28:31');
 /*!40000 ALTER TABLE `services_package` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,7 +386,7 @@ CREATE TABLE `users` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unq_username` (`username`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -356,6 +395,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (2,'customer123','','customer@customer.com','$2a$10$izv.joyxWJjice1dOIIb0.VJRiPiJso2OXZuw8nvXSc.mKsGPKiTe','2022-12-31 03:58:23','2022-12-31 10:58:23'),(7,'qwe','','qwe@qwe.qwe','$2a$10$6oGipntzFAUIQegfkzwbrOjXNXpV8VShJI7Sakin2aKhArV0vJR1G','2023-01-01 12:54:09','2023-01-01 19:54:09'),(8,'','','','$2a$10$f/4si1nxrq9efcI15u8HbujFfQUaCr9RHit4v1y3cpLq1twcYGEEy','2023-01-01 13:06:31','2023-01-01 20:06:31'),(9,'admin','','admin@admin.com','$2a$10$/.mHl9rPBuMbT3EB8wmsZO/xWim4qbq1AwcwSRdcBuAsBIRnVT5eq','2023-01-08 07:53:38','2023-01-08 14:53:38');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -384,6 +424,7 @@ CREATE TABLE `users_role` (
 
 LOCK TABLES `users_role` WRITE;
 /*!40000 ALTER TABLE `users_role` DISABLE KEYS */;
+INSERT INTO `users_role` VALUES (2,1,'2022-12-31 03:58:23','2022-12-31 10:58:23'),(7,1,'2023-01-01 12:54:09','2023-01-01 19:54:09'),(8,1,'2023-01-01 13:06:31','2023-01-01 20:06:31'),(9,2,'2023-01-08 07:53:38','2023-01-08 14:53:38');
 /*!40000 ALTER TABLE `users_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -396,4 +437,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-30 14:13:58
+-- Dump completed on 2023-01-09 14:03:08
