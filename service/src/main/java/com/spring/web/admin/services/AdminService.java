@@ -56,6 +56,7 @@ public class AdminService {
                 .setPhone(data.getPhone())
                 .setAddress(data.getAddress())
                 .setCurrentAddress(data.getCurrentAddress());
+        admin.getUser().setEmail(data.getEmail());
 
         adminRepository.save(admin);
     }
@@ -75,6 +76,7 @@ public class AdminService {
                 admin.getAddress(),
                 admin.getCurrentAddress(),
                 admin.getUser().getUserName(),
+                admin.getUser().getEmail(),
                 DateTimeConverter.dateToString(admin.getCreatedAt()),
                 DateTimeConverter.dateToString(admin.getUpdatedAt())
         );

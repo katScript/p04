@@ -4,6 +4,7 @@ import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import TableData from "components/table/TableData";
 import ServiceData from "models/order/service-data";
 import {getAllService} from "api/order/service";
+import {Link} from "react-router-dom";
 
 class Service extends Component {
     constructor(props) {
@@ -58,11 +59,22 @@ class Service extends Component {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-title font-medium">Service</h4>
+                                        <div className="row">
+                                            <h4 className="card-title font-medium col-3">Service</h4>
+                                            <div className="col-9">
+                                                <span className="col-lg-3">
+                                                    <Link to="/admin/service/edit" className="btn btn-primary float-right">Tạo dịch vụ mới</Link>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <hr/>
                                         <TableData label={this.state.label}
                                                    data={this.state.data}
                                                    keyData={this.state.keyData}
-                                                   action={true}
+                                                   action={{
+                                                       edit: "/admin/service/edit/",
+                                                       delete: ""
+                                                   }}
                                         />
                                     </div>
                                 </div>

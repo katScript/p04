@@ -62,7 +62,10 @@ class Package extends Component {
                                         <TableData label={this.state.label}
                                                    data={this.state.data}
                                                    keyData={this.state.keyData}
-                                                   action={true}
+                                                   action={{
+                                                       edit: "/admin/package/edit/",
+                                                       delete: ""
+                                                   }}
                                         />
                                     </div>
                                 </div>

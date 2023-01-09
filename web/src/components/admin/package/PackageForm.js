@@ -87,12 +87,9 @@ class PackageForm extends Component {
                         <div className="row justify-content-center">
                             <div className="col-lg-12">
                                 <div className="card">
-                                    <div className="text-center card-title pt-5">
-                                        <span className="font-medium">
-                                            {title}
-                                        </span>
-                                    </div>
                                     <div className="card-body">
+                                        <h4 className="card-title font-medium col-8">{title}</h4>
+                                        <hr/>
                                         <div className="form-validation">
                                             <form className="form-valide" onSubmit={this.handleFormSubmit}>
                                                 <div className="form-group row justify-content-center">
