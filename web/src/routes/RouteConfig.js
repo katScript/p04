@@ -18,6 +18,8 @@ import NotFound from "components/page/NotFound";
 import Recharge from "components/client/customer/Recharge";
 import BillingAddressForm from "components/client/customer/billing-address/BillingAddressForm";
 import History from "components/client/customer/History";
+import UserForm from "../components/admin/user/UserForm";
+import UserRegister from "../components/admin/user/UserRegister";
 
 class RouteConfig extends Component {
     constructor(props) {
@@ -54,11 +56,11 @@ class RouteConfig extends Component {
                         <Route index element={<Dashboard/>} />
                         <Route path="service">
                             <Route index exact element={<Service/>} />
-                            <Route path="detail/:id?" exact element={<ServiceForm />} />
+                            <Route path="edit/:id?" exact element={<ServiceForm />} />
                         </Route>
                         <Route path="package" exact>
                             <Route index exact element={<Package/>} />
-                            <Route path="detail/:id?" exact element={<PackageForm/>} />
+                            <Route path="edit/:id?" exact element={<PackageForm/>} />
                         </Route>
                         <Route path="customer" exact>
                             <Route index exact element={<Customer/>} />
@@ -70,6 +72,8 @@ class RouteConfig extends Component {
                         </Route>
                         <Route path="user" exact>
                             <Route index exact element={<User/>} />
+                            <Route path="register/" element={<UserRegister/>} />
+                            <Route path="edit/:id" element={<UserForm/>} />
                         </Route>
                     </Route>
                 )}

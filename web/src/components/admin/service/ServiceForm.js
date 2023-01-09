@@ -4,10 +4,10 @@ import wrapper from "components/app/wrapper";
 import {getServiceById, saveService} from "api/order/service";
 import {getAllPackage} from "api/order/package";
 import Swal from "sweetalert2";
-import {Link} from "react-router-dom";
 import ServiceData from "models/order/service-data";
 import PackageData from "models/order/package-data";
 import SelectTable from "components/table/SelectTable";
+import {common} from "utils/common";
 
 class ServiceForm extends Component {
     constructor(props) {
@@ -15,6 +15,7 @@ class ServiceForm extends Component {
 
         this.serviceData = new ServiceData();
         this.packageData = new PackageData();
+        this.categoryOption = common.categoryOption();
 
         this.state = {
             id: null,
@@ -44,23 +45,22 @@ class ServiceForm extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        try {
-            this.serviceData.setObjectData(this.state);
-            saveService(this.serviceData.getObjectData()).then(() => {
-            });
-
-            return Swal.fire({
+        this.serviceData.setObjectData(this.state);
+        saveService(this.serviceData.getObjectData()).then(() => {
+            Swal.fire({
                 title: 'Good job!',
                 text: 'You clicked the button.',
                 icon: 'success'
+            }).then((r) => {
+                common.redirect("/admin/service")
             });
-        } catch (e) {
+        }).catch((e) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Something went wrong!'
             });
-        }
+        });
     }
 
     handleChangeInput = async (event) => {
@@ -120,12 +120,9 @@ class ServiceForm extends Component {
                         <div className="row justify-content-center">
                             <div className="col-lg-8">
                                 <div className="card">
-                                    <div className="text-center card-title pt-5">
-                                        <span className="font-medium">
-                                            {title}
-                                        </span>
-                                    </div>
                                     <div className="card-body">
+                                        <h4 className="card-title font-medium col-8">{title}</h4>
+                                        <hr/>
                                         <div className="form-validation">
                                             <form className="form-valide" onSubmit={this.handleFormSubmit}>
                                                 <div className="form-group row justify-content-center">
@@ -139,17 +136,23 @@ class ServiceForm extends Component {
                                                                value={serviceName} onChange={this.handleChangeInput}/>
                                                     </div>
                                                 </div>
-
                                                 <div className="form-group row justify-content-center">
                                                     <label className="col-lg-4 col-form-label"
                                                            htmlFor="category">Category
                                                         <span className="text-danger">*</span>
                                                     </label>
                                                     <div className="col-lg-6">
-                                                        <input type="text" className="form-control" id="category"
-                                                               name="category" placeholder="Category"
-                                                               value={category} onChange={this.handleChangeInput}/>
+                                                        <select className="form-control" id="category" name="category" value={category} onChange={this.handleChangeInput}>
+                                                            <option value="">Chọn loại dịch vụ</option>
+                                                            {this.categoryOption.map((e,i) => {
+                                                                return (<option key={i} value={e.value}>{e.label}</option>);
+                                                            })}
+                                                        </select>
                                                     </div>
+                                                </div>
+
+                                                <div className="row justify-content-center">
+                                                    <hr className="col-lg-10"/>
                                                 </div>
 
                                                 <div className="form-group row justify-content-center">
@@ -168,10 +171,6 @@ class ServiceForm extends Component {
                                                                         <span>
                                                                         {e.packageName} <span
                                                                             className="badge badge-success">{e.status}</span>
-                                                                        </span>
-                                                                        <span className="float-right">
-                                                                            <Link className="ml-1 font-tiny" to="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                                                <i className="fa fa-close color-danger"></i></Link>
                                                                         </span>
                                                                     </li>);
                                                                 })}

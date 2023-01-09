@@ -13,6 +13,8 @@ public class AdminDTO {
 
     private String username;
 
+    private String email;
+
     private String createdAt;
 
     private String updatedAt;
@@ -26,6 +28,7 @@ public class AdminDTO {
             String address,
             String currentAddress,
             String username,
+            String email,
             String createdAt,
             String updatedAt
     ) {
@@ -35,6 +38,7 @@ public class AdminDTO {
         this.address = address;
         this.currentAddress = currentAddress;
         this.username = username;
+        this.email = email;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -101,5 +105,13 @@ public class AdminDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
