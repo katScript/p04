@@ -16,6 +16,8 @@ import Customer from "components/admin/customer/Customer";
 import CustomerForm from "components/admin/customer/CustomerForm";
 import NotFound from "components/page/NotFound";
 import Recharge from "components/client/customer/Recharge";
+import BillingAddressForm from "components/client/customer/billing-address/BillingAddressForm";
+import History from "components/client/customer/History";
 
 class RouteConfig extends Component {
     constructor(props) {
@@ -26,12 +28,15 @@ class RouteConfig extends Component {
     }
 
     getCustomerLoginRoute = () => {
-        if (this.props.isLogin)
+        if (this.props.isLogin && this.props.customer != null)
             return (
                 <Route path="customer" exact>
                     <Route index element={<CustomerInformation/>} />
-                    <Route path="recharge" exact element={<Recharge/>} />
-                    <Route path="history" exact element={<CustomerInformation/>} />
+                    <Route path="recharge" exact>
+                        <Route index exact element={<Recharge />} />
+                        <Route path="billing/:id?" exact element={<BillingAddressForm customerId={this.props.customer.id} />} />
+                    </Route>
+                    <Route path="history" exact element={<History />} />
                 </Route>
             );
 

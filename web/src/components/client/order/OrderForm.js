@@ -1,16 +1,23 @@
 import React, {Component, useEffect} from "react";
 import wrapper from "components/app/wrapper";
-import SideBar from "components/bar/SideBar";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import {getServiceById} from "api/order/service";
 import {common} from "utils/common";
 import Loader from "components/common/Loader";
+import Swal from "sweetalert2";
+import {placeOrder} from "api/order/order";
+import CustomerData from "models/customer/customer-data";
+import {Link} from "react-router-dom";
 
 class OrderForm extends Component {
     constructor(props) {
         super(props);
 
         this.staticContent = this.props.staticContent;
+
+        this.customerData = new CustomerData();
+        this.customer = JSON.parse(localStorage.getItem(common.userHashId.customer));
+
         this.state = {
             service: {},
             items: [],
@@ -32,7 +39,7 @@ class OrderForm extends Component {
 
     handleChangePrice = async () => {
         this.setState({
-            subtotal: this.state.qty * this.state.packagePrice
+            subtotal: common.thousandFormat(this.state.qty * this.state.packagePrice)
         });
     }
 
@@ -60,6 +67,51 @@ class OrderForm extends Component {
         return data;
     }
 
+    placeOrder = async () => {
+        await placeOrder({
+            customerId: this.customer.id,
+            item: {
+                id: this.state.packageId
+            },
+            target: this.state.target,
+            qty: this.state.qty,
+            note: this.state.note
+        });
+    }
+
+    handleFormSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.customer.currentMoney < (this.state.qty * this.state.packagePrice));
+        if (this.customer.currentMoney < (this.state.qty * this.state.packagePrice)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Bạn không có đủ tiền trong tài khoản!",
+                confirmButtonText: 'Đóng',
+            }).then(r => {
+            });
+        } else {
+            this.placeOrder().then(() => {
+                return Swal.fire({
+                    title: 'Thành công!',
+                    text: 'Đặt hàng thành công!',
+                    icon: 'success',
+                    confirmButtonText: 'Đóng',
+                }).then(r => {
+                    common.redirect(`/place/order/service/${this.props.params.id}`);
+                });
+            }).catch((e) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "Có lỗi sảy ra vui lòng thử lại sau!",
+                    confirmButtonText: 'Đóng',
+                }).then(r => {
+                });
+            });
+        }
+    }
+
     staticContentImport = () => {
         this.staticContent.useBodyStaticScript("/plugins/jqueryui/js/jquery-ui.min.js");
         this.staticContent.useStaticStyle("/plugins/fullcalendar/css/fullcalendar.min.css");
@@ -81,6 +133,13 @@ class OrderForm extends Component {
         }, [params]);
     }
 
+    getSubmitButton = () => {
+        if (this.customer != null)
+            return (<button type="submit" className="btn btn-primary">Đặt mua dịch vụ</button>);
+
+        return (<h5 className="font-tiny">Đăng nhập để có thể đặt hàng! Đi đến trang <Link to="/auth/login">Đăng nhập</Link>.</h5>);
+    }
+
     render() {
         const service = this.state.service,
             items = this.state.items;
@@ -93,7 +152,7 @@ class OrderForm extends Component {
                         <div className="row justify-content-center">
                             <div className="col-lg-12">
                                 <Loader id={"order-form-loader"} />
-                                <form className="form-valide" id="order-form-main">
+                                <form className="form-valide" id="order-form-main" onSubmit={this.handleFormSubmit}>
                                     <div className="card">
                                         <div className="card-body">
                                             <div className="card-title font-medium">
@@ -129,7 +188,7 @@ class OrderForm extends Component {
                                                                             {e.packageName} {e.status && <span
                                                                             className="badge badge-success">{e.status}</span>}
                                                                             <span
-                                                                                className="label label-info float-right">{e.price} VND</span>
+                                                                                className="label label-info float-right">{common.thousandFormat(e.price)} VND</span>
                                                                         </li>
                                                                     );
                                                                 })}
@@ -193,9 +252,7 @@ class OrderForm extends Component {
 
                                                 <div className="form-group row justify-content-center">
                                                     <div className="col-lg-12">
-                                                        <button type="submit"
-                                                                className="btn btn-primary">Place order
-                                                        </button>
+                                                        {this.getSubmitButton()}
                                                     </div>
                                                 </div>
                                             </div>

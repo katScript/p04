@@ -16,7 +16,7 @@ public class DateTimeConverter {
 
         return date.toInstant()
                 .atZone(ZoneId.of("Asia/Saigon")).toLocalDateTime()
-                .format(DateTimeFormatter.ofPattern(FORMAT));
+                .format(DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy"));
     }
 
     public static Date stringToDate(String date) {

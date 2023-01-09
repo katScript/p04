@@ -37,7 +37,11 @@ class App extends Component {
                 <div id="main-wrapper">
                     <Header/>
                     {this.getSideBar()}
-                    <RouteConfig isAdmin={this.isAdmin()} isLogin={this.isLogin()}/>
+                    <RouteConfig isAdmin={this.isAdmin()}
+                                 isLogin={this.isLogin()}
+                                 customer={this.customer}
+                                 admin={this.admin}
+                    />
                     <div className="footer">
                         <div className="copyright">
                             <p>Copyright © Developed by <a href="#">Kat</a> 2022</p>

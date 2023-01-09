@@ -1,15 +1,16 @@
-package com.spring.web.order.data;
+package com.spring.web.customer.data;
 
 import com.spring.web.helpers.Option;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category {
-    private static final String[] VALUE = {"facebook", "instagram", "tiktok", "shopee", "youtube", "telegram"};
-    private static final String[] LABEL = {"Facebook", "Instagram", "TikTok", "Shopee", "Youtube", "Telegram"};
+public class Host {
+    private static final String[] VALUE = {"viettel", "mobifone", "vietnamobile", "vinaphone"};
+    private static final String[] LABEL = {"Viettel", "MobiFone", "Vietnamobile", "Vinaphone"};
 
-    public static List<Option> getAlLCategoryType() {
+
+    public static List<Option> getAlLHostOption() {
         List<Option> list = new ArrayList<>();
 
         for (int i = 0; i < VALUE.length; ++i) {

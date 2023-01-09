@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
-import AdminSideBar from "components/bar/AdminSideBar";
 
 class Dashboard extends Component {
     constructor(props) {

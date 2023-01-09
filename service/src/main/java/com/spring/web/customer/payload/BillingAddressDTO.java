@@ -1,16 +1,29 @@
 package com.spring.web.customer.payload;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class BillingAddressDTO {
     private Long id;
 
+    @NotNull
+    @NotBlank
     private Long customerId;
 
+    @NotNull
+    @NotBlank(message = "Type can not empty!")
     private String type;
 
+    @NotNull
+    @NotBlank(message = "Billing name can not empty!")
     private String billingName;
 
+    @NotNull
+    @NotBlank(message = "Holder name name can not empty!")
     private String holder;
 
+    @NotNull
+    @NotBlank(message = "Account number name can not empty!")
     private String accountNumber;
 
     private String address;

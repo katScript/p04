@@ -20,7 +20,7 @@ public class CustomerBalanceController {
     @PostMapping("/change")
     public ResponseEntity<?> changeCustomerBalance(@Valid @PathVariable Long id, @RequestBody ChangeBalanceRequest cbr) {
         try {
-            balanceHistoryService.changeCustomerBalance(id, cbr);
+            balanceHistoryService.changeCustomerBalance(id, cbr, false);
             return ResponseEntity.ok(new MessageResponse("Change customer balance success!"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(

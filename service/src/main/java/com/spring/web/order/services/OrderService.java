@@ -2,6 +2,8 @@ package com.spring.web.order.services;
 
 import com.spring.web.customer.models.Customer;
 import com.spring.web.customer.models.repository.CustomerRepository;
+import com.spring.web.customer.services.CustomerLogService;
+import com.spring.web.helpers.currency.Formatter;
 import com.spring.web.helpers.date.DateTimeConverter;
 import com.spring.web.order.data.OrderStatus;
 import com.spring.web.order.models.Order;
@@ -32,11 +34,19 @@ public class OrderService {
     @Autowired
     private OrderStatusRepository orderStatusRepository;
 
+    @Autowired
+    private PackageService packageService;
+
+    @Autowired
+    private CustomerLogService customerLogService;
+
     public OrderDTO getById(Long id) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(String.format("Order with id %d not found!", id)));
 
-        return bindOrderData(order);
+        OrderDTO result = bindOrderData(order);
+        result.setItem(packageService.bindPackageData(order.getItem()));
+        return result;
     }
 
     public OrderDTO getCustomerOrderById(Long customerId, Long id) {
@@ -86,7 +96,14 @@ public class OrderService {
         Order order = bindOrderObject(orderDTO);
 
         setOrderStatus(order, OrderStatus.PLACE_ORDER);
-        orderRepository.save(order);
+        Order result = orderRepository.save(order);
+
+        Customer customer = result.getCustomer();
+        customerLogService.createCustomerLog(customer, result, String.format("Khách hàng %s đặt mua dịch vụ %s với gói %s có tổng giá trị %s VND!",
+                customer.getFullName(),
+                order.getItem().getService().getServiceName(),
+                order.getItem().getPackageName(),
+                Formatter.formatThousand(order.getSubtotal())));
     }
 
     public void saveOrder(OrderDTO orderDTO) {
@@ -119,15 +136,23 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException(String.format("Order status %s not found!", statusCode)));
 
         order.setStatus(status)
-                .setStatusDetail(status.getCode());
+                .setStatusDetail(status.getLabel());
     }
 
     private void processBillingData(Order order, OrderDTO data) {
         Package item = order.getItem();
 
+        double price = data.getQty() * item.getPrice(),
+            customerMoney = order.getCustomer().getCurrentMoney();
+
+        if (price > customerMoney)
+            throw new RuntimeException("Customer not have enough money!");
+
         order.setQty(data.getQty())
-                .setSubtotal(data.getQty() * item.getPrice())
+                .setSubtotal(price)
                 .setDiscountPrice(0.0);
+
+        order.getCustomer().setCurrentMoney(customerMoney - price);
     }
 
     public Order bindOrderObject(OrderDTO data) {

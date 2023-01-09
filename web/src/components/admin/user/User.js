@@ -58,7 +58,13 @@ class User extends Component {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-title">Admin User</h4>
+                                        <div className="row">
+                                            <h4 className="card-title font-medium col-3">Admin User</h4>
+                                            <div className="card-title col-9">
+
+                                            </div>
+                                        </div>
+                                        <hr/>
                                         <TableData label={this.state.label}
                                                    data={this.state.data}
                                                    keyData={this.state.keyData}

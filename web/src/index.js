@@ -5,7 +5,7 @@ import reportWebVitals from 'reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import {common} from "utils/common";
 
-common.storeCategoryOption();
+common.storeStaticData();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>
