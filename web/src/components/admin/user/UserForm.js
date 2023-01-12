@@ -96,7 +96,7 @@ class UserForm extends Component {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-title font-medium col-3">Đăng kí quản trị viên</h4>
+                                        <h4 className="card-title font-medium col-3">Thông tin quản trị viên</h4>
                                         <hr/>
                                         <form className="form-valide" noValidate="novalidate" onSubmit={this.handleFormSubmit}>
                                             <div className="form-group row justify-content-center">

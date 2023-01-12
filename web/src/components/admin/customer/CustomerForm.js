@@ -6,6 +6,8 @@ import CustomerData from "models/customer/customer-data";
 import CustomerInformationForm from "components/admin/customer/form/CustomerInformationForm";
 import BillingAddressList from "components/admin/customer/form/BillingAddressList";
 import BalanceHistoryList from "components/admin/customer/form/BalanceHistoryList";
+import CustomerOrderList from "components/admin/customer/form/CustomerOrderList";
+import CustomerHistory from "components/admin/customer/form/CustomerHistory";
 
 class CustomerForm extends Component {
     constructor(props) {
@@ -83,7 +85,7 @@ class CustomerForm extends Component {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-title">USER NAME: {this.state.username}</h4>
+                                        <h4 className="card-title">Tên người dùng: {this.state.username}</h4>
                                         <hr/>
                                         <div className="basic-list-group">
                                             <div className="row">
@@ -91,23 +93,23 @@ class CustomerForm extends Component {
                                                     <div className="list-group" id="list-tab" role="tablist">
                                                         <a className="list-group-item list-group-item-action active show"
                                                             id="list-home-list" data-toggle="list" href="#information"
-                                                            role="tab" aria-controls="information" aria-selected="true">Customer Information</a>
+                                                            role="tab" aria-controls="information" aria-selected="true">Thông tin</a>
 
                                                         <a className="list-group-item list-group-item-action"
                                                             id="list-profile-list" data-toggle="list" href="#order"
-                                                            role="tab" aria-controls="order" aria-selected="false">Order</a>
+                                                            role="tab" aria-controls="order" aria-selected="false">Đơn hàng</a>
 
                                                         <a className="list-group-item list-group-item-action"
                                                             id="list-messages-list" data-toggle="list" href="#billing-address"
-                                                            role="tab" aria-controls="billing-address" aria-selected="false">Billing Address</a>
+                                                            role="tab" aria-controls="billing-address" aria-selected="false">Thông tin thanh toán</a>
 
                                                         <a className="list-group-item list-group-item-action"
                                                             id="list-settings-list" data-toggle="list" href="#balance"
-                                                            role="tab" aria-controls="balance" aria-selected="false">Balance History</a>
+                                                            role="tab" aria-controls="balance" aria-selected="false">Lịch sử giao dịch</a>
 
                                                         <a className="list-group-item list-group-item-action"
                                                             id="list-settings-list" data-toggle="list" href="#log"
-                                                            role="tab" aria-controls="log" aria-selected="false">Active History</a>
+                                                            role="tab" aria-controls="log" aria-selected="false">Lịch sử hoạt động</a>
                                                     </div>
                                                 </div>
                                                 <div className="col-xl-10 col-md-10 col-sm-11">
@@ -117,15 +119,7 @@ class CustomerForm extends Component {
                                                         </div>
                                                         <div className="tab-pane fade" id="order"
                                                              role="tabpanel">
-                                                            <p>Velit aute mollit ipsum ad dolor consectetur nulla
-                                                                officia culpa adipisicing exercitation fugiat tempor.
-                                                                Voluptate deserunt sit sunt nisi aliqua fugiat proident
-                                                                ea ut. Mollit voluptate reprehenderit occaecat
-                                                                nisi ad non minim tempor sunt voluptate consectetur
-                                                                exercitation id ut nulla. Ea et fugiat aliquip nostrud
-                                                                sunt incididunt consectetur culpa aliquip eiusmod dolor.
-                                                                Anim ad Lorem aliqua in cupidatat nisi
-                                                                enim eu nostrud do aliquip veniam minim.</p>
+                                                            <CustomerOrderList data={this.state} />
                                                         </div>
                                                         <div className="tab-pane fade" id="billing-address">
                                                             <BillingAddressList data={this.state}/>
@@ -134,15 +128,7 @@ class CustomerForm extends Component {
                                                             <BalanceHistoryList data={this.state}/>
                                                         </div>
                                                         <div className="tab-pane fade" id="log">
-                                                            <p>Velit aute mollit ipsum ad dolor consectetur nulla
-                                                                officia culpa adipisicing exercitation fugiat tempor.
-                                                                Voluptate deserunt sit sunt nisi aliqua fugiat proident
-                                                                ea ut. Mollit voluptate reprehenderit occaecat
-                                                                nisi ad non minim tempor sunt voluptate consectetur
-                                                                exercitation id ut nulla. Ea et fugiat aliquip nostrud
-                                                                sunt incididunt consectetur culpa aliquip eiusmod dolor.
-                                                                Anim ad Lorem aliqua in cupidatat nisi
-                                                                enim eu nostrud do aliquip veniam minim.</p>
+                                                            <CustomerHistory data={this.state} />
                                                         </div>
                                                     </div>
                                                 </div>

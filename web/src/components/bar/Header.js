@@ -37,7 +37,7 @@ class Header extends Component {
                         </div>
                         <div className="header-right">
                             <ul className="clearfix">
-                                { user ? <NavUser user={user} /> : <NavSignIn/> }
+                                { user ? <NavUser user={user} admin={this.props.admin} /> : <NavSignIn/> }
                             </ul>
                         </div>
                     </div>

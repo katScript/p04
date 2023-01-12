@@ -23,3 +23,7 @@ export const getAllCustomerBalanceHistory = (id = null) => get(`${PATH}/${id}/ba
 
 // order history
 export const getAllCustomerOrderHistory = (id = null) => get(`${PATH}/${id}/log/all`).catch((e) => {throw e;});
+
+// card request
+export const getCustomerCardDetail = (customerId = null, id = null) => get(`${PATH}/${customerId}/billing/card/${id}`).catch((e) => {throw e;});
+export const applyCard = (customerId = null, params = {}) => post(`${PATH}/${customerId}/billing/card/apply`, params).catch((e) => {throw e;});

@@ -18,7 +18,7 @@ class SelectTable extends Component {
             <div className="bootstrap-modal">
                 <button type="button" className="btn btn-primary"
                         data-toggle="modal"
-                        data-target=".bd-example-modal-lg">Select package
+                        data-target=".bd-example-modal-lg">Chọn gói dịch vụ
                 </button>
                 <div className="modal fade bd-example-modal-lg"
                      tabIndex="-1"
@@ -26,7 +26,7 @@ class SelectTable extends Component {
                     <div className="modal-dialog modal-lg select-model">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Package</h5>
+                                <h5 className="modal-title">Gói dịch vụ</h5>
                                 <button type="button" className="close"
                                         data-dismiss="modal">
                                     <span>&times;</span>

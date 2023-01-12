@@ -1,17 +1,17 @@
 import React, {Component, useEffect} from "react";
 import wrapper from "components/app/wrapper";
 import TableData from "components/table/TableData";
-import {getAllCustomerBalanceHistory} from "api/customer/customer";
-import BalanceHistoryData from "models/customer/balance-history-data";
+import {getAllCustomerOrderHistory} from "api/customer/customer";
+import OrderHistoryData from "models/customer/order-history-data";
 
-class BalanceHistory extends Component {
+class CustomerHistory extends Component {
     constructor(props) {
         super(props);
 
-        this.balanceHistory = new BalanceHistoryData();
+        this.orderHistoryData = new OrderHistoryData();
         this.state = {
-            keyData: this.balanceHistory.getTableKeyList(),
-            label: this.balanceHistory.getLabelList(),
+            keyData: this.orderHistoryData.getTableKeyList(),
+            label: this.orderHistoryData.getLabelList(),
             data: []
         };
     }
@@ -22,20 +22,20 @@ class BalanceHistory extends Component {
         useEffect(() => {
             const id = this.props.data.id;
             if (id) {
-                this.getBalanceHistory(id).then((r) => {
+                this.getOrderHistory(id).then((r) => {
                     this.setState({data: r});
                 });
             }
         }, [data]);
     }
 
-    getBalanceHistory = async (id) => {
-        const {data} = await getAllCustomerBalanceHistory(id);
+    getOrderHistory = async (id) => {
+        const {data} = await getAllCustomerOrderHistory(id);
         let list = [];
 
         for (const item of Object.values(data)) {
-            this.balanceHistory.setObjectData(item);
-            list.push(this.balanceHistory.getObjectData());
+            this.orderHistoryData.setObjectData(item);
+            list.push(this.orderHistoryData.getObjectData());
         }
 
         return list;
@@ -43,8 +43,8 @@ class BalanceHistory extends Component {
 
     render() {
         return (
-            <div className="BalanceHistory">
-                <h4>{this.props.data.username} Lịch sử giao dịch</h4>
+            <div className="CustomerHistory">
+                <h4>{this.props.data.username} Lịch sử hoạt động</h4>
                 <hr/>
                 <TableData label={this.state.label}
                            data={this.state.data}
@@ -57,4 +57,4 @@ class BalanceHistory extends Component {
 }
 
 
-export default wrapper(BalanceHistory);
+export default wrapper(CustomerHistory);

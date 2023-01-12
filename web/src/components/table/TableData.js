@@ -41,7 +41,7 @@ class TableData extends Component {
                         {label.map((item, i) => {
                             return (<th key={i}>{item}</th>);
                         })}
-                        {action && <th>Action</th>}
+                        {action && <th>Chức năng</th>}
                     </tr>
                     </thead>
                     <tbody>

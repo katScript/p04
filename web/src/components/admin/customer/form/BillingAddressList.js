@@ -44,7 +44,8 @@ class BillingAddressList extends Component {
     render() {
         return (
             <div className="BillingAddressList">
-                <h4>{this.props.data.username} BILLING ADDRESS LIST</h4>
+                <h4>{this.props.data.username} Thông tin thanh toán</h4>
+                <hr/>
                 <TableData label={this.state.label}
                            data={this.state.data}
                            keyData={this.state.keyData}

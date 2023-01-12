@@ -60,7 +60,7 @@ class Service extends Component {
                                 <div className="card">
                                     <div className="card-body">
                                         <div className="row">
-                                            <h4 className="card-title font-medium col-3">Service</h4>
+                                            <h4 className="card-title font-medium col-3">Dịch vụ</h4>
                                             <div className="col-9">
                                                 <span className="col-lg-3">
                                                     <Link to="/admin/service/edit" className="btn btn-primary float-right">Tạo dịch vụ mới</Link>

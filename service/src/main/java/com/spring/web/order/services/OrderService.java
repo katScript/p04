@@ -2,6 +2,7 @@ package com.spring.web.order.services;
 
 import com.spring.web.customer.models.Customer;
 import com.spring.web.customer.models.repository.CustomerRepository;
+import com.spring.web.customer.payload.CustomerDTO;
 import com.spring.web.customer.services.CustomerLogService;
 import com.spring.web.helpers.currency.Formatter;
 import com.spring.web.helpers.date.DateTimeConverter;
@@ -44,9 +45,7 @@ public class OrderService {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(String.format("Order with id %d not found!", id)));
 
-        OrderDTO result = bindOrderData(order);
-        result.setItem(packageService.bindPackageData(order.getItem()));
-        return result;
+        return bindOrderData(order);
     }
 
     public OrderDTO getCustomerOrderById(Long customerId, Long id) {
@@ -60,7 +59,7 @@ public class OrderService {
     }
 
     public List<OrderDTO> getAllByCustomerId(Long id) {
-        List<Order> orders = orderRepository.findByCustomerId(id);
+        List<Order> orders = orderRepository.findByCustomerIdOrderByCreatedAtDesc(id);
         List<OrderDTO> result = new ArrayList<>();
 
         for (Order o : orders) {
@@ -71,7 +70,7 @@ public class OrderService {
     }
 
     public List<OrderDTO> getAll() {
-        List<Order> orders = orderRepository.findAll();
+        List<Order> orders = orderRepository.findAllOrderByCreatedAtDesc();
         List<OrderDTO> result = new ArrayList<>();
 
         for (Order o : orders) {
@@ -155,6 +154,18 @@ public class OrderService {
         order.getCustomer().setCurrentMoney(customerMoney - price);
     }
 
+
+    public List<OrderDTO> getOrderByCustomerAndService(Long customerId, Long serviceId) {
+        List<Order> orders = orderRepository.findByCustomerIdAndServiceId(customerId, serviceId);
+        List<OrderDTO> results = new ArrayList<>();
+
+        for (Order c : orders) {
+            results.add(bindOrderData(c));
+        }
+
+        return results;
+    }
+
     public Order bindOrderObject(OrderDTO data) {
         Order order;
         if (data.getId() != null) {
@@ -181,7 +192,7 @@ public class OrderService {
     }
 
     public OrderDTO bindOrderData(Order order) {
-        return new OrderDTO(
+        OrderDTO orderDTO =  new OrderDTO(
                 order.getId(),
                 order.getCustomer().getId(),
                 new PackageDTO(),
@@ -195,5 +206,8 @@ public class OrderService {
                 DateTimeConverter.dateToString(order.getCreatedAt()),
                 DateTimeConverter.dateToString(order.getUpdatedAt())
         );
+
+        orderDTO.setItem(packageService.bindPackageData(order.getItem()));
+        return orderDTO;
     }
 }

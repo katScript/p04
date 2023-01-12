@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import AdminSideBar from "components/bar/AdminSideBar";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import wrapper from "components/app/wrapper";
 import {getPackageById, savePackage} from "api/order/package";
 import Swal from "sweetalert2";
+import {common} from "utils/common";
 
 class PackageForm extends Component {
     constructor(props) {
@@ -41,22 +41,21 @@ class PackageForm extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        try {
-            savePackage(this.state).then(() => {
-            });
-
-            return Swal.fire({
+        savePackage(this.state).then(() => {
+            Swal.fire({
                 title: 'Good job!',
                 text: 'You clicked the button.',
                 icon: 'success'
+            }).then(() => {
+                common.redirect("/admin/packaget")
             });
-        } catch (e) {
+        }).catch((e) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Something went wrong!'
             });
-        }
+        });
     }
 
     getPackageDataById = async (id) => {
@@ -94,47 +93,47 @@ class PackageForm extends Component {
                                             <form className="form-valide" onSubmit={this.handleFormSubmit}>
                                                 <div className="form-group row justify-content-center">
                                                     <label className="col-lg-4 col-form-label"
-                                                           htmlFor="packageName">Package name
+                                                           htmlFor="packageName">Tên gói dịch vụ
                                                         <span className="text-danger">*</span>
                                                     </label>
                                                     <div className="col-lg-6">
                                                         <input type="text" className="form-control" id="packageName"
-                                                               name="packageName" placeholder="Package name"
+                                                               name="packageName" placeholder="Tên gói dịch vụ"
                                                                value={packageName} onChange={this.handleChangeInput}/>
                                                     </div>
                                                 </div>
 
                                                 <div className="form-group row justify-content-center">
                                                     <label className="col-lg-4 col-form-label"
-                                                           htmlFor="price">Price
+                                                           htmlFor="price">Giá tiền
                                                         <span className="text-danger">*</span>
                                                     </label>
                                                     <div className="col-lg-6">
                                                         <input type="number" className="form-control" id="price"
-                                                               name="price" placeholder="price" value={price}
+                                                               name="price" placeholder="Giá tiền" value={price}
                                                                onChange={this.handleChangeInput}/>
                                                     </div>
                                                 </div>
 
                                                 <div className="form-group row justify-content-center">
                                                     <label className="col-lg-4 col-form-label"
-                                                           htmlFor="status">Status
+                                                           htmlFor="status">Trạng thái
                                                     </label>
                                                     <div className="col-lg-6">
                                                         <input type="text" className="form-control" id="status"
-                                                               name="status" placeholder="Status"
+                                                               name="status" placeholder="Trạng thái"
                                                                value={status} onChange={this.handleChangeInput}/>
                                                     </div>
                                                 </div>
 
                                                 <div className="form-group row justify-content-center">
                                                     <label className="col-lg-4 col-form-label"
-                                                           htmlFor="note">Note
+                                                           htmlFor="note">Ghi chú
                                                     </label>
                                                     <div className="col-lg-6">
                                                         <textarea className="form-control" id="note"
                                                                   name="note" rows="5"
-                                                                  placeholder="Note" value={note}
+                                                                  placeholder="Ghi chú" value={note}
                                                                   onChange={this.handleChangeInput}>
                                                         </textarea>
                                                     </div>
@@ -142,7 +141,7 @@ class PackageForm extends Component {
 
                                                 <div className="form-group row justify-content-center">
                                                     <div className="col-lg-10">
-                                                        <button type="submit" className="btn btn-primary float-right">Save</button>
+                                                        <button type="submit" className="btn btn-primary float-right">Lưu</button>
                                                     </div>
                                                 </div>
                                             </form>

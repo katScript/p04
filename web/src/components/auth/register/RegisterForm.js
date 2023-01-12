@@ -68,7 +68,7 @@ class RegisterForm extends Component {
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <input type="text" className="form-control" id="fullname"
-                                       name="fullname" placeholder="Your name" value={fullname}
+                                       name="fullname" placeholder="Họ và tên" value={fullname}
                                        onChange={this.handleChangeInput}/>
                             </div>
                         </div>
@@ -76,7 +76,7 @@ class RegisterForm extends Component {
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <input type="text" className="form-control" id="username"
-                                       name="username" placeholder="Username" value={username}
+                                       name="username" placeholder="Tên đăng nhập" value={username}
                                        onChange={this.handleChangeInput}/>
                             </div>
                         </div>
@@ -91,14 +91,14 @@ class RegisterForm extends Component {
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <input type="password" className="form-control" id="password" name="password"
-                                       placeholder="Password" value={password} onChange={this.handleChangeInput}/>
+                                       placeholder="Mật khẩu" value={password} onChange={this.handleChangeInput}/>
                             </div>
                         </div>
 
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <input type="password" className="form-control" id="confirmPassword"
-                                       name="confirmPassword" placeholder="Confirm password" value={confirmPassword}
+                                       name="confirmPassword" placeholder="Nhập lại mật khẩu" value={confirmPassword}
                                        onChange={this.handleChangeInput}/>
                             </div>
                         </div>
@@ -106,14 +106,14 @@ class RegisterForm extends Component {
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <input type="text" className="form-control" id="phone" name="phone"
-                                       placeholder="(+84) Phone number" value={phone} onChange={this.handleChangeInput}/>
+                                       placeholder="(+84) Số điện thoại" value={phone} onChange={this.handleChangeInput}/>
                             </div>
                         </div>
 
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <div className="d-flex justify-content-center">
-                                    <button type="submit" className="btn btn-primary">Register</button>
+                                    <button type="submit" className="btn btn-primary">Đăng ký</button>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@ class RegisterForm extends Component {
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <span className="d-flex justify-content-center">
-                                    Go to <Link to="/auth/login">Login</Link>
+                                    <span>Đi đến trang </span><Link to="/auth/login"> Đăng nhập </Link>
                                 </span>
                             </div>
                         </div>

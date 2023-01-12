@@ -1,7 +1,6 @@
 package com.spring.web.customer.services;
 
 import com.spring.web.authentication.models.User;
-import com.spring.web.authentication.models.repository.UserRepository;
 import com.spring.web.customer.models.Customer;
 import com.spring.web.customer.models.repository.CustomerRepository;
 import com.spring.web.customer.payload.CustomerDTO;

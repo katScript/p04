@@ -26,7 +26,14 @@ public class BillingCardService {
     @Autowired
     public BalanceHistoryRepository balanceHistoryRepository;
 
-    public BillingCardDTO getById(Long customerId, Long id) {
+    public BillingCardDTO getById(Long id) {
+        BillingCard billingCard = billingCardRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(String.format("Billing address with id %d not found!", id)));
+
+        return bindBillingCardData(billingCard);
+    }
+
+    public BillingCardDTO getByIdWithCustomer(Long customerId, Long id) {
         BillingCard billingCard = billingCardRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(String.format("Billing address with id %d not found!", id)));
 
@@ -36,8 +43,33 @@ public class BillingCardService {
         return bindBillingCardData(billingCard);
     }
 
+    public List<BillingCardDTO> getAll() {
+        List<BillingCard> billingCards = billingCardRepository.findByActiveFalseOrderByCreatedAtDesc();
+        List<BillingCardDTO> result = new ArrayList<>();
+
+        for (BillingCard ba : billingCards) {
+            result.add(bindBillingCardData(ba));
+        }
+
+        return result;
+    }
+
+
     public List<BillingCardDTO> getByCustomer(Customer customer) {
-        List<BillingCard> billingCards = billingCardRepository.findByCustomer(customer);
+        List<BillingCard> billingCards = billingCardRepository.findByCustomerOrderByCreatedAtDesc(customer);
+        List<BillingCardDTO> result = new ArrayList<>();
+
+        for (BillingCard ba : billingCards) {
+            result.add(bindBillingCardData(ba));
+        }
+
+        return result;
+    }
+
+    public List<BillingCardDTO> getCustomerActiveBilling(Long id) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found!"));
+        List<BillingCard> billingCards = billingCardRepository.findByCustomerAndActiveTrueOrderByCreatedAtDesc(customer);
         List<BillingCardDTO> result = new ArrayList<>();
 
         for (BillingCard ba : billingCards) {
@@ -48,7 +80,7 @@ public class BillingCardService {
     }
 
     public List<BillingCardDTO> getBillingByCustomerId(Long customerId) {
-        List<BillingCard> billingCards = billingCardRepository.findByCustomerId(customerId);
+        List<BillingCard> billingCards = billingCardRepository.findByCustomerIdOrderByCreatedAtDesc(customerId);
         List<BillingCardDTO> result = new ArrayList<>();
 
         for (BillingCard ba : billingCards) {
@@ -108,14 +140,14 @@ public class BillingCardService {
         String incomeString = Formatter.formatThousand(income);
         String description;
         if (BillingCard != null) {
-            description = String.format("%s recharge %s from %s card with serial %s",
+            description = String.format("%s nạp %s từ thẻ %s với số serial %s",
                     BillingCard.getCustomer().getFullName(),
                     incomeString,
                     BillingCard.getHost(),
                     BillingCard.getSeri()
             );
         } else {
-            description = String.format("Recharge %s by transaction id %d", income, billingCardId);
+            description = String.format("Nạp %s với giao dịch có id %d", income, billingCardId);
         }
 
         return description;

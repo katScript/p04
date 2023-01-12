@@ -25,7 +25,7 @@ public class BillingCardController {
     @GetMapping("/{billingId}")
     public ResponseEntity<?> getBillingCardById(@Valid @PathVariable Long id, @PathVariable Long billingId) {
         try {
-            return ResponseEntity.ok(billingCardService.getById(id, billingId));
+            return ResponseEntity.ok(billingCardService.getByIdWithCustomer(id, billingId));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,
@@ -68,6 +68,19 @@ public class BillingCardController {
             balanceHistoryService.changeCustomerBalance(id, data, true);
             billingCardService.updateUsingBillingCard(data.getBillingAddressId());
             return ResponseEntity.ok(new MessageResponse("Save billing card success!"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
+    @GetMapping("/apply/history")
+    public ResponseEntity<?> applyCard(@Valid @PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(billingCardService.getCustomerActiveBilling(id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,
