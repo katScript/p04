@@ -2,6 +2,7 @@ package com.spring.web.admin.controller;
 
 import com.spring.web.admin.payload.AdminDTO;
 import com.spring.web.admin.services.AdminService;
+import com.spring.web.customer.services.BillingCardService;
 import com.spring.web.helpers.erorrs.ErrorResponse;
 import com.spring.web.helpers.message.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ import javax.validation.Valid;
 public class AdminController {
     @Autowired
     public AdminService adminService;
+
+    @Autowired
+    public BillingCardService billingCardService;
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllAdmin() {
@@ -75,6 +79,32 @@ public class AdminController {
         try {
             adminService.deleteAdminById(id);
             return ResponseEntity.ok(new MessageResponse("Delete admin user success!"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
+    @GetMapping("/billing/card/all")
+    public ResponseEntity<?> getAllBillingCardRequest() {
+        try {
+            return ResponseEntity.ok(billingCardService.getAll());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
+    @GetMapping("/billing/card/{id}")
+    public ResponseEntity<?> getBillingCardRequest(@Valid @PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(billingCardService.getById(id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,

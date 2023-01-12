@@ -10,11 +10,11 @@ class NavSignIn extends Component {
         return (
             <li className="icons">
                 <Link to="/auth/login">
-                    <span className={loginClass}>Login</span>
+                    <span className={loginClass}>Đăng nhập</span>
                 </Link>
                 <span>/</span>
                 <Link to="/auth/register">
-                    <span className={registerClass}>Register</span>
+                    <span className={registerClass}>Đăng ký</span>
                 </Link>
             </li>
         );

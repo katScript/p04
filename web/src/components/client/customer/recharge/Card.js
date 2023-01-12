@@ -15,7 +15,8 @@ class Card extends Component {
             code: "",
             seri: "",
             value: "",
-            host: ""
+            host: "",
+            active: false
         }
     }
 

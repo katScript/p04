@@ -5,6 +5,7 @@ import TableData from "components/table/TableData";
 import AdminData from "models/admin/admin-data";
 import {getAllAdmin, deleteAdmin} from "api/admin/admin";
 import {common} from "utils/common";
+import {Link} from "react-router-dom";
 
 class User extends Component {
     constructor(props) {
@@ -49,10 +50,6 @@ class User extends Component {
         return list;
     }
 
-    handleAddNewClick = () => {
-        common.redirect("/admin/user/register")
-    }
-
     render() {
         return (
             <div className="User">
@@ -64,10 +61,10 @@ class User extends Component {
                                 <div className="card">
                                     <div className="card-body">
                                         <div className="row">
-                                            <h4 className="card-title font-medium col-3">Admin User</h4>
+                                            <h4 className="card-title font-medium col-3">Quản trị viên</h4>
                                             <div className="col-9">
                                                 <span className="col-lg-3">
-                                                    <button className="btn btn-primary float-right" onClick={this.handleAddNewClick}>Đăng ký mới admin</button>
+                                                    <Link to="/admin/user/register" className="btn btn-primary float-right">Đăng ký mới admin</Link>
                                                 </span>
                                             </div>
                                         </div>

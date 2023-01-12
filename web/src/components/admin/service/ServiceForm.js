@@ -127,18 +127,18 @@ class ServiceForm extends Component {
                                             <form className="form-valide" onSubmit={this.handleFormSubmit}>
                                                 <div className="form-group row justify-content-center">
                                                     <label className="col-lg-4 col-form-label"
-                                                           htmlFor="serviceName">Service name
+                                                           htmlFor="serviceName">Tên dịch vụ
                                                         <span className="text-danger">*</span>
                                                     </label>
                                                     <div className="col-lg-6">
                                                         <input type="text" className="form-control" id="serviceName"
-                                                               name="serviceName" placeholder="Service name"
+                                                               name="serviceName" placeholder="Tên dịch vụ"
                                                                value={serviceName} onChange={this.handleChangeInput}/>
                                                     </div>
                                                 </div>
                                                 <div className="form-group row justify-content-center">
                                                     <label className="col-lg-4 col-form-label"
-                                                           htmlFor="category">Category
+                                                           htmlFor="category">Loại dịch vụ
                                                         <span className="text-danger">*</span>
                                                     </label>
                                                     <div className="col-lg-6">
@@ -182,7 +182,7 @@ class ServiceForm extends Component {
                                                 <div className="form-group row justify-content-center">
                                                     <div className="col-lg-10">
                                                         <button type="submit"
-                                                                className="btn btn-primary float-right">Save
+                                                                className="btn btn-primary float-right">Lưu
                                                         </button>
                                                     </div>
                                                 </div>

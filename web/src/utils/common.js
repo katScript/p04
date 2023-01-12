@@ -39,6 +39,7 @@ const storeHostOption = async () => {
 
 export const common = {
     DOMAIN: "http://localhost:8091",
+    // DOMAIN: "https://api.dcodetest.com",
     userHashId: userCookies,
     storageKey: storageKey,
     cookiesManager: cookies,
@@ -80,6 +81,8 @@ export const common = {
         window.location.href = path;
     },
     thousandFormat: (value) => {
-        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (value)
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return "0";
     }
 }

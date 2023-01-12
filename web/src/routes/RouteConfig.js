@@ -18,8 +18,11 @@ import NotFound from "components/page/NotFound";
 import Recharge from "components/client/customer/Recharge";
 import BillingAddressForm from "components/client/customer/billing-address/BillingAddressForm";
 import History from "components/client/customer/History";
-import UserForm from "../components/admin/user/UserForm";
-import UserRegister from "../components/admin/user/UserRegister";
+import UserForm from "components/admin/user/UserForm";
+import UserRegister from "components/admin/user/UserRegister";
+import AdminOrderForm from "components/admin/order/AdminOrderForm";
+import Payment from "components/admin/customer/payment/Payment";
+import CardInfo from "components/admin/customer/payment/CardInfo";
 
 class RouteConfig extends Component {
     constructor(props) {
@@ -65,10 +68,12 @@ class RouteConfig extends Component {
                         <Route path="customer" exact>
                             <Route index exact element={<Customer/>} />
                             <Route path=":id" exact element={<CustomerForm/> }/>
-                            <Route path="payment" exact element={<PackageForm/>} />
+                            <Route path="payment" exact element={<Payment/>} />
+                            <Route path="payment/:id" exact element={<CardInfo/>} />
                         </Route>
                         <Route path="order" exact>
                             <Route index exact element={<Order/>} />
+                            <Route path="edit/:id" element={<AdminOrderForm/>} />
                         </Route>
                         <Route path="user" exact>
                             <Route index exact element={<User/>} />

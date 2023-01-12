@@ -3,6 +3,7 @@ package com.spring.web.order.models.repository;
 import com.spring.web.customer.models.Customer;
 import com.spring.web.order.models.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,5 +12,8 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByCustomer(Customer customer);
 
-    List<Order> findByCustomerId(Long id);
+    List<Order> findByCustomerIdOrderByCreatedAtDesc(Long id);
+
+    @Query("select o from Order o order by o.createdAt desc")
+    List<Order> findAllOrderByCreatedAtDesc();
 }

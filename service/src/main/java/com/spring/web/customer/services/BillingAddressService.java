@@ -95,14 +95,14 @@ public class BillingAddressService {
         String incomeString = Formatter.formatThousand(income);
         String description;
         if (billingAddress != null) {
-            description = String.format("%s recharge %s from %s with account %s",
+            description = String.format("%s nạp %s từ %s với tài khoản %s",
                     billingAddress.getCustomer().getFullName(),
                     incomeString,
                     billingAddress.getBillingName(),
                     billingAddress.getAccountNumber()
             );
         } else {
-            description = String.format("Recharge %s by billing address id %d", income, billingAddressId);
+            description = String.format("Nạp %s bằng thông tin tài khoản có id %d", income, billingAddressId);
         }
 
         return description;

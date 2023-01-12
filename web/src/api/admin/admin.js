@@ -8,3 +8,7 @@ export const getAdminByUserId = (id) => get(`${PATH}/user/${id}`);
 export const registerAdmin = (params) => post(`${PATH}/auth/register`, params).catch((e) => {throw e;});
 export const saveAdminData = (params) => post(`${PATH}/save`, params).catch((e) => {throw e;});
 export const deleteAdmin = (id) => del(`${PATH}/${id}`).catch((e) => {throw e;});
+
+// billing
+export const getAllBillingCardRequest = () => get(`${PATH}/billing/card/all`).catch((e) => {throw e;});
+export const getBillingCardRequest = (id = null) => get(`${PATH}/billing/card/${id}`).catch((e) => {throw e;});

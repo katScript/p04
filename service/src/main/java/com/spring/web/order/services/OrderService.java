@@ -44,9 +44,7 @@ public class OrderService {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(String.format("Order with id %d not found!", id)));
 
-        OrderDTO result = bindOrderData(order);
-        result.setItem(packageService.bindPackageData(order.getItem()));
-        return result;
+        return bindOrderData(order);
     }
 
     public OrderDTO getCustomerOrderById(Long customerId, Long id) {
@@ -60,7 +58,7 @@ public class OrderService {
     }
 
     public List<OrderDTO> getAllByCustomerId(Long id) {
-        List<Order> orders = orderRepository.findByCustomerId(id);
+        List<Order> orders = orderRepository.findByCustomerIdOrderByCreatedAtDesc(id);
         List<OrderDTO> result = new ArrayList<>();
 
         for (Order o : orders) {
@@ -71,7 +69,7 @@ public class OrderService {
     }
 
     public List<OrderDTO> getAll() {
-        List<Order> orders = orderRepository.findAll();
+        List<Order> orders = orderRepository.findAllOrderByCreatedAtDesc();
         List<OrderDTO> result = new ArrayList<>();
 
         for (Order o : orders) {
@@ -181,7 +179,7 @@ public class OrderService {
     }
 
     public OrderDTO bindOrderData(Order order) {
-        return new OrderDTO(
+        OrderDTO orderDTO =  new OrderDTO(
                 order.getId(),
                 order.getCustomer().getId(),
                 new PackageDTO(),
@@ -195,5 +193,8 @@ public class OrderService {
                 DateTimeConverter.dateToString(order.getCreatedAt()),
                 DateTimeConverter.dateToString(order.getUpdatedAt())
         );
+
+        orderDTO.setItem(packageService.bindPackageData(order.getItem()));
+        return orderDTO;
     }
 }

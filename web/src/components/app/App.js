@@ -35,7 +35,7 @@ class App extends Component {
             <div className="App">
                 <Loader id={"preloader"}/>
                 <div id="main-wrapper">
-                    <Header/>
+                    <Header admin={this.isAdmin()}/>
                     {this.getSideBar()}
                     <RouteConfig isAdmin={this.isAdmin()}
                                  isLogin={this.isLogin()}

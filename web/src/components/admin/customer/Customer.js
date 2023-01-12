@@ -58,11 +58,14 @@ class Customer extends Component {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-title">Customer</h4>
+                                        <h4 className="card-title">Khách hàng</h4>
                                         <TableData label={this.state.label}
                                                    data={this.state.data}
                                                    keyData={this.state.keyData}
-                                                   action={true}
+                                                   action={{
+                                                       edit: "/admin/customer/",
+                                                       delete: ""
+                                                   }}
                                         />
                                     </div>
                                 </div>

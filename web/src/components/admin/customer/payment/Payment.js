@@ -2,22 +2,21 @@ import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import TableData from "components/table/TableData";
-import {getAllPackage} from "api/order/package";
-import PackageData from "models/order/package-data";
-import {Link} from "react-router-dom";
+import BillingCardData from "models/customer/billing-card-data";
+import {getAllBillingCardRequest} from "api/admin/admin";
 
-class Package extends Component {
+class Payment extends Component {
     constructor(props) {
         super(props);
 
-        this.packageData = new PackageData();
+        this.billingCardData = new BillingCardData();
         this.state = {
-            keyData: this.packageData.getTableKeyList(),
-            label: this.packageData.getLabelList(),
+            keyData: this.billingCardData.getTableKeyList(),
+            label: this.billingCardData.getLabelList(),
             data: []
         };
 
-        this.getAllPackageData().then((r) => {
+        this.getAllCardRequest().then((r) => {
             this.setState({data: r});
         });
     }
@@ -31,19 +30,19 @@ class Package extends Component {
             },
             {
                 active : true,
-                label : "Service",
-                url: "/admin/package"
+                label : "Customer",
+                url: "/admin/customer"
             }
         ];
     }
 
-    getAllPackageData = async () => {
-        const {data} = await getAllPackage();
+    getAllCardRequest = async () => {
+        const {data} = await getAllBillingCardRequest();
         let list = [];
 
         for (const item of Object.values(data)) {
-            this.packageData.setObjectData(item);
-            list.push(this.packageData.getObjectData());
+            this.billingCardData.setObjectData(item);
+            list.push(this.billingCardData.getObjectData());
         }
 
         return list;
@@ -51,7 +50,7 @@ class Package extends Component {
 
     render() {
         return (
-            <div className="Package">
+            <div className="Payment">
                 <div className="content-body">
                     <Breadcrumb item={this.prepareBreadcrumb()}/>
                     <div className="container-fluid">
@@ -59,19 +58,12 @@ class Package extends Component {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <div className="row">
-                                            <h4 className="card-title font-medium col-3">Gói dịch vụ</h4>
-                                            <div className="col-9">
-                                                <span className="col-lg-3">
-                                                    <Link className="btn btn-primary float-right" to="/admin/package/edit">Tạo gói mới</Link>
-                                                </span>
-                                            </div>
-                                        </div>
+                                        <h4 className="card-title">Thẻ điện thoại</h4>
                                         <TableData label={this.state.label}
                                                    data={this.state.data}
                                                    keyData={this.state.keyData}
                                                    action={{
-                                                       edit: "/admin/package/edit/",
+                                                       edit: "/admin/customer/payment/",
                                                        delete: ""
                                                    }}
                                         />
@@ -87,4 +79,4 @@ class Package extends Component {
 }
 
 
-export default wrapper(Package);
+export default wrapper(Payment);

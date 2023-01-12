@@ -57,7 +57,6 @@ class OrderData {
             updatedAt : this.updatedAt
         }
     }
-
 }
 
 export default OrderData;

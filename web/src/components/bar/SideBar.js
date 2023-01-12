@@ -8,6 +8,7 @@ class SideBar extends Component {
     constructor(props) {
         super(props);
 
+        this.category = common.categoryOption();
         this.state = {
             facebook: [],
             instagram: [],
@@ -16,10 +17,8 @@ class SideBar extends Component {
             youtube: [],
             telegram: []
         }
-    }
 
-    componentWillMount() {
-        common.categoryOption().forEach((e) => {
+        this.category.forEach((e) => {
             this.getServiceDataByCategory(e.value).then(async (r) => {
                 await this.setState({[e.value]: r});
             });
@@ -42,24 +41,24 @@ class SideBar extends Component {
                             <li>
                                 <Link to="/">
                                     <i className="icon-screen-desktop menu-icon"></i><span
-                                    className="nav-text">Home</span>
+                                    className="nav-text">Trang chủ</span>
                                 </Link>
                             </li>
-                            <li className="nav-label">Customer</li>
+                            <li className="nav-label">Người dùng</li>
                             {this.props.isLogin && (
                                 <li>
                                     <a href="#account" className="has-arrow" aria-expanded="false">
                                     <i className="icon-user menu-icon"></i>
-                                        <span className="nav-text">Account</span>
+                                        <span className="nav-text">Tài khoản</span>
                                     </a>
                                     <ul aria-expanded="false">
-                                        <li><Link to="/customer"><i className="icon-book-open menu-icon"></i>Information</Link></li>
-                                        <li><Link to="/customer/recharge"><i className="icon-credit-card menu-icon"></i>Recharge</Link></li>
-                                        <li><Link to="/customer/history"><i className="icon-notebook menu-icon"></i>History</Link></li>
+                                        <li><Link to="/customer"><i className="icon-book-open menu-icon"></i>Thông tin tài khoản</Link></li>
+                                        <li><Link to="/customer/recharge"><i className="icon-credit-card menu-icon"></i>Nạp tiền</Link></li>
+                                        <li><Link to="/customer/history"><i className="icon-notebook menu-icon"></i>Lịch sử</Link></li>
                                     </ul>
                                 </li>
                                 )}
-                            <li className="nav-label">Service</li>
+                            <li className="nav-label">Dịch vụ</li>
                             <li>
                                 <a href="#facebook" className="has-arrow" aria-expanded="false">
                                     <i className="menu-icon font-tiny">

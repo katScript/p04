@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
-import {Link} from "react-router-dom";
 import UserData from "models/user/user-data";
 import {common} from "utils/common";
+import {Link} from "react-router-dom";
 
 class NavUser extends Component {
     constructor(props) {
@@ -28,21 +28,18 @@ class NavUser extends Component {
                 <div className="drop-down dropdown-profile dropdown-menu">
                     <div className="dropdown-content-body">
                         <ul>
-                            <li>
-                                <a href="#"><i className="icon-user"></i>
-                                    <span>Profile</span></a>
-                            </li>
-                            <li>
-                                <a href="#"><i className="icon-envelope-open"></i>
-                                    <span>Inbox</span>
-                                    <div className="badge gradient-3 badge-pill badge-primary">3</div>
-                                </a>
-                            </li>
-
+                            {
+                                !this.props.admin && (
+                                    <li>
+                                        <Link to="/customer"><i className="icon-user"></i>
+                                            <span>Thông tin</span></Link>
+                                    </li>
+                                )
+                            }
                             <hr className="my-2"/>
                             <li>
                                 <a href="#" onClick={this.logout}>
-                                    <i className="icon-key"></i><span>Logout</span>
+                                    <i className="icon-key"></i><span>Đăng xuất</span>
                                 </a>
                             </li>
                         </ul>

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
-import Header from "components/bar/Header";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import RegisterForm from "components/auth/register/RegisterForm";
 

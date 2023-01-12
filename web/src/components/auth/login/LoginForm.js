@@ -81,14 +81,14 @@ class LoginForm extends Component {
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <input type="text" className="form-control" id="username"
-                                       name="username" placeholder="Username"
+                                       name="username" placeholder="Tên đăng nhập"
                                        value={username} onChange={this.handleChangeInput}/>
                             </div>
                         </div>
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <input type="password" className="form-control" name="password"
-                                       placeholder="Password"
+                                       placeholder="Mật khẩu"
                                        value={password} onChange={this.handleChangeInput}/>
                             </div>
                         </div>
@@ -96,7 +96,7 @@ class LoginForm extends Component {
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <div className="d-flex justify-content-center">
-                                    <button type="submit" className="btn btn-primary">Login</button>
+                                    <button type="submit" className="btn btn-primary">Đăng nhập</button>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@ class LoginForm extends Component {
                         <div className="form-group row justify-content-center">
                             <div className="col-lg-8">
                                 <span className="d-flex justify-content-center">
-                                    <Link to="/auth/register">Register</Link> now!
+                                    <Link to="/auth/register">Đăng kí </Link> <span> ngay!</span>
                                 </span>
                             </div>
                         </div>
