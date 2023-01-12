@@ -47,7 +47,7 @@ class PackageForm extends Component {
                 text: 'You clicked the button.',
                 icon: 'success'
             }).then(() => {
-                common.redirect("/admin/packaget")
+                common.redirect("/admin/package")
             });
         }).catch((e) => {
             Swal.fire({

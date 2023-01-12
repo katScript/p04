@@ -4,7 +4,6 @@ import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import TableData from "components/table/TableData";
 import AdminData from "models/admin/admin-data";
 import {getAllAdmin, deleteAdmin} from "api/admin/admin";
-import {common} from "utils/common";
 import {Link} from "react-router-dom";
 
 class User extends Component {
