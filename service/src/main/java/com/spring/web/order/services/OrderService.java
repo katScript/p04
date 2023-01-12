@@ -2,6 +2,7 @@ package com.spring.web.order.services;
 
 import com.spring.web.customer.models.Customer;
 import com.spring.web.customer.models.repository.CustomerRepository;
+import com.spring.web.customer.payload.CustomerDTO;
 import com.spring.web.customer.services.CustomerLogService;
 import com.spring.web.helpers.currency.Formatter;
 import com.spring.web.helpers.date.DateTimeConverter;
@@ -151,6 +152,18 @@ public class OrderService {
                 .setDiscountPrice(0.0);
 
         order.getCustomer().setCurrentMoney(customerMoney - price);
+    }
+
+
+    public List<OrderDTO> getOrderByCustomerAndService(Long customerId, Long serviceId) {
+        List<Order> orders = orderRepository.findByCustomerIdAndServiceId(customerId, serviceId);
+        List<OrderDTO> results = new ArrayList<>();
+
+        for (Order c : orders) {
+            results.add(bindOrderData(c));
+        }
+
+        return results;
     }
 
     public Order bindOrderObject(OrderDTO data) {

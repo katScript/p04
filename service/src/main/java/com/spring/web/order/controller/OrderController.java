@@ -69,6 +69,19 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/customer/{customerId}/service/{serviceId}")
+    public ResponseEntity<?> getByCustomerIdAndServiceId(@Valid @PathVariable Long customerId, @PathVariable Long serviceId) {
+        try {
+            return ResponseEntity.ok(orderService.getOrderByCustomerAndService(customerId, serviceId));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
     @PostMapping("/place")
     public ResponseEntity<?> placeOrder(@Valid @RequestBody OrderDTO orderDTO) {
         try {

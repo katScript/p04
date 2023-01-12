@@ -23,7 +23,7 @@ class History extends Component {
                                 <div className="card-body">
                                     <h4 className="card-title font-medium">Lịch sử hoạt động</h4>
                                     <hr/>
-                                    <div className="row align-items-center">
+                                    <div className="row">
                                         <div className="col-md-8 col-xl-10 order-2 order-md-1">
                                             <div className="tab-content">
                                                 <div id="h-order" className="tab-pane text-md-right fade active show">

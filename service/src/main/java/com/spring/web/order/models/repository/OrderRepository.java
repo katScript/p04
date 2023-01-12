@@ -14,6 +14,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findByCustomerIdOrderByCreatedAtDesc(Long id);
 
+    @Query("select o from Order o where o.customer.id = :customerId and o.item.service.id = :serviceId")
+    List<Order> findByCustomerIdAndServiceId(Long customerId, Long serviceId);
+
     @Query("select o from Order o order by o.createdAt desc")
     List<Order> findAllOrderByCreatedAtDesc();
 }
