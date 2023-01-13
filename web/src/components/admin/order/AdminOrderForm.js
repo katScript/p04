@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import wrapper from "components/app/wrapper";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
-import Swal from "sweetalert2";
 import {common} from "utils/common";
 import OrderData from "models/order/order-data";
-import {getOrderById} from "api/order/order";
+import {getOrderById, changeOrderStatus} from "api/order/order";
+import Swal from "sweetalert2";
 
 class AdminOrderForm extends Component {
     constructor(props) {
@@ -61,7 +61,41 @@ class AdminOrderForm extends Component {
         return data;
     }
 
-    changeStatus = async () => {
+    completeOrder = async () => {
+        await changeOrderStatus({
+            id: this.state.id,
+            status:"complete"
+        }).catch((e) => {throw e;});
+    }
+
+    getCompleteButton = () => {
+        if (this.state.status !== "Complete") {
+            return (<button type="button" onClick={this.handleClickComplete} className="btn mb-1 btn-flat btn-primary float-right">Hoàn thành</button>);
+        }
+
+        return (
+            <div className="row float-right">
+                <div className="col font-medium text-green">Đơn hàng đã hoàn thành</div>
+            </div>
+        );
+    }
+
+    handleClickComplete = () => {
+        this.completeOrder().then((r) => {
+            Swal.fire({
+                title: 'Lưu thành công!',
+                text: `Đơn hàng với mã #${this.state.id}`,
+                icon: 'success'
+            }).then(() => {
+                common.redirect("/admin/order")
+            });
+        }).catch((e) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Có lỗi xảy ra!'
+            });
+        });
     }
 
     render() {
@@ -81,24 +115,28 @@ class AdminOrderForm extends Component {
                                                 <span className="col-lg-4 font-small">Gói dịch vụ</span>
                                                 <span className="col-lg-8 font-small">{this.state.item.packageName}</span>
                                             </div>
+                                            <hr/>
                                             <div className="row">
                                                 <span className="col-lg-4 font-small">Links</span>
                                                 <span className="col-lg-8 font-small">{this.state.target}</span>
                                             </div>
+                                            <hr/>
                                             <div className="row">
                                                 <span className="col-lg-4 font-small">Số lượng</span>
                                                 <span className="col-lg-8 font-small">{this.state.qty}</span>
                                             </div>
+                                            <hr/>
                                             <div className="row">
                                                 <span className="col-lg-4 font-small">Giá trị đơn hàng</span>
                                                 <span className="col-lg-8 font-small">{common.thousandFormat(this.state.subtotal)} VND</span>
                                             </div>
+                                            <hr/>
                                             <div className="row">
                                                 <span className="col-lg-4 font-small">Ghi chú</span>
                                                 <span className="col-lg-8 font-small">{this.state.note}</span>
                                             </div>
 
-                                            <button type="button" className="btn mb-1 btn-flat btn-primary float-right">Hoàn thành</button>
+                                            {this.getCompleteButton()}
                                         </div>
                                     </div>
                                 </div>

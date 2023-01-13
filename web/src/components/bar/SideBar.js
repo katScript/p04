@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {common} from "utils/common";
 import {getAllServiceByCategory} from "api/order/service";
 import SideBarManager from "components/bar/SideBarManager";
+import StaticContent from "hooks/StaticContent";
 
 class SideBar extends Component {
     constructor(props) {
@@ -32,6 +33,7 @@ class SideBar extends Component {
 
     render() {
         const {facebook, instagram, tiktok, shopee, youtube, telegram} = this.state;
+        const staticContent = new StaticContent();
 
         return (
             <div className="SideBar">
@@ -62,7 +64,7 @@ class SideBar extends Component {
                             <li>
                                 <a href="#facebook" className="has-arrow" aria-expanded="false">
                                     <i className="menu-icon font-tiny">
-                                        <i className="fab fa-facebook-f"></i>
+                                        <img src={staticContent.getPublicUrl("/images/service/facebook-icon.png")} width="16" height="16" />
                                     </i><span className="nav-text">Facebook</span>
                                 </a>
                                 <ul aria-expanded="false">

@@ -3,6 +3,7 @@ package com.spring.web.order.controller;
 import com.spring.web.helpers.erorrs.ErrorResponse;
 import com.spring.web.helpers.message.MessageResponse;
 import com.spring.web.order.payload.OrderDTO;
+import com.spring.web.order.payload.request.ChangeOrderStatus;
 import com.spring.web.order.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -102,6 +103,20 @@ public class OrderController {
         try {
             orderService.saveOrder(orderDTO);
             return ResponseEntity.ok(new MessageResponse("Save order success!"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
+    @PostMapping("/status/change")
+    public ResponseEntity<?> changeStatusOrder(@Valid @RequestBody ChangeOrderStatus data) {
+        try {
+            orderService.changeOrderStatusByOrderId(data.getId(), data.getStatus());
+            return ResponseEntity.ok(new MessageResponse(String.format("Change order status to %s success!", data.getStatus())));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(
                     400,

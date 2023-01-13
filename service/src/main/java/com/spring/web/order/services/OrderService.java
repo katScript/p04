@@ -130,6 +130,14 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    public void changeOrderStatusByOrderId(Long id, String status) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(String.format("Order with id %d not found!", id)));
+
+        setOrderStatus(order, status);
+        orderRepository.save(order);
+    }
+
     private void setOrderStatus(Order order, String statusCode) {
         Status status = orderStatusRepository.findByCode(statusCode)
                 .orElseThrow(() -> new RuntimeException(String.format("Order status %s not found!", statusCode)));
