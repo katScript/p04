@@ -8,7 +8,8 @@ import Swal from "sweetalert2";
 import {placeOrder} from "api/order/order";
 import CustomerData from "models/customer/customer-data";
 import {Link} from "react-router-dom";
-import OrderHistory from "./OrderHistory";
+import OrderHistory from "components/client/order/OrderHistory";
+import FormValidateRule from "components/common/FormValidateRule";
 
 class OrderForm extends Component {
     constructor(props) {
@@ -30,6 +31,30 @@ class OrderForm extends Component {
             packageNote: "",
             subtotal: 0
         };
+    }
+
+    getPackageListSelect = (items) => {
+        if (items.length > 0) {
+            return (
+                <div className="basic-list-group">
+                    <ul className="list-group">
+                        {items.map((e, i) => {
+                            return (
+                                <li key={e.id} id={i}
+                                    className="list-group-item"
+                                    onClick={this.handleSelectPackage}>
+                                    {e.packageName} {e.status &&
+                                    <span className="badge badge-success">{e.status}</span>}
+                                    <span className="label label-info float-right">{common.thousandFormat(e.price)} VND</span>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            )
+        }
+
+        return (<span className="text-danger">Không có gói dịch vụ nào khả dụng!</span>);
     }
 
     handleChangeInput = async (event) => {
@@ -82,8 +107,15 @@ class OrderForm extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(this.customer.currentMoney < (this.state.qty * this.state.packagePrice));
-        if (this.customer.currentMoney < (this.state.qty * this.state.packagePrice)) {
+        if (!this.state.packageId && this.state.packageId === "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Không có gói dịch vụ nào đang được chọn!",
+                confirmButtonText: 'Đóng',
+            }).then(r => {
+            });
+        } else if (this.this.customer.currentMoney < (this.state.qty * this.state.packagePrice)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -111,12 +143,6 @@ class OrderForm extends Component {
                 });
             });
         }
-    }
-
-    staticContentImport = () => {
-        this.staticContent.useBodyStaticScript("/plugins/jqueryui/js/jquery-ui.min.js");
-        this.staticContent.useStaticStyle("/plugins/fullcalendar/css/fullcalendar.min.css");
-        this.staticContent.useBodyStaticScript("/plugins/moment/moment.min.js");
     }
 
     HooksData = () => {
@@ -202,23 +228,7 @@ class OrderForm extends Component {
                                                                         <span className="text-danger">*</span>
                                                                     </label>
                                                                     <div className="col-lg-5">
-                                                                        <div className="basic-list-group">
-                                                                            <ul className="list-group">
-                                                                                {items.map((e, i) => {
-                                                                                    return (
-                                                                                        <li key={e.id} id={i}
-                                                                                            className="list-group-item"
-                                                                                            onClick={this.handleSelectPackage}>
-                                                                                            {e.packageName} {e.status &&
-                                                                                            <span
-                                                                                                className="badge badge-success">{e.status}</span>}
-                                                                                            <span
-                                                                                                className="label label-info float-right">{common.thousandFormat(e.price)} VND</span>
-                                                                                        </li>
-                                                                                    );
-                                                                                })}
-                                                                            </ul>
-                                                                        </div>
+                                                                        {this.getPackageListSelect(items)}
                                                                     </div>
                                                                 </div>
 
@@ -230,9 +240,9 @@ class OrderForm extends Component {
                                                                     <div className="col-lg-10">
                                                                         <input type="number"
                                                                                className="form-control input-default"
-                                                                               id="Số lượng"
+                                                                               id="qty"
                                                                                name="qty" value={this.state.qty}
-                                                                               placeholder="Quantity"
+                                                                               placeholder="Số lượng"
                                                                                onChange={this.handleChangeInput}/>
                                                                     </div>
                                                                 </div>
@@ -295,15 +305,14 @@ class OrderForm extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <this.staticContentImport/>
                 <this.HooksData/>
+                <FormValidateRule/>
             </div>
         );
     }
