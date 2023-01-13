@@ -115,7 +115,7 @@ class OrderForm extends Component {
                 confirmButtonText: 'Đóng',
             }).then(r => {
             });
-        } else if (this.this.customer.currentMoney < (this.state.qty * this.state.packagePrice)) {
+        } else if (this.customer.currentMoney < (this.state.qty * this.state.packagePrice)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
