@@ -4,21 +4,19 @@ import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import {common} from "utils/common";
 import Loader from "components/common/Loader";
 import {
-    deleteCustomerBillingAddress,
-    getCustomerBillingAddress,
-    saveCustomerBillingAddress
-} from "api/customer/customer";
+    deleteBillingAddress,
+    getBillingAddress,
+    saveBillingAddress
+} from "api/admin/admin";
 import Swal from "sweetalert2";
 
 class BillingAddressForm extends Component {
     constructor(props) {
         super(props);
         this.billingId = this.props.params.id;
-        this.customerId = this.props.customerId;
 
         this.state = {
             id: null,
-            customerId: this.customerId,
             type: "",
             billingName: "",
             holder: "",
@@ -38,37 +36,37 @@ class BillingAddressForm extends Component {
         return this.state.id === null;
     }
 
-    fetchBillingId = async (customerId, billingId) => {
-        const {data} = await getCustomerBillingAddress(customerId, billingId);
+    fetchBillingId = async (billingId) => {
+        const {data} = await getBillingAddress(billingId);
         return data;
     }
 
-    deleteBilling = async (customerId, billingId) => {
-        await deleteCustomerBillingAddress(customerId, billingId);
+    deleteBilling = async (billingId) => {
+        await deleteBillingAddress(billingId);
     }
 
     saveResponse = async () => {
         try {
-            await saveCustomerBillingAddress(this.customerId, this.state);
+            await saveBillingAddress(this.state);
         } catch (e) {
             throw e;
         }
     }
 
     handleDeleteClick = () => {
-        this.deleteBilling(this.customerId, this.billingId).then(() => {
+        this.deleteBilling(this.billingId).then(() => {
             return Swal.fire({
                 title: 'Thành công!',
                 text: 'Xóa phương thức thanh toán thành công!',
                 icon: 'success',
                 confirmButtonText: 'Đóng',
             }).then(r => {
-                common.redirect("/customer/recharge");
+                common.redirect("/admin/bank");
             });
         }).catch((e) => {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Lỗi...',
                 text: "Có lỗi sảy ra vui lòng thử lại sau!",
                 confirmButtonText: 'Đóng',
             }).then(r => {
@@ -85,12 +83,12 @@ class BillingAddressForm extends Component {
                 icon: 'success',
                 confirmButtonText: 'Đóng',
             }).then(r => {
-                common.redirect("/customer/recharge");
+                common.redirect("/admin/bank");
             });
         }).catch((e) => {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Lỗi...',
                 text: "Có lỗi sảy ra vui lòng thử lại sau!",
                 confirmButtonText: 'Đóng',
             }).then(r => {
@@ -103,7 +101,7 @@ class BillingAddressForm extends Component {
         useEffect(() => {
             common.loadScreen("#billing-form-loader", "#billing-form-main");
             if (this.billingId) {
-                this.fetchBillingId(this.customerId, this.billingId).then((r) => {
+                this.fetchBillingId(this.billingId).then((r) => {
                     this.setState({
                         id: r.id,
                         type: r.type,
@@ -119,7 +117,7 @@ class BillingAddressForm extends Component {
 
     render() {
         return (
-            <div className="Recharge">
+            <div className="BillingAddressForm">
                 <div className="content-body">
                     <Breadcrumb item={[]}/>
                     <div className="container-fluid">

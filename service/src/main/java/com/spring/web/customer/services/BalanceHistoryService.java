@@ -1,5 +1,6 @@
 package com.spring.web.customer.services;
 
+import com.spring.web.admin.services.BillingAddressService;
 import com.spring.web.customer.models.BalanceHistory;
 import com.spring.web.customer.models.Customer;
 import com.spring.web.customer.models.repository.BalanceHistoryRepository;
@@ -73,6 +74,7 @@ public class BalanceHistoryService {
                 cbr.getBillingAddressId(),
                 cbr.getIncome()
         ) : billingAddressService.getCustomerBalanceChangeDescription(
+                customer,
                 cbr.getBillingAddressId(),
                 cbr.getIncome()
         );

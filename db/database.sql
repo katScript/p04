@@ -114,15 +114,15 @@ INSERT INTO `customers_balance_history` VALUES (1,2,0,20000,20000,'fullName rech
 UNLOCK TABLES;
 
 --
--- Table structure for table `customers_billing_address`
+-- Table structure for table `billing_address`
 --
 
 DROP TABLE IF EXISTS `customers_billing_address`;
+DROP TABLE IF EXISTS `billing_address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customers_billing_address` (
+CREATE TABLE `billing_address` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `customer_id` int unsigned NOT NULL,
   `type` varchar(50) NOT NULL,
   `billing_name` varchar(225) NOT NULL,
   `holder` varchar(225) NOT NULL,
@@ -130,10 +130,8 @@ CREATE TABLE `customers_billing_address` (
   `address` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `fk_billing_address_customer_id_customers` (`customer_id`),
-  CONSTRAINT `fk_billing_address_customer_id_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +140,6 @@ CREATE TABLE `customers_billing_address` (
 
 LOCK TABLES `customers_billing_address` WRITE;
 /*!40000 ALTER TABLE `customers_billing_address` DISABLE KEYS */;
-INSERT INTO `customers_billing_address` VALUES (1,2,'mobile','BANK ABCD','CUSTOMER A','012391823','bank address','2023-01-08 05:46:52','2023-01-09 10:42:35'),(2,2,'momo','Tên ngân hàng','Tên chủ thẻ','1923819283','Địa chỉ','2023-01-09 03:35:59','2023-01-09 10:42:25'),(3,2,'paypal','PAYPAL NGUYEN VAN A','NGUYEN VAN A','1928391912','','2023-01-09 03:44:51','2023-01-09 10:44:51');
 /*!40000 ALTER TABLE `customers_billing_address` ENABLE KEYS */;
 UNLOCK TABLES;
 

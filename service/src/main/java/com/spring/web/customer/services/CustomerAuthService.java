@@ -49,7 +49,6 @@ public class CustomerAuthService {
                 user,
                 new HashSet<>(),
                 new HashSet<>(),
-                new HashSet<>(),
                 new HashSet<>()
         ));
     }

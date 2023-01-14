@@ -1,10 +1,12 @@
-package com.spring.web.customer.models;
+package com.spring.web.admin.models;
+
+import com.spring.web.customer.models.Customer;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="customers_billing_address")
+@Table(name="billing_address")
 public class BillingAddress {
     @Id
     @Column(name = "id")
@@ -25,10 +27,6 @@ public class BillingAddress {
 
     @Column(name = "address")
     private String address;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="customer_id", referencedColumnName = "id", nullable = false)
-    private Customer customer;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private Date createdAt;
@@ -53,7 +51,6 @@ public class BillingAddress {
         this.holder = holder;
         this.accountNumber = accountNumber;
         this.address = address;
-        this.customer = customer;
     }
 
     public Long getId() {
@@ -125,15 +122,6 @@ public class BillingAddress {
 
     public BillingAddress setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-        return this;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public BillingAddress setCustomer(Customer customer) {
-        this.customer = customer;
         return this;
     }
 }

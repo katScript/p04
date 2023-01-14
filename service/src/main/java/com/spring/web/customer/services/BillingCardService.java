@@ -117,7 +117,8 @@ public class BillingCardService {
                     .setSeri(data.getSeri())
                     .setValue(data.getValue())
                     .setHost(data.getHost())
-                    .setCustomer(customer);
+                    .setCustomer(customer)
+                    .setActive(data.getActive());
 
         BillingCard result = billingCardRepository.save(billingCard);
         this.createSubmitCardHistory(customerId, result.getId());

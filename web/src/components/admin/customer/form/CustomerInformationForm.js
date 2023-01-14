@@ -64,7 +64,7 @@ class CustomerInformationForm extends Component {
         }).catch((e) => {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Lỗi...',
                 text: "Có lỗi sảy ra vui lòng thử lại sau!",
                 confirmButtonText: 'Đóng',
             }).then(r => {

@@ -21,8 +21,6 @@ public class CustomerDTO {
 
     private List<OrderDTO> orders;
 
-    private List<BillingAddressDTO> billingAddress;
-
     private List<BalanceHistoryDTO> balanceHistory;
 
     private List<CustomerLogDTO> customerLog;
@@ -44,7 +42,6 @@ public class CustomerDTO {
             Double currentMoney,
             Double totalMoney,
             List<OrderDTO> orders,
-            List<BillingAddressDTO> billingAddress,
             List<BalanceHistoryDTO> balanceHistory,
             List<CustomerLogDTO> customerLog,
             String username,
@@ -59,7 +56,6 @@ public class CustomerDTO {
         this.currentMoney = currentMoney;
         this.totalMoney = totalMoney;
         this.orders = orders;
-        this.billingAddress = billingAddress;
         this.balanceHistory = balanceHistory;
         this.customerLog = customerLog;
         this.username = username;
@@ -130,14 +126,6 @@ public class CustomerDTO {
 
     public void setOrders(List<OrderDTO> orders) {
         this.orders = orders;
-    }
-
-    public List<BillingAddressDTO> getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(List<BillingAddressDTO> billingAddress) {
-        this.billingAddress = billingAddress;
     }
 
     public List<BalanceHistoryDTO> getBalanceHistory() {

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import {getAllCustomerBillingAddress} from "api/customer/customer";
-import {Link} from "react-router-dom";
+import {getAllBillingAddress} from "api/admin/admin";
 import {common} from "utils/common";
 
 class Bank extends Component {
@@ -8,18 +7,17 @@ class Bank extends Component {
         super(props);
 
         this.billingOption = common.billingOption();
-        const id = this.props.customerId;
         this.state = {
             data: [],
         }
 
-        this.fetchAllCustomerBillingAddress(id).then((r) => {
+        this.fetchAllCustomerBillingAddress().then((r) => {
             this.setState({data: r});
         });
     }
 
-    fetchAllCustomerBillingAddress = async (id) => {
-        const {data} = await getAllCustomerBillingAddress(id);
+    fetchAllCustomerBillingAddress = async () => {
+        const {data} = await getAllBillingAddress();
         return data;
     }
 
@@ -65,25 +63,10 @@ class Bank extends Component {
                                        </h5>
                                    </div>
                                </div>
-                               <div className="float-right col-lg-3">
-                                   <Link to={"/customer/recharge/billing/" + e.id} type="button" className=" btn mb-1 btn-rounded btn-primary">
-                                           <span className="btn-icon-left text-dark">
-                                               <i className="fas fa-pen"></i>
-                                           </span>Thay đổi
-                                   </Link>
-                               </div>
                            </div>
                        </div>
                    )
                 })}
-
-
-                <Link to="/customer/recharge/billing" type="button"
-                      className="btn mb-1 btn-rounded btn-primary">
-                                           <span className="btn-icon-left text-dark">
-                                               <i className="fa fa-plus color-info"></i>
-                                           </span>Thêm phương thức thanh toán mới
-                </Link>
             </div>
         );
     }

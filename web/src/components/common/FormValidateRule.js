@@ -1,4 +1,3 @@
-import React from "react";
 import $ from "jquery";
 import "jquery-validation";
 
@@ -19,7 +18,8 @@ const rules = {
     "range": {required: !0, range: [1, 5]},
     "terms": {required: !0},
     "target": {required: !0},
-    "qty": {required: !0, number: !0, min:1}
+    "qty": {required: !0, number: !0, min:1},
+    "income": {required: !0, digits: !0, min:1000}
 }
 
 const message = {
@@ -53,12 +53,19 @@ const message = {
         required: "Số lượng không được để trống!",
         number: "Số lượng phải là số nguyên!",
         min: "Số lượng gói dịch vụ không được nhỏ hơn 0!"
+    },
+    "income": {
+        required: "Số tiền không được để trống!",
+        digits: "Số tiền phải là số nguyên!",
+        min: "Số tiền không được nhỏ hơn 1000 VND!"
     }
 }
 
-function FormValidateRule () {
+function FormValidateRule (props) {
+    const form = props.form ? props.form : ".form-valide";
+
     $(document).ready(() => {
-        $(".form-valide").validate({
+        $(form).validate({
             ignore: [],
             errorClass: "invalid-feedback animated fadeInDown",
             errorElement: "div",

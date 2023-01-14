@@ -45,7 +45,7 @@ class RegisterForm extends Component {
         }).catch((e) => {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Lỗi...',
                 text: 'Something went wrong!'
             }).then(() => {});
         });

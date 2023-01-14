@@ -56,7 +56,7 @@ class LoginForm extends Component {
         }).catch((e) => {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Lỗi...',
                 text: "Tên đăng nhập hoặc mật khẩu không đúng!",
                 confirmButtonText: 'Đóng',
             }).then(r => {
