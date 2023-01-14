@@ -138,9 +138,9 @@ CREATE TABLE `billing_address` (
 -- Dumping data for table `customers_billing_address`
 --
 
-LOCK TABLES `customers_billing_address` WRITE;
-/*!40000 ALTER TABLE `customers_billing_address` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers_billing_address` ENABLE KEYS */;
+LOCK TABLES `billing_address` WRITE;
+/*!40000 ALTER TABLE `billing_address` DISABLE KEYS */;
+/*!40000 ALTER TABLE `billing_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
