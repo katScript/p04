@@ -5,7 +5,7 @@ import {common} from "utils/common";
 import {changeCustomerBalance} from "api/customer/customer";
 import {getAllBillingAddress} from "api/admin/admin";
 import $ from 'jquery';
-import FormValidateRule from "common/FormValidateRule";
+import FormValidateRule from "components/common/FormValidateRule";
 
 class OnlineBanking extends Component {
     constructor(props) {
