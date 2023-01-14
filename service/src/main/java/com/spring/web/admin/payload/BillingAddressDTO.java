@@ -1,14 +1,10 @@
-package com.spring.web.customer.payload;
+package com.spring.web.admin.payload;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class BillingAddressDTO {
     private Long id;
-
-    @NotNull
-    @NotBlank
-    private Long customerId;
 
     @NotNull
     @NotBlank(message = "Type can not empty!")
@@ -36,7 +32,6 @@ public class BillingAddressDTO {
 
     public BillingAddressDTO(
             Long id,
-            Long customerId,
             String type,
             String billingName,
             String holder,
@@ -46,7 +41,6 @@ public class BillingAddressDTO {
             String updatedAt
     ) {
         this.id = id;
-        this.customerId = customerId;
         this.type = type;
         this.billingName = billingName;
         this.holder = holder;
@@ -62,14 +56,6 @@ public class BillingAddressDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
     }
 
     public String getType() {

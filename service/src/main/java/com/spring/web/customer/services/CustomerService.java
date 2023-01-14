@@ -19,9 +19,6 @@ public class CustomerService {
     private BalanceHistoryService balanceHistoryService;
 
     @Autowired
-    private BillingAddressService billingAddressService;
-
-    @Autowired
     private CustomerLogService customerLogService;
 
     @Autowired
@@ -41,7 +38,6 @@ public class CustomerService {
         customerData.setOrders(orderService.getByCustomer(customer));
         customerData.setCustomerLog(customerLogService.getByCustomer(customer));
         customerData.setBalanceHistory(balanceHistoryService.getByCustomer(customer));
-        customerData.setBillingAddress(billingAddressService.getByCustomer(customer));
 
         return customerData;
     }
@@ -98,7 +94,6 @@ public class CustomerService {
                 customer.getSubscription(),
                 Formatter.roundCurrency(customer.getCurrentMoney()),
                 customer.getTotalMoney(),
-                new ArrayList<>(),
                 new ArrayList<>(),
                 new ArrayList<>(),
                 new ArrayList<>(),

@@ -45,10 +45,6 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer",
             fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<BillingAddress> billingAddresses;
-
-    @OneToMany(mappedBy = "customer",
-            fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders;
 
     @OneToMany(mappedBy = "customer",
@@ -63,7 +59,6 @@ public class Customer {
 
     public Customer() {
         balanceHistories = new HashSet<>();
-        billingAddresses = new HashSet<>();
         orders = new HashSet<>();
         logs = new HashSet<>();
     }
@@ -78,7 +73,6 @@ public class Customer {
             Double totalMoney,
             User user,
             Set<BalanceHistory> balanceHistories,
-            Set<BillingAddress> billingAddresses,
             Set<Order> orders,
             Set<Log> logs
     ) {
@@ -91,7 +85,6 @@ public class Customer {
         this.totalMoney = totalMoney;
         this.user = user;
         this.balanceHistories = balanceHistories;
-        this.billingAddresses = billingAddresses;
         this.orders = orders;
         this.logs = logs;
     }
@@ -174,15 +167,6 @@ public class Customer {
 
     public Customer setBalanceHistories(Set<BalanceHistory> balanceHistories) {
         this.balanceHistories = balanceHistories;
-        return this;
-    }
-
-    public Set<BillingAddress> getBillingAddresses() {
-        return billingAddresses;
-    }
-
-    public Customer setBillingAddresses(Set<BillingAddress> billingAddresses) {
-        this.billingAddresses = billingAddresses;
         return this;
     }
 

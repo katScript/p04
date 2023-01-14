@@ -101,7 +101,7 @@ class CardInfo extends Component {
         }).catch((e) => {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Lỗi...',
                 text: 'Có lỗi đã sảy ra!'
             });
         });

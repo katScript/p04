@@ -43,7 +43,7 @@ class Recharge extends Component {
                                             <div id="bank" className="tab-pane active show">
                                                 <div className="row align-items-center">
                                                     <div className="container-fluid">
-                                                        <Bank customerId={this.customer.id}/>
+                                                        <Bank />
                                                     </div>
                                                 </div>
                                             </div>

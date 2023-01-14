@@ -12,3 +12,8 @@ export const deleteAdmin = (id) => del(`${PATH}/${id}`).catch((e) => {throw e;})
 // billing
 export const getAllBillingCardRequest = () => get(`${PATH}/billing/card/all`).catch((e) => {throw e;});
 export const getBillingCardRequest = (id = null) => get(`${PATH}/billing/card/${id}`).catch((e) => {throw e;});
+
+export const getAllBillingAddress = () => get(`${PATH}/billing/all`).catch((e) => {throw e;});
+export const getBillingAddress = (billingId = null) => get(`${PATH}/billing/${billingId}`).catch((e) => {throw e;});
+export const deleteBillingAddress = (billingId = null) => del(`${PATH}/billing/${billingId}`).catch((e) => {throw e;});
+export const saveBillingAddress = (params = {}) => post(`${PATH}/billing/save`, params).catch((e) => {throw e;});

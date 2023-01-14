@@ -1,10 +1,9 @@
-package com.spring.web.customer.services;
+package com.spring.web.admin.services;
 
-import com.spring.web.customer.models.BillingAddress;
+import com.spring.web.admin.models.BillingAddress;
 import com.spring.web.customer.models.Customer;
-import com.spring.web.customer.models.repository.BillingAddressRepository;
-import com.spring.web.customer.models.repository.CustomerRepository;
-import com.spring.web.customer.payload.BillingAddressDTO;
+import com.spring.web.admin.models.repository.BillingAddressRepository;
+import com.spring.web.admin.payload.BillingAddressDTO;
 import com.spring.web.helpers.currency.Formatter;
 import com.spring.web.helpers.date.DateTimeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +17,15 @@ public class BillingAddressService {
     @Autowired
     private BillingAddressRepository billingAddressRepository;
 
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    public BillingAddressDTO getById(Long customerId, Long id) {
+    public BillingAddressDTO getById(Long id) {
         BillingAddress billingAddress = billingAddressRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(String.format("Billing address with id %d not found!", id)));
-
-        if (!billingAddress.getCustomer().getId().equals(customerId))
-            throw new RuntimeException("Customer not valid!");
 
         return bindBillingAddressData(billingAddress);
     }
 
-    public List<BillingAddressDTO> getByCustomer(Customer customer) {
-        List<BillingAddress> billingAddresses = billingAddressRepository.findByCustomer(customer);
+    public List<BillingAddressDTO> getAllBillingAddress() {
+        List<BillingAddress> billingAddresses = billingAddressRepository.findAll();
         List<BillingAddressDTO> result = new ArrayList<>();
 
         for (BillingAddress ba : billingAddresses) {
@@ -42,67 +35,46 @@ public class BillingAddressService {
         return result;
     }
 
-    public List<BillingAddressDTO> getBillingByCustomerId(Long customerId) {
-        List<BillingAddress> billingAddresses = billingAddressRepository.findByCustomerId(customerId);
-        List<BillingAddressDTO> result = new ArrayList<>();
-
-        for (BillingAddress ba : billingAddresses) {
-            result.add(bindBillingAddressData(ba));
-        }
-
-        return result;
-    }
-
-    public void saveCustomerBillingAddress(Long customerId, BillingAddressDTO data) {
+    public void saveCustomerBillingAddress(BillingAddressDTO data) {
         BillingAddress billingAddress;
         if (data.getId() != null) {
             billingAddress = billingAddressRepository.findById(data.getId())
                     .orElseThrow(() -> new RuntimeException(String.format("Billing address with id %d not found!", data.getId())));
-
-            if (!billingAddress.getCustomer().getId().equals(customerId))
-                throw new RuntimeException("Customer not valid!");
         } else {
             billingAddress = new BillingAddress();
         }
-
-        Customer customer = customerRepository.findById(customerId)
-                        .orElseThrow(() -> new RuntimeException(String.format("Customer with id %d not found!", customerId)));
 
         billingAddress.setType(data.getType())
                 .setBillingName(data.getBillingName())
                 .setHolder(data.getHolder())
                 .setAccountNumber(data.getAccountNumber())
-                .setAddress(data.getAddress())
-                .setCustomer(customer);
+                .setAddress(data.getAddress());
 
         billingAddressRepository.save(billingAddress);
     }
 
-    public void deleteCustomerBillingAddress(Long customerId, Long billingAddressId) {
+    public void deleteCustomerBillingAddress(Long billingAddressId) {
         BillingAddress billingAddress = billingAddressRepository.findById(billingAddressId)
                 .orElseThrow(() -> new RuntimeException(String.format("Billing address with id %d not found!", billingAddressId)));
-
-        if (!billingAddress.getCustomer().getId().equals(customerId))
-            throw new RuntimeException("Customer not valid!");
 
         billingAddressRepository.delete(billingAddress);
     }
 
-    public String getCustomerBalanceChangeDescription(Long billingAddressId, Double income) {
+    public String getCustomerBalanceChangeDescription(Customer customer, Long billingAddressId, Double income) {
         BillingAddress billingAddress = billingAddressRepository.findById(billingAddressId)
                 .orElse(null);
 
         String incomeString = Formatter.formatThousand(income);
         String description;
         if (billingAddress != null) {
-            description = String.format("%s nạp %s từ %s với tài khoản %s",
-                    billingAddress.getCustomer().getFullName(),
+            description = String.format("%s nạp %s tới %s với tài khoản %s",
+                    customer.getFullName(),
                     incomeString,
                     billingAddress.getBillingName(),
                     billingAddress.getAccountNumber()
             );
         } else {
-            description = String.format("Nạp %s bằng thông tin tài khoản có id %d", income, billingAddressId);
+            description = String.format("Nạp %s tới tài khoản có id %d", income, billingAddressId);
         }
 
         return description;
@@ -111,7 +83,6 @@ public class BillingAddressService {
     public BillingAddressDTO bindBillingAddressData(BillingAddress billingAddress) {
         return new BillingAddressDTO(
                 billingAddress.getId(),
-                billingAddress.getCustomer().getId(),
                 billingAddress.getType(),
                 billingAddress.getBillingName(),
                 billingAddress.getHolder(),

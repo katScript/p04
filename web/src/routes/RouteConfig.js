@@ -16,13 +16,14 @@ import Customer from "components/admin/customer/Customer";
 import CustomerForm from "components/admin/customer/CustomerForm";
 import NotFound from "components/page/NotFound";
 import Recharge from "components/client/customer/Recharge";
-import BillingAddressForm from "components/client/customer/billing-address/BillingAddressForm";
+import BillingAddressForm from "components/admin/user/BillingAddressForm";
 import History from "components/client/customer/History";
 import UserForm from "components/admin/user/UserForm";
 import UserRegister from "components/admin/user/UserRegister";
 import AdminOrderForm from "components/admin/order/AdminOrderForm";
 import Payment from "components/admin/customer/payment/Payment";
 import CardInfo from "components/admin/customer/payment/CardInfo";
+import AdminBank from "components/admin/user/AdminBank";
 
 class RouteConfig extends Component {
     constructor(props) {
@@ -80,6 +81,8 @@ class RouteConfig extends Component {
                             <Route path="register/" element={<UserRegister/>} />
                             <Route path="edit/:id" element={<UserForm/>} />
                         </Route>
+                        <Route path="bank" element={<AdminBank />} />
+                        <Route path="bank/edit/:id?" exact element={<BillingAddressForm />} />
                     </Route>
                 )}
                 <Route path="/" exact>

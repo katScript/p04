@@ -4,7 +4,7 @@ import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import {getCustomerById} from "api/customer/customer";
 import CustomerData from "models/customer/customer-data";
 import CustomerInformationForm from "components/admin/customer/form/CustomerInformationForm";
-import BillingAddressList from "components/admin/customer/form/BillingAddressList";
+import BillingAddressList from "components/admin/customer/form/OnlineBanking";
 import BalanceHistoryList from "components/admin/customer/form/BalanceHistoryList";
 import CustomerOrderList from "components/admin/customer/form/CustomerOrderList";
 import CustomerHistory from "components/admin/customer/form/CustomerHistory";
@@ -101,7 +101,7 @@ class CustomerForm extends Component {
 
                                                         <a className="list-group-item list-group-item-action"
                                                             id="list-messages-list" data-toggle="list" href="#billing-address"
-                                                            role="tab" aria-controls="billing-address" aria-selected="false">Thông tin thanh toán</a>
+                                                            role="tab" aria-controls="billing-address" aria-selected="false">Nạp tiền online</a>
 
                                                         <a className="list-group-item list-group-item-action"
                                                             id="list-settings-list" data-toggle="list" href="#balance"

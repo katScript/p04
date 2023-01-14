@@ -110,7 +110,7 @@ class OrderForm extends Component {
         if (!this.state.packageId && this.state.packageId === "") {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Lỗi...',
                 text: "Không có gói dịch vụ nào đang được chọn!",
                 confirmButtonText: 'Đóng',
             }).then(r => {
@@ -118,7 +118,7 @@ class OrderForm extends Component {
         } else if (this.customer.currentMoney < (this.state.qty * this.state.packagePrice)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Lỗi...',
                 text: "Bạn không có đủ tiền trong tài khoản!",
                 confirmButtonText: 'Đóng',
             }).then(r => {
@@ -136,7 +136,7 @@ class OrderForm extends Component {
             }).catch((e) => {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
+                    title: 'Lỗi...',
                     text: "Có lỗi sảy ra vui lòng thử lại sau!",
                     confirmButtonText: 'Đóng',
                 }).then(r => {

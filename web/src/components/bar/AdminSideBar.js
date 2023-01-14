@@ -42,10 +42,11 @@ class AdminSideBar extends Component {
                             </li>
                             <li>
                                 <Link to="#user" className="has-arrow" aria-expanded="false">
-                                    <i className="icon-briefcase menu-icon"></i><span className="nav-text">Người dùng</span>
+                                    <i className="icon-briefcase menu-icon"></i><span className="nav-text">Quản trị</span>
                                 </Link>
                                 <ul aria-expanded="false">
                                     <li><Link to="/admin/user">Quản trị viên</Link></li>
+                                    <li><Link to="/admin/bank">Phương thức thanh toán</Link></li>
                                 </ul>
                             </li>
                         </ul>
