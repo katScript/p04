@@ -33,6 +33,19 @@ public class CustomerController {
         }
     }
 
+    @GetMapping("/all/page")
+    public ResponseEntity<?> getAllCustomerPagination( ) {
+        try {
+            return ResponseEntity.ok(customerService.getAllCustomer());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to supper admin for more information!")
+            );
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getCustomerById(@Valid @PathVariable Long id) {
         try {

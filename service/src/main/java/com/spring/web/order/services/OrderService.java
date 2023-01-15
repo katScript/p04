@@ -205,6 +205,7 @@ public class OrderService {
                 order.getCustomer().getId(),
                 new PackageDTO(),
                 order.getTarget(),
+                order.getStatus().getCode(),
                 order.getStatusDetail(),
                 order.getQty(),
                 order.getSubtotal(),

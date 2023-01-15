@@ -43,6 +43,19 @@ public class PackageController {
         }
     }
 
+    @GetMapping("/select/all")
+    public ResponseEntity<?> getAllNotSelectedService(@Valid @RequestParam(required = false) Long id) {
+        try {
+            return ResponseEntity.ok(packageService.getAllNotSelectedPackage(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    400,
+                    e.getMessage(),
+                    "Contact to admin for more information!")
+            );
+        }
+    }
+
     @PostMapping("/save")
     public ResponseEntity<?> saveService(@Valid @RequestBody PackageDTO data) {
         try {

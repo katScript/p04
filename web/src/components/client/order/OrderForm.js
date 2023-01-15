@@ -19,6 +19,7 @@ class OrderForm extends Component {
 
         this.customerData = new CustomerData();
         this.customer = JSON.parse(localStorage.getItem(common.userHashId.customer));
+        this.id = this.props.params.id;
 
         this.state = {
             service: {},
@@ -156,7 +157,6 @@ class OrderForm extends Component {
                     packageNote: ""
                 });
             });
-
         }, [params]);
     }
 
@@ -179,7 +179,7 @@ class OrderForm extends Component {
                     <Breadcrumb item={[]}/>
                     <div className="container-fluid">
                         <div className="row justify-content-center">
-                            <div className="col-lg-12">
+                            <div className="col-lg-9">
                                 <Loader id={"order-form-loader"}/>
                                 <div className="card">
                                     <div className="card-body">
@@ -260,12 +260,14 @@ class OrderForm extends Component {
                                                                 </div>
                                                                 {this.state.packageNote && (
                                                                     <div className="text-center">
-                                                                        <hr/>
-                                                                        <h5 className="card-title font-small">Ghi chú
-                                                                            gói dịch vụ</h5>
-                                                                        <div className="container">
-                                                                            <p className="card-text"
-                                                                               dangerouslySetInnerHTML={{__html: this.state.packageNote}}></p>
+                                                                        <div className="container border-0 rounded gradient-11 p-2">
+                                                                            <h5 className="font-small mt-2">Ghi chú
+                                                                                gói dịch vụ</h5>
+
+                                                                            <div className="container">
+                                                                                <p className="text-dark"
+                                                                                   dangerouslySetInnerHTML={{__html: this.state.packageNote}}></p>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 )}
@@ -295,7 +297,7 @@ class OrderForm extends Component {
                                                 </div>
                                                 <div className="tab-pane fade" id="history">
                                                     <div className="p-t-15">
-                                                        <OrderHistory serviceId={this.props.params.id}/>
+                                                        <OrderHistory/>
                                                     </div>
                                                 </div>
                                                 <div className="tab-pane fade" id="support">
@@ -304,6 +306,15 @@ class OrderForm extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-3">
+                                <div className="card">
+                                    <div className="card-body">
+                                        <div className="card-title font-medium">
+                                            Thông báo
                                         </div>
                                     </div>
                                 </div>

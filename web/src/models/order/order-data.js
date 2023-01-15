@@ -5,6 +5,7 @@ class OrderData {
         this.item = {};
         this.target = null;
         this.status = null;
+        this.labelStatus = null;
         this.qty = null;
         this.subtotal = null;
         this.couponCode = null;
@@ -17,7 +18,7 @@ class OrderData {
 
 
     getTableKeyList = () => {
-        return ["id", "packageName", "status", "subtotal"];
+        return ["id", "packageName", "labelStatus", "subtotal"];
     }
 
     getLabelList = () => {
@@ -30,6 +31,7 @@ class OrderData {
         this.item = data.item;
         this.target = data.target;
         this.status = data.status;
+        this.labelStatus = data.labelStatus;
         this.qty = data.qty;
         this.subtotal = data.subtotal;
         this.couponCode = data.couponCode;
@@ -47,6 +49,7 @@ class OrderData {
             item : this.item,
             target : this.target,
             status : this.status,
+            labelStatus: this.labelStatus,
             qty : this.qty,
             subtotal : this.subtotal,
             couponCode : this.couponCode,

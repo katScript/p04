@@ -11,6 +11,8 @@ public class OrderDTO {
 
     private String status;
 
+    private String labelStatus;
+
     private Integer qty;
 
     private Double subtotal;
@@ -33,6 +35,7 @@ public class OrderDTO {
             PackageDTO item,
             String target,
             String status,
+            String labelStatus,
             Integer qty,
             Double subtotal,
             String couponCode,
@@ -46,6 +49,7 @@ public class OrderDTO {
         this.item = item;
         this.target = target;
         this.status = status;
+        this.labelStatus = labelStatus;
         this.qty = qty;
         this.subtotal = subtotal;
         this.couponCode = couponCode;
@@ -149,5 +153,13 @@ public class OrderDTO {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getLabelStatus() {
+        return labelStatus;
+    }
+
+    public void setLabelStatus(String labelStatus) {
+        this.labelStatus = labelStatus;
     }
 }

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import wrapper from "components/app/wrapper";
 import {getServiceById, saveService} from "api/order/service";
-import {getAllPackage} from "api/order/package";
+import {getAllNotSelectedPackagePackage} from "api/order/package";
 import Swal from "sweetalert2";
 import ServiceData from "models/order/service-data";
 import PackageData from "models/order/package-data";
@@ -74,7 +74,11 @@ class ServiceForm extends Component {
     }
 
     getAllPackageData = async () => {
-        const {data} = await getAllPackage();
+        let endpoint = common.buildUrlRequestParam({
+                id: this.props.params.id
+            });
+
+        const {data} = await getAllNotSelectedPackagePackage(endpoint);
         let list = [];
 
         for (const item of Object.values(data)) {

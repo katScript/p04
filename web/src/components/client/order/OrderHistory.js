@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
 import wrapper from "components/app/wrapper";
 import OrderData from "models/order/order-data";
 import {common} from "utils/common";
@@ -21,12 +21,6 @@ class OrderHistory extends Component {
 
     getTableData = () => {
         if (this.customer) {
-            this.getOrderHistoryData(this.customer.id, this.props.serviceId).then((r) => {
-                 this.setState({
-                     data: r
-                 });
-            });
-
             return (<TableData label={this.state.label}
                                data={this.state.data}
                                keyData={this.state.keyData}
@@ -48,10 +42,22 @@ class OrderHistory extends Component {
         return list;
     }
 
+    HooksData = () => {
+        const params = this.props.params;
+        useEffect(() => {
+            this.getOrderHistoryData(this.customer.id, this.props.params.id).then((r) => {
+                this.setState({
+                    data: r
+                });
+            });
+        }, [params]);
+    }
+
     render() {
         return (
             <div className="OrderHistory">
                 {this.getTableData()}
+                <this.HooksData/>
             </div>
         );
     }

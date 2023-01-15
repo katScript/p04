@@ -8,6 +8,9 @@ import BillingAddressList from "components/admin/customer/form/OnlineBanking";
 import BalanceHistoryList from "components/admin/customer/form/BalanceHistoryList";
 import CustomerOrderList from "components/admin/customer/form/CustomerOrderList";
 import CustomerHistory from "components/admin/customer/form/CustomerHistory";
+import Swal from "sweetalert2";
+import {common} from "../../../utils/common";
+import ChangePasswordModel from "../user/ChangePasswordModel";
 
 class CustomerForm extends Component {
     constructor(props) {
@@ -85,7 +88,12 @@ class CustomerForm extends Component {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-title">Tên người dùng: {this.state.username}</h4>
+                                        <div className="row">
+                                            <h4 className="card-title col-lg-3">Tên người dùng: {this.state.username}</h4>
+                                            <div className="col-lg-9">
+                                                <ChangePasswordModel username={this.state.username}/>
+                                            </div>
+                                        </div>
                                         <hr/>
                                         <div className="basic-list-group">
                                             <div className="row">
