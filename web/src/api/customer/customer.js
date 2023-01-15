@@ -1,4 +1,4 @@
-import {get, post, del} from "utils/http";
+import {get, post} from "utils/http";
 
 const PATH = "/v1/customer";
 

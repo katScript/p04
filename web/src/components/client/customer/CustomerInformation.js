@@ -5,6 +5,8 @@ import {common} from "utils/common";
 import {getCustomerById, saveCustomerInfo} from "api/customer/customer";
 import CustomerData from "models/customer/customer-data";
 import Swal from "sweetalert2";
+import FormValidateRule from "components/common/FormValidateRule";
+import ChangePasswordModel from "../../admin/user/ChangePasswordModel";
 
 class CustomerInformation extends Component {
     constructor(props) {
@@ -87,12 +89,17 @@ class CustomerInformation extends Component {
                             <div className="col-lg-9">
                                 <div className="card h-100">
                                     <div className="card-body">
-                                        <div className="card-title font-medium">
-                                            {this.state.username}
+                                        <div className="row">
+                                            <div className="card-title font-medium col-lg-3">
+                                                {this.state.username}
+                                            </div>
+                                            <div className="col-lg-9">
+                                                <ChangePasswordModel username={this.state.username}/>
+                                            </div>
                                         </div>
                                         <hr/>
                                         <div className="form-validation">
-                                            <form className="form-valide" onSubmit={this.handleFormSubmit}>
+                                            <form className="customer-information" onSubmit={this.handleFormSubmit}>
                                                 <div className="form-group row justify-content-center">
                                                     <label className="col-lg-2 col-form-label"
                                                            htmlFor="fullName">Họ và tên
@@ -135,6 +142,8 @@ class CustomerInformation extends Component {
                                             </form>
                                         </div>
                                     </div>
+                                    <FormValidateRule form=".customer-information" />
+                                    <FormValidateRule form=".password-account" />
                                 </div>
                             </div>
                             <div className="col-lg-3">

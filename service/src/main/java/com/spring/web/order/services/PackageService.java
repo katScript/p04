@@ -38,6 +38,17 @@ public class PackageService {
         return results;
     }
 
+    public List<PackageDTO> getAllNotSelectedPackage(Long id) {
+        List<Package> packages = packageRepository.findByServiceIsNullOrServiceId(id);
+        List<PackageDTO> results = new ArrayList<>();
+
+        for (Package p : packages) {
+            results.add(bindPackageData(p));
+        }
+
+        return results;
+    }
+
     public List<PackageDTO> getAllPackageByServiceId(Long id) {
         List<Package> packages = packageRepository.findByServiceId(id);
         List<PackageDTO> results = new ArrayList<>();

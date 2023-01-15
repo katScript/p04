@@ -8,3 +8,5 @@ export const login = (params = {}) => {
             throw e;
         });
 };
+
+export const changePassword = (params = {}) => post(PATH + "/password/change", params).catch((e) => {throw e;});

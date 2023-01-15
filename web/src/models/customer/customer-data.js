@@ -19,11 +19,11 @@ class CustomerData {
     }
 
     getTableKeyList = () => {
-        return ["id", "fullName", "currentMoney", "email", "phone"];
+        return ["id", "username", "fullName", "currentMoney", "email", "phone"];
     }
 
     getLabelList = () => {
-        return ["#", "Customer name", "Current Money", "Email", "Phone number"];
+        return ["#", "Tên người dùng" , "Họ và tên", "Số tiền hiện tại", "Email", "Số điện thoại"];
     }
 
     setObjectData = (data) => {

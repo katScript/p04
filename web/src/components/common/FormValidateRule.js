@@ -19,7 +19,8 @@ const rules = {
     "terms": {required: !0},
     "target": {required: !0},
     "qty": {required: !0, number: !0, min:1},
-    "income": {required: !0, digits: !0, min:1000}
+    "income": {required: !0, digits: !0, min:1000},
+
 }
 
 const message = {
@@ -57,7 +58,7 @@ const message = {
     "income": {
         required: "Số tiền không được để trống!",
         digits: "Số tiền phải là số nguyên!",
-        min: "Số tiền không được nhỏ hơn 1000 VND!"
+        min: "Số tiền không được nhỏ hơn 1,000 VND!"
     }
 }
 

@@ -59,7 +59,7 @@ class CustomerInformationForm extends Component {
                 icon: 'success',
                 confirmButtonText: 'Đóng',
             }).then(r => {
-                common.redirect("/admin/customer");
+                common.redirect("/admin/customer/" + this.state.id);
             });
         }).catch((e) => {
             Swal.fire({

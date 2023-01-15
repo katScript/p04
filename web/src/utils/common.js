@@ -84,5 +84,16 @@ export const common = {
         if (value)
             return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return "0";
+    },
+    buildUrlRequestParam: (obj) => {
+        let url = [];
+        for (const [key, value] of Object.entries(obj)) {
+            if (value) url.push(`${key}=${value}`);
+        }
+
+        if (url.length > 0)
+            return "?" + url.join("&");
+
+        return "";
     }
 }

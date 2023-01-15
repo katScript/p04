@@ -2,6 +2,10 @@
     max-width: 900px!important;
 }
 
+.custom-model {
+    max-width: 900px!important;
+}
+
 .content-body {
     min-height: 950px!important;
 }
@@ -27,4 +31,9 @@
 .active-package {
     z-index: 1;
     border: 1px solid #4d7cff!important;
+}
+
+.icon-side-bar {
+    width: 24px;
+    height: 24px;
 }

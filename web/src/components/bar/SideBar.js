@@ -42,7 +42,9 @@ class SideBar extends Component {
                         <ul className="metismenu" id="menu">
                             <li>
                                 <Link to="/">
-                                    <i className="icon-screen-desktop menu-icon"></i><span
+                                    <i className="menu-icon">
+                                        <img className="icon-side-bar" src={staticContent.getPublicUrl("/images/service/home-icon.png")} />
+                                    </i><span
                                     className="nav-text">Trang chủ</span>
                                 </Link>
                             </li>
@@ -64,7 +66,7 @@ class SideBar extends Component {
                             <li>
                                 <a href="#facebook" className="has-arrow" aria-expanded="false">
                                     <i className="menu-icon font-tiny">
-                                        <img src={staticContent.getPublicUrl("/images/service/facebook-icon.png")} width="16" height="16" />
+                                        <img className="icon-side-bar" src={staticContent.getPublicUrl("/images/service/facebook-icon.png")} />
                                     </i><span className="nav-text">Facebook</span>
                                 </a>
                                 <ul aria-expanded="false">
@@ -80,7 +82,7 @@ class SideBar extends Component {
                             <li>
                                 <a href="#instagram" className="has-arrow" aria-expanded="false">
                                     <i className="menu-icon font-tiny">
-                                        <i className="fab fa-instagram"></i>
+                                        <img className="icon-side-bar" src={staticContent.getPublicUrl("/images/service/instagram-icon.png")} />
                                     </i><span className="nav-text">Instagram</span>
                                 </a>
                                 <ul aria-expanded="false">
@@ -96,7 +98,7 @@ class SideBar extends Component {
                             <li>
                                 <a href="#tiktock" className="has-arrow" aria-expanded="false">
                                     <i className="menu-icon font-tiny">
-                                        <i className="fab fa-tiktok"></i>
+                                        <img className="icon-side-bar" src={staticContent.getPublicUrl("/images/service/tiktok-icon.png")} />
                                     </i>
                                     <span className="nav-text">TikTok</span>
                                 </a>
@@ -113,7 +115,7 @@ class SideBar extends Component {
                             <li>
                                 <a href="#shopee" className="has-arrow" aria-expanded="false">
                                     <i className="menu-icon font-tiny">
-                                        <i className="fab fa-shopify"></i>
+                                        <img className="icon-side-bar" src={staticContent.getPublicUrl("/images/service/shopee-icon.png")} />
                                     </i>
                                     <span className="nav-text">Shopee</span>
                                 </a>
@@ -130,7 +132,7 @@ class SideBar extends Component {
                             <li>
                                 <a href="#youtube" className="has-arrow" aria-expanded="false">
                                     <i className="menu-icon font-tiny">
-                                        <i className="fab fa-youtube"></i>
+                                        <img className="icon-side-bar" src={staticContent.getPublicUrl("/images/service/youtube-icon.png")} />
                                     </i>
                                     <span className="nav-text">Youtube</span>
                                 </a>
@@ -147,7 +149,7 @@ class SideBar extends Component {
                             <li>
                                 <a href="#telegram" className="has-arrow" aria-expanded="false">
                                     <i className="menu-icon font-tiny">
-                                        <i className="fab fa-telegram-plane"></i>
+                                        <img className="icon-side-bar" src={staticContent.getPublicUrl("/images/service/telegram-icon.png")} />
                                     </i>
                                     <span className="nav-text">Telegram</span>
                                 </a>
