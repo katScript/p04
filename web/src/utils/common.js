@@ -38,8 +38,8 @@ const storeHostOption = async () => {
 }
 
 export const common = {
-    DOMAIN: "http://localhost:8091",
-    // DOMAIN: "https://api.dcodetest.com",
+    // DOMAIN: "http://localhost:8091",
+    DOMAIN: "https://api.dcodetest.com",
     userHashId: userCookies,
     storageKey: storageKey,
     cookiesManager: cookies,
